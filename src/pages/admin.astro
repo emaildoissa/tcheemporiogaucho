@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import { products as defaultProducts } from "../data/products";
+import availableUploads from "../data/availableUploads.json";
 ---
 
 <!doctype html>
@@ -38,15 +39,21 @@ import { products as defaultProducts } from "../data/products";
             href="/"
             class="px-4 py-2 text-xs font-semibold rounded-lg border border-[#3e3432] bg-[#1a1717] hover:bg-[#25201f] text-[#f2ede6] transition flex items-center gap-2"
           >
-            ← Ver Loja Pública
+            <svg class="size-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Ver Loja Pública
           </a>
           <button
             type="button"
             id="btn-export-json"
-            class="px-3.5 py-2 text-xs font-semibold rounded-lg border border-[#3e3432] bg-[#1a1717] hover:bg-[#25201f] text-[#d5cbca] transition"
+            class="px-3.5 py-2 text-xs font-semibold rounded-lg border border-[#3e3432] bg-[#1a1717] hover:bg-[#25201f] text-[#d5cbca] transition flex items-center gap-1.5"
             title="Baixar cópia do JSON atualizado"
           >
-            📥 Exportar JSON
+            <svg class="size-3.5 text-[#d4af37]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+            Exportar JSON
           </button>
           <button
             type="button"
@@ -61,7 +68,10 @@ import { products as defaultProducts } from "../data/products";
             id="btn-open-add-modal"
             class="px-4 py-2 text-xs font-bold rounded-lg bg-[#8b1b22] hover:bg-[#a52129] text-white shadow-lg transition flex items-center gap-1.5"
           >
-            + Novo Produto
+            <svg class="size-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4" />
+            </svg>
+            Novo Produto
           </button>
         </div>
       </div>
@@ -167,19 +177,24 @@ import { products as defaultProducts } from "../data/products";
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- Categoria com Dropdown Predefinido -->
             <div>
               <label class="block text-xs font-semibold uppercase tracking-wider text-[#a39a97] mb-1.5">
                 Categoria *
               </label>
-              <input
-                type="text"
+              <select
                 id="form-product-category"
                 required
-                list="category-suggestions"
-                placeholder="Ex: Vinhos Finos"
                 class="w-full bg-[#0d0c0c] border border-[#3e3432] rounded-lg px-3.5 py-2 text-sm text-white focus:outline-none focus:border-[#8b1b22]"
+              >
+                <!-- Preenchido dinamicamente com todas as categorias + opção personalizada -->
+              </select>
+              <input
+                type="text"
+                id="form-product-category-custom"
+                placeholder="Digite a nova categoria..."
+                class="hidden mt-2 w-full bg-[#0d0c0c] border border-[#3e3432] rounded-lg px-3.5 py-2 text-sm text-white focus:outline-none focus:border-[#8b1b22]"
               />
-              <datalist id="category-suggestions"></datalist>
             </div>
 
             <div>
@@ -198,21 +213,76 @@ import { products as defaultProducts } from "../data/products";
             </div>
           </div>
 
-          <div>
-            <label class="block text-xs font-semibold uppercase tracking-wider text-[#a39a97] mb-1.5">
-              Caminho ou URL da Imagem
-            </label>
-            <div class="flex gap-3 items-center">
+          <!-- Seção de Importação Simplificada de Fotos -->
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <label class="block text-xs font-semibold uppercase tracking-wider text-[#a39a97]">
+                Foto do Produto
+              </label>
+              <button
+                type="button"
+                id="btn-toggle-manual-url"
+                class="text-xs text-[#a39a97] hover:text-[#d4af37] underline transition"
+              >
+                Digitar URL manual
+              </button>
+            </div>
+
+            <!-- Botões Rápidos de Ação: Upload de Arquivo ou Galeria Existente -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              <!-- Opção 1: Upload de Arquivo do Dispositivo -->
+              <label
+                class="flex items-center justify-center gap-2 p-3 rounded-xl border border-dashed border-[#3e3432] hover:border-[#8b1b22] bg-[#0d0c0c] hover:bg-[#191515] text-[#d5cbca] text-xs font-semibold cursor-pointer transition"
+                title="Selecione uma imagem do seu computador ou celular"
+              >
+                <svg class="size-4 text-[#8b1b22]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                </svg>
+                <span>Carregar Imagem Local</span>
+                <input type="file" id="form-product-file" accept="image/*" class="hidden" />
+              </label>
+
+              <!-- Opção 2: Escolher da Galeria Existente -->
+              <button
+                type="button"
+                id="btn-open-gallery"
+                class="flex items-center justify-center gap-2 p-3 rounded-xl border border-[#3e3432] hover:border-[#d4af37] bg-[#0d0c0c] hover:bg-[#191515] text-[#d5cbca] text-xs font-semibold transition"
+                title="Selecione uma foto colonial já cadastrada no acervo"
+              >
+                <svg class="size-4 text-[#d4af37]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <span>Galeria da Loja (239 fotos)</span>
+              </button>
+            </div>
+
+            <!-- Prévia e Status da Foto Atual -->
+            <div class="flex gap-3 items-center p-2.5 rounded-xl bg-[#0d0c0c] border border-[#2d2422]">
+              <div class="w-14 h-14 bg-[#141212] border border-[#3e3432] rounded-lg overflow-hidden flex items-center justify-center shrink-0">
+                <img id="form-image-preview" src="" alt="Prévia" class="w-full h-full object-contain hidden" />
+                <span id="form-image-placeholder" class="text-[11px] text-[#7d7270] text-center px-1">Sem Foto</span>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div id="image-status-badge" class="text-xs font-semibold text-[#a39a97] truncate">Nenhuma foto selecionada</div>
+                <div id="image-path-display" class="text-[11px] text-[#7d7270] font-mono truncate mt-0.5">Clique acima para carregar ou escolher</div>
+              </div>
+              <button
+                type="button"
+                id="btn-clear-image"
+                class="text-xs text-red-400 hover:text-red-300 px-2 py-1 rounded hover:bg-red-950/30 transition hidden"
+              >
+                Remover
+              </button>
+            </div>
+
+            <!-- Campo manual alternativo (oculto por padrão) -->
+            <div id="manual-url-container" class="hidden pt-1">
               <input
                 type="text"
                 id="form-product-image"
                 placeholder="/uploads/2025/07/amendoim-cru-500g.png"
-                class="flex-1 bg-[#0d0c0c] border border-[#3e3432] rounded-lg px-3.5 py-2 text-sm text-white focus:outline-none focus:border-[#8b1b22]"
+                class="w-full bg-[#0d0c0c] border border-[#3e3432] rounded-lg px-3.5 py-2 text-xs text-white focus:outline-none focus:border-[#8b1b22]"
               />
-              <div class="w-11 h-11 bg-[#0d0c0c] border border-[#3e3432] rounded-lg overflow-hidden flex items-center justify-center">
-                <img id="form-image-preview" src="" alt="Prévia" class="w-full h-full object-contain hidden" />
-                <span id="form-image-placeholder" class="text-xs text-[#7d7270]">Foto</span>
-              </div>
             </div>
           </div>
 
@@ -228,16 +298,31 @@ import { products as defaultProducts } from "../data/products";
             ></textarea>
           </div>
 
+          <!-- Selo / Badge com Dropdown Predefinido -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
             <div>
               <label class="block text-xs font-semibold uppercase tracking-wider text-[#a39a97] mb-1.5">
                 Selo / Badge
               </label>
+              <select
+                id="form-product-badge"
+                class="w-full bg-[#0d0c0c] border border-[#3e3432] rounded-lg px-3.5 py-2 text-sm text-white focus:outline-none focus:border-[#8b1b22]"
+              >
+                <option value="">Nenhum (Sem selo)</option>
+                <option value="Mais Vendido">Mais Vendido</option>
+                <option value="Artesanal">Artesanal</option>
+                <option value="Receita Tradicional">Receita Tradicional</option>
+                <option value="Reserva Especial">Reserva Especial</option>
+                <option value="Colonial Gaúcho">Colonial Gaúcho</option>
+                <option value="Edição Limitada">Edição Limitada</option>
+                <option value="Premiado">Premiado</option>
+                <option value="__custom__">+ Outro selo personalizado...</option>
+              </select>
               <input
                 type="text"
-                id="form-product-badge"
-                placeholder="Ex: Mais Vendido, Colonial, Artesanal"
-                class="w-full bg-[#0d0c0c] border border-[#3e3432] rounded-lg px-3.5 py-2 text-sm text-white focus:outline-none focus:border-[#8b1b22]"
+                id="form-product-badge-custom"
+                placeholder="Digite o selo personalizado..."
+                class="hidden mt-2 w-full bg-[#0d0c0c] border border-[#3e3432] rounded-lg px-3.5 py-2 text-sm text-white focus:outline-none focus:border-[#8b1b22]"
               />
             </div>
 
@@ -272,6 +357,47 @@ import { products as defaultProducts } from "../data/products";
       </div>
     </div>
 
+    <!-- Modal da Galeria de Fotos Existentes -->
+    <div
+      id="gallery-picker-modal"
+      class="fixed inset-0 z-60 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4"
+    >
+      <div class="bg-[#161313] border border-[#3e3432] rounded-2xl w-full max-w-4xl h-[85vh] flex flex-col shadow-2xl p-6">
+        <div class="flex items-center justify-between pb-4 border-b border-[#2d2422] mb-4">
+          <div>
+            <h3 class="text-base font-bold text-white flex items-center gap-2">
+              <svg class="size-5 text-[#d4af37]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              Galeria de Fotos Coloniais da Loja
+            </h3>
+            <p class="text-xs text-[#a39a97]">Clique em qualquer imagem para selecioná-la imediatamente para o produto</p>
+          </div>
+          <button type="button" id="btn-close-gallery" class="text-[#a39a97] hover:text-white text-xl">✕</button>
+        </div>
+
+        <!-- Barra de Busca Rápida na Galeria -->
+        <div class="mb-4">
+          <input
+            type="text"
+            id="gallery-search-input"
+            placeholder="Filtrar por nome (ex: vinho, amendoim, espumante, geleia, mel, queijo, salame)..."
+            class="w-full bg-[#0d0c0c] border border-[#3e3432] rounded-xl px-4 py-2.5 text-sm text-white placeholder-[#7d7270] focus:outline-none focus:border-[#8b1b22]"
+          />
+        </div>
+
+        <!-- Grade de Miniaturas -->
+        <div id="gallery-grid" class="flex-1 overflow-y-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 p-1">
+          <!-- Injetado via script -->
+        </div>
+
+        <div class="pt-4 border-t border-[#2d2422] flex justify-between items-center text-xs text-[#a39a97]">
+          <span id="gallery-status-count">Carregando acervo...</span>
+          <button type="button" id="btn-cancel-gallery" class="px-4 py-1.5 rounded-lg border border-[#3e3432] hover:bg-[#25201f] text-white">Fechar</button>
+        </div>
+      </div>
+    </div>
+
     <!-- Toast Notification -->
     <div
       id="admin-toast"
@@ -280,11 +406,12 @@ import { products as defaultProducts } from "../data/products";
       Notificação
     </div>
 
-    <!-- Initial Data Script -->
+    <!-- Initial Data Scripts -->
     <script type="application/json" id="initial-products-data" set:html={JSON.stringify(defaultProducts)} />
+    <script type="application/json" id="available-uploads-data" set:html={JSON.stringify(availableUploads)} />
 
     <script>
-      import { loadCatalogFromStorage, saveCatalogToStorage, resetCatalogStorage, CATALOG_KEY } from "../lib/storefrontStorage";
+      import { loadCatalogFromStorage, saveCatalogToStorage, resetCatalogStorage } from "../lib/storefrontStorage";
 
       interface ProductItem {
         id: string;
@@ -303,6 +430,9 @@ import { products as defaultProducts } from "../data/products";
       const initialDataEl = document.getElementById("initial-products-data");
       const initialProducts: ProductItem[] = JSON.parse(initialDataEl?.textContent || "[]");
 
+      const availableUploadsEl = document.getElementById("available-uploads-data");
+      const availableUploads: string[] = JSON.parse(availableUploadsEl?.textContent || "[]");
+
       let catalog: ProductItem[] = loadCatalogFromStorage<ProductItem>() || initialProducts;
       if (!loadCatalogFromStorage()) {
         saveCatalogToStorage(catalog);
@@ -312,7 +442,6 @@ import { products as defaultProducts } from "../data/products";
       const tableBody = document.getElementById("products-table-body");
       const searchInput = document.getElementById("search-input") as HTMLInputElement;
       const categorySelect = document.getElementById("category-select") as HTMLSelectElement;
-      const categoryDatalist = document.getElementById("category-suggestions");
       const filteredCountEl = document.getElementById("filtered-count");
 
       // Stats
@@ -321,20 +450,35 @@ import { products as defaultProducts } from "../data/products";
       const statFeaturedEl = document.getElementById("stat-featured-products");
       const statAvgEl = document.getElementById("stat-avg-price");
 
-      // Modal
+      // Modal Form elements
       const modal = document.getElementById("product-modal");
       const modalTitle = document.getElementById("modal-title");
       const productForm = document.getElementById("product-form") as HTMLFormElement;
       const formId = document.getElementById("form-product-id") as HTMLInputElement;
       const formName = document.getElementById("form-product-name") as HTMLInputElement;
-      const formCat = document.getElementById("form-product-category") as HTMLInputElement;
+      const formCat = document.getElementById("form-product-category") as HTMLSelectElement;
+      const formCatCustom = document.getElementById("form-product-category-custom") as HTMLInputElement;
       const formPrice = document.getElementById("form-product-price") as HTMLInputElement;
       const formImg = document.getElementById("form-product-image") as HTMLInputElement;
+      const formFileInput = document.getElementById("form-product-file") as HTMLInputElement;
       const formDesc = document.getElementById("form-product-desc") as HTMLTextAreaElement;
-      const formBadge = document.getElementById("form-product-badge") as HTMLInputElement;
+      const formBadge = document.getElementById("form-product-badge") as HTMLSelectElement;
+      const formBadgeCustom = document.getElementById("form-product-badge-custom") as HTMLInputElement;
       const formFeatured = document.getElementById("form-product-featured") as HTMLInputElement;
+
+      // Image Preview elements
       const imgPreview = document.getElementById("form-image-preview") as HTMLImageElement;
       const imgPlaceholder = document.getElementById("form-image-placeholder") as HTMLSpanElement;
+      const imgStatusBadge = document.getElementById("image-status-badge") as HTMLDivElement;
+      const imgPathDisplay = document.getElementById("image-path-display") as HTMLDivElement;
+      const btnClearImg = document.getElementById("btn-clear-image") as HTMLButtonElement;
+      const manualUrlContainer = document.getElementById("manual-url-container") as HTMLDivElement;
+
+      // Gallery Modal elements
+      const galleryModal = document.getElementById("gallery-picker-modal");
+      const galleryGrid = document.getElementById("gallery-grid");
+      const gallerySearchInput = document.getElementById("gallery-search-input") as HTMLInputElement;
+      const galleryStatusCount = document.getElementById("gallery-status-count");
 
       // Toast
       const toast = document.getElementById("admin-toast");
@@ -366,26 +510,38 @@ import { products as defaultProducts } from "../data/products";
       }
 
       function populateCategories() {
-        if (!categorySelect || !categoryDatalist) return;
+        if (!categorySelect || !formCat) return;
         const cats = Array.from(new Set(catalog.map((p) => p.category))).sort();
-        
-        const currentSelected = categorySelect.value;
-        categorySelect.innerHTML = '<option value="all">Todas as Categorias</option>';
-        categoryDatalist.innerHTML = "";
 
+        // 1. Filtro na barra superior
+        const currentFilterSelected = categorySelect.value;
+        categorySelect.innerHTML = '<option value="all">Todas as Categorias</option>';
         cats.forEach((cat) => {
           const opt = document.createElement("option");
           opt.value = cat;
           opt.textContent = `${cat} (${catalog.filter((p) => p.category === cat).length})`;
           categorySelect.appendChild(opt);
-
-          const dataOpt = document.createElement("option");
-          dataOpt.value = cat;
-          categoryDatalist.appendChild(dataOpt);
         });
+        if (cats.includes(currentFilterSelected)) {
+          categorySelect.value = currentFilterSelected;
+        }
 
-        if (cats.includes(currentSelected)) {
-          categorySelect.value = currentSelected;
+        // 2. Dropdown do formulário do Modal
+        const currentFormVal = formCat.value;
+        formCat.innerHTML = "";
+        cats.forEach((cat) => {
+          const opt = document.createElement("option");
+          opt.value = cat;
+          opt.textContent = cat;
+          formCat.appendChild(opt);
+        });
+        const customOpt = document.createElement("option");
+        customOpt.value = "__custom__";
+        customOpt.textContent = "+ Nova Categoria Personalizada...";
+        formCat.appendChild(customOpt);
+
+        if (cats.includes(currentFormVal)) {
+          formCat.value = currentFormVal;
         }
       }
 
@@ -442,7 +598,7 @@ import { products as defaultProducts } from "../data/products";
                 <td class="py-3 px-4">
                   ${
                     prod.featured
-                      ? '<span class="inline-flex items-center gap-1 text-xs font-semibold text-amber-400">★ Sim</span>'
+                      ? '<span class="inline-flex items-center gap-1 text-xs font-semibold text-amber-400">Sim (Destaque)</span>'
                       : '<span class="text-xs text-[#5e5452]">Não</span>'
                   }
                 </td>
@@ -470,24 +626,76 @@ import { products as defaultProducts } from "../data/products";
           .join("");
       }
 
+      function updateImagePreview(label?: string) {
+        const url = formImg?.value?.trim();
+        if (url && imgPreview && imgPlaceholder) {
+          imgPreview.src = url;
+          imgPreview.classList.remove("hidden");
+          imgPlaceholder.classList.add("hidden");
+          if (imgStatusBadge) imgStatusBadge.textContent = label || "Foto selecionada";
+          if (imgPathDisplay) imgPathDisplay.textContent = url.startsWith("data:") ? "[Imagem carregada do dispositivo]" : url;
+          btnClearImg?.classList.remove("hidden");
+        } else if (imgPreview && imgPlaceholder) {
+          imgPreview.classList.add("hidden");
+          imgPlaceholder.classList.remove("hidden");
+          if (imgStatusBadge) imgStatusBadge.textContent = "Nenhuma foto selecionada";
+          if (imgPathDisplay) imgPathDisplay.textContent = "Clique acima para carregar ou escolher";
+          btnClearImg?.classList.add("hidden");
+        }
+      }
+
       function openModal(prod?: ProductItem) {
         if (!modal || !productForm) return;
+        populateCategories();
+
         if (prod) {
           if (modalTitle) modalTitle.textContent = "Editar Produto Colonial";
           formId.value = prod.id;
           formName.value = prod.name;
-          formCat.value = prod.category;
           formPrice.value = String(prod.price);
           formImg.value = prod.image || "";
           formDesc.value = prod.description || "";
-          formBadge.value = prod.badge || "";
           formFeatured.checked = Boolean(prod.featured);
+
+          // Categoria
+          const hasCat = Array.from(formCat.options).some((o) => o.value === prod.category);
+          if (hasCat) {
+            formCat.value = prod.category;
+            formCatCustom.classList.add("hidden");
+            formCatCustom.value = "";
+          } else {
+            formCat.value = "__custom__";
+            formCatCustom.classList.remove("hidden");
+            formCatCustom.value = prod.category;
+          }
+
+          // Selo / Badge
+          const badgeVal = prod.badge || "";
+          const hasBadge = Array.from(formBadge.options).some((o) => o.value === badgeVal);
+          if (hasBadge) {
+            formBadge.value = badgeVal;
+            formBadgeCustom.classList.add("hidden");
+            formBadgeCustom.value = "";
+          } else {
+            formBadge.value = "__custom__";
+            formBadgeCustom.classList.remove("hidden");
+            formBadgeCustom.value = badgeVal;
+          }
         } else {
           if (modalTitle) modalTitle.textContent = "Adicionar Novo Produto Colonial";
           productForm.reset();
           formId.value = "tche-" + Date.now();
           formPrice.value = "15.00";
+          formImg.value = "";
+          if (formCat.options.length > 0) formCat.selectedIndex = 0;
+          formCatCustom.classList.add("hidden");
+          formCatCustom.value = "";
+          formBadge.value = "";
+          formBadgeCustom.classList.add("hidden");
+          formBadgeCustom.value = "";
         }
+
+        manualUrlContainer.classList.add("hidden");
         updateImagePreview();
         modal.classList.remove("hidden");
         modal.classList.add("flex");
@@ -499,21 +707,133 @@ import { products as defaultProducts } from "../data/products";
         modal.classList.remove("flex");
       }
 
-      function updateImagePreview() {
-        const url = formImg?.value?.trim();
-        if (url && imgPreview && imgPlaceholder) {
-          imgPreview.src = url;
-          imgPreview.classList.remove("hidden");
-          imgPlaceholder.classList.add("hidden");
-        } else if (imgPreview && imgPlaceholder) {
-          imgPreview.classList.add("hidden");
-          imgPlaceholder.classList.remove("hidden");
+      // Eventos dos selects de Categoria e Selo
+      formCat?.addEventListener("change", () => {
+        if (formCat.value === "__custom__") {
+          formCatCustom.classList.remove("hidden");
+          formCatCustom.focus();
+        } else {
+          formCatCustom.classList.add("hidden");
+          formCatCustom.value = "";
         }
+      });
+
+      formBadge?.addEventListener("change", () => {
+        if (formBadge.value === "__custom__") {
+          formBadgeCustom.classList.remove("hidden");
+          formBadgeCustom.focus();
+        } else {
+          formBadgeCustom.classList.add("hidden");
+          formBadgeCustom.value = "";
+        }
+      });
+
+      // Upload local via File Picker
+      formFileInput?.addEventListener("change", () => {
+        const file = formFileInput.files?.[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            const dataUrl = e.target?.result as string;
+            formImg.value = dataUrl;
+            updateImagePreview(`Arquivo: ${file.name} (${Math.round(file.size / 1024)} KB)`);
+            showToast(`Foto "${file.name}" carregada com sucesso.`);
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+
+      // Limpar foto
+      btnClearImg?.addEventListener("click", () => {
+        formImg.value = "";
+        if (formFileInput) formFileInput.value = "";
+        updateImagePreview();
+      });
+
+      // Alternar campo manual de URL
+      document.getElementById("btn-toggle-manual-url")?.addEventListener("click", () => {
+        manualUrlContainer.classList.toggle("hidden");
+        if (!manualUrlContainer.classList.contains("hidden")) {
+          formImg.focus();
+        }
+      });
+      formImg?.addEventListener("input", () => updateImagePreview("URL digitada manualmente"));
+
+      // Galeria de Fotos
+      function openGallery() {
+        if (!galleryModal) return;
+        galleryModal.classList.remove("hidden");
+        galleryModal.classList.add("flex");
+        renderGalleryItems(availableUploads);
       }
 
-      // Event listeners
-      formImg?.addEventListener("input", updateImagePreview);
+      function closeGallery() {
+        if (!galleryModal) return;
+        galleryModal.classList.add("hidden");
+        galleryModal.classList.remove("flex");
+      }
 
+      function renderGalleryItems(list: string[]) {
+        if (!galleryGrid || !galleryStatusCount) return;
+        galleryStatusCount.textContent = `Mostrando ${list.length} de ${availableUploads.length} fotos disponíveis`;
+
+        if (list.length === 0) {
+          galleryGrid.innerHTML = `
+            <div class="col-span-full py-12 text-center text-[#7d7270] text-sm">
+              Nenhuma imagem encontrada com esse termo de busca.
+            </div>
+          `;
+          return;
+        }
+
+        galleryGrid.innerHTML = list
+          .map((imgPath) => {
+            const fileName = imgPath.split("/").pop() || "";
+            return `
+              <button
+                type="button"
+                data-img-src="${imgPath}"
+                class="gallery-item group relative aspect-square rounded-xl bg-[#0d0c0c] border border-[#2d2422] hover:border-[#8b1b22] p-2 flex flex-col items-center justify-center overflow-hidden transition hover:scale-[1.03] text-left"
+              >
+                <img
+                  src="${imgPath}"
+                  alt="${fileName}"
+                  class="w-full h-full object-contain mb-1"
+                  loading="lazy"
+                />
+                <span class="absolute inset-x-0 bottom-0 bg-black/80 text-[10px] text-white px-1.5 py-0.5 truncate opacity-0 group-hover:opacity-100 transition">
+                  ${fileName}
+                </span>
+              </button>
+            `;
+          })
+          .join("");
+      }
+
+      galleryGrid?.addEventListener("click", (ev) => {
+        const itemBtn = (ev.target as HTMLElement).closest<HTMLButtonElement>(".gallery-item");
+        if (!itemBtn) return;
+        const src = itemBtn.dataset.imgSrc;
+        if (src) {
+          formImg.value = src;
+          const fileName = src.split("/").pop() || "Foto da Galeria";
+          updateImagePreview(`Acervo da Loja: ${fileName}`);
+          closeGallery();
+          showToast(`Foto colonial selecionada: ${fileName}`);
+        }
+      });
+
+      gallerySearchInput?.addEventListener("input", () => {
+        const query = (gallerySearchInput.value || "").toLowerCase().trim();
+        const filtered = availableUploads.filter((p) => p.toLowerCase().includes(query));
+        renderGalleryItems(filtered);
+      });
+
+      document.getElementById("btn-open-gallery")?.addEventListener("click", openGallery);
+      document.getElementById("btn-close-gallery")?.addEventListener("click", closeGallery);
+      document.getElementById("btn-cancel-gallery")?.addEventListener("click", closeGallery);
+
+      // Event listeners gerais do Modal
       document.getElementById("btn-open-add-modal")?.addEventListener("click", () => openModal());
       document.getElementById("btn-close-modal")?.addEventListener("click", closeModal);
       document.getElementById("btn-cancel-modal")?.addEventListener("click", closeModal);
@@ -521,7 +841,7 @@ import { products as defaultProducts } from "../data/products";
       searchInput?.addEventListener("input", renderTable);
       categorySelect?.addEventListener("change", renderTable);
 
-      // Table actions (edit / delete)
+      // Ações da Tabela (Editar e Excluir)
       tableBody?.addEventListener("click", (ev) => {
         const target = (ev.target as HTMLElement).closest<HTMLButtonElement>(".btn-edit, .btn-delete");
         if (!target) return;
@@ -544,21 +864,32 @@ import { products as defaultProducts } from "../data/products";
         }
       });
 
-      // Form submit (Add or Edit)
+      // Submit do Formulário (Criar ou Editar)
       productForm?.addEventListener("submit", (ev) => {
         ev.preventDefault();
         const id = formId.value.trim();
         const name = formName.value.trim();
-        const category = formCat.value.trim();
+        
+        let category = formCat.value.trim();
+        if (category === "__custom__") {
+          category = formCatCustom.value.trim() || "Geral";
+        }
+
         const price = parseFloat(formPrice.value) || 0;
         const image = formImg.value.trim() || "/images/shop/cosmic-products.png";
         const description = formDesc.value.trim();
-        const badge = formBadge.value.trim() || undefined;
+
+        let badge: string | undefined = formBadge.value.trim();
+        if (badge === "__custom__") {
+          badge = formBadgeCustom.value.trim() || undefined;
+        } else if (!badge) {
+          badge = undefined;
+        }
+
         const featured = formFeatured.checked;
 
         const existingIdx = catalog.findIndex((p) => p.id === id);
         if (existingIdx >= 0) {
-          // Update
           catalog[existingIdx] = {
             ...catalog[existingIdx],
             name,
@@ -569,9 +900,8 @@ import { products as defaultProducts } from "../data/products";
             badge,
             featured
           };
-          showToast(`Produto "${name}" atualizado.`);
+          showToast(`Produto "${name}" atualizado com sucesso!`);
         } else {
-          // Create
           catalog.unshift({
             id,
             name,
@@ -594,7 +924,7 @@ import { products as defaultProducts } from "../data/products";
         closeModal();
       });
 
-      // Reset Catalog
+      // Restaurar Catálogo Original
       document.getElementById("btn-reset-catalog")?.addEventListener("click", () => {
         if (confirm("Deseja restaurar o catálogo para a base original dos 228 produtos do dump? Suas alterações manuais locais serão substituídas.")) {
           resetCatalogStorage();
@@ -607,7 +937,7 @@ import { products as defaultProducts } from "../data/products";
         }
       });
 
-      // Export JSON
+      // Exportar JSON
       document.getElementById("btn-export-json")?.addEventListener("click", () => {
         const blob = new Blob([JSON.stringify(catalog, null, 2)], { type: "application/json" });
         const url = URL.createObjectURL(blob);
@@ -619,7 +949,7 @@ import { products as defaultProducts } from "../data/products";
         showToast("Arquivo JSON gerado e baixado.");
       });
 
-      // Initial run
+      // Execução inicial
       updateStats();
       populateCategories();
       renderTable();
