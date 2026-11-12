@@ -12,18 +12,15 @@ const displayProducts = bestSellers.length === 4 ? bestSellers : products.slice(
 ---
 
 <section id="produtos" class="editorial" data-product-section>
-  <div class="catalog-head section-head" data-mos="fade-up">
+  <header class="section-header" data-mos="fade-up">
     <div>
-      <span class="catalog-eyebrow">Destaques Coloniais</span>
       <h2>Mais Vendidos da Nossa Terra</h2>
-      <p>Uma seleção das delícias gaúchas mais pedidas pelos nossos clientes. Feitas por famílias e cooperativas da Serra e do Pampa.</p>
+      <p>Uma seleção das delícias gaúchas mais pedidas pelos nossos clientes.</p>
     </div>
-    <div class="catalog-actions">
-      <a href="/catalogo" class="btn-view-all" title="Ver todo o catálogo com mais de 220 produtos">
-        Ver Todos os Produtos (228) →
-      </a>
-    </div>
-  </div>
+    <a href="/catalogo" class="link-see-all">
+      Ver todos<span aria-hidden="true"> →</span>
+    </a>
+  </header>
 
   <!-- Grid de 4 Produtos em Destaque (1 Linha Limpa) -->
   <div class="product-grid" id="main-product-grid">
@@ -108,14 +105,6 @@ const displayProducts = bestSellers.length === 4 ? bestSellers : products.slice(
     }
   </div>
 
-  <!-- Botão Inferior de Acesso ao Catálogo Completo -->
-  <div class="catalog-bottom-cta" data-mos="fade-up">
-    <a href="/catalogo" class="btn-see-full-catalog">
-      <span>Explorar Catálogo Completo com Filtros Laterais</span>
-      <span class="arrow">→</span>
-    </a>
-  </div>
-
   <!-- Sacola Lateral / Drawer -->
   <aside class="product-cart" aria-hidden="true" data-product-cart>
     <header>
@@ -145,48 +134,48 @@ const displayProducts = bestSellers.length === 4 ? bestSellers : products.slice(
 </section>
 
 <style is:global>
-  .section-head {
+  /* Header idêntico ao de Famílias Coloniais */
+  .section-header {
+    border-bottom: 1px solid var(--commerce-border);
     justify-content: space-between;
     align-items: flex-end;
-    margin-bottom: 24px;
+    margin-bottom: 17px;
+    padding: 4px 0 18px;
     display: flex;
     flex-wrap: wrap;
-    gap: 16px;
-  }
-  .section-head > div {
-    gap: 7px;
-    display: grid;
-  }
-  .catalog-eyebrow {
-    width: max-content;
-    color: var(--commerce-accent);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    font-size: 11px;
-    font-weight: 700;
-  }
-  .catalog-actions {
-    display: flex;
-    align-items: center;
     gap: 12px;
   }
-  .btn-view-all {
-    font-size: 13px;
-    font-weight: 700;
-    padding: 10px 20px;
-    border-radius: 10px;
-    background: #8b1b22;
-    color: #fff;
-    text-decoration: none;
-    transition: all 0.2s ease;
-    display: inline-flex;
-    align-items: center;
-    box-shadow: 0 4px 14px rgba(139, 27, 34, 0.35);
+  .section-header > div {
+    gap: 9px;
+    display: grid;
   }
-  .btn-view-all:hover {
-    background: #a52129;
-    transform: translateY(-1px);
-    box-shadow: 0 6px 18px rgba(139, 27, 34, 0.45);
+  .section-header h2 {
+    letter-spacing: -0.035em;
+    margin: 0;
+    font-size: clamp(1.65rem, 2.5vw, 2.35rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--commerce-foreground);
+  }
+  .section-header p {
+    color: var(--commerce-muted);
+    letter-spacing: -0.01em;
+    margin: 0;
+    font-size: 13px;
+  }
+  .link-see-all {
+    color: var(--commerce-foreground);
+    letter-spacing: -0.01em;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    display: flex;
+    transition: color 0.2s ease;
+  }
+  .link-see-all:hover {
+    color: var(--commerce-accent);
   }
 
   /* Grid de 4 Produtos em 1 linha */
@@ -354,38 +343,6 @@ const displayProducts = bestSellers.length === 4 ? bestSellers : products.slice(
   .add-cart:hover {
     border-color: var(--commerce-accent);
     color: var(--commerce-accent);
-  }
-
-  /* Bottom CTA */
-  .catalog-bottom-cta {
-    margin-top: 28px;
-    text-align: center;
-  }
-  .btn-see-full-catalog {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 12px 28px;
-    border-radius: 12px;
-    background: #141212;
-    border: 1px solid #362e2c;
-    color: #f2ede6;
-    font-size: 13px;
-    font-weight: 700;
-    text-decoration: none;
-    transition: all 0.2s ease;
-  }
-  .btn-see-full-catalog:hover {
-    border-color: #8b1b22;
-    background: #1c1817;
-    color: #ff9da3;
-    transform: translateY(-2px);
-  }
-  .btn-see-full-catalog .arrow {
-    transition: transform 0.2s ease;
-  }
-  .btn-see-full-catalog:hover .arrow {
-    transform: translateX(4px);
   }
 
   /* Cart Drawer */
@@ -594,9 +551,9 @@ const displayProducts = bestSellers.length === 4 ? bestSellers : products.slice(
       grid-template-columns: 1fr;
       gap: 6px;
     }
-    .section-head {
-      flex-direction: column;
-      align-items: flex-start;
+    .section-header {
+      flex-direction: row;
+      align-items: flex-end;
     }
   }
 </style>
