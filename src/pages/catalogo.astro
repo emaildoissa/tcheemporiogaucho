@@ -289,7 +289,7 @@ const maxPrice = Math.ceil(
                   <!-- Imagem do Produto -->
                   <div
                     class="relative aspect-[4/3] bg-[#181514] overflow-hidden flex items-center justify-center p-3 cursor-pointer"
-                    data-quickview-id={product.id}
+                    data-product-link={`/produto/${product.id}`}
                   >
                     <img
                       src={product.image || "/images/shop/cosmic-products.png"}
@@ -308,7 +308,7 @@ const maxPrice = Math.ceil(
                       </span>
                       <h3
                         class="font-semibold text-xs sm:text-sm text-white line-clamp-2 group-hover:text-[#ff9da3] transition-colors leading-snug cursor-pointer"
-                        data-quickview-id={product.id}
+                        data-product-link={`/produto/${product.id}`}
                         title={product.name}
                       >
                         {product.name}
@@ -914,9 +914,9 @@ const maxPrice = Math.ceil(
           syncWishlist();
           showToast(exists ? "Removido dos favoritos" : "Salvo nos seus favoritos");
         }
-      } else if (target.matches("[data-quickview-id]")) {
-        const id = target.dataset.quickviewId;
-        if (id) openQuickView(id);
+      } else if (target.matches("[data-product-link]")) {
+        const link = target.dataset.productLink;
+        if (link) window.location.href = link;
       } else if (target.matches("[data-remove-cart]")) {
         const id = target.dataset.removeCart;
         if (id && cart[id]) {
