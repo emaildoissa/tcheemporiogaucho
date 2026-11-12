@@ -22,9 +22,11 @@ const navLinks = [
             class="inline-flex items-center gap-2.5 primary-focus text-foreground group"
             aria-label="Início Tchê Empório Gaúcho"
           >
-            <div class="w-8 h-8 rounded-full bg-[#8b1b22] flex items-center justify-center text-sm shadow-md group-hover:scale-105 transition-transform">
-              🍷
-            </div>
+            <img
+              src="/images/logo.png"
+              alt="Logo Tchê Empório Gaúcho"
+              class="w-9 h-9 object-contain rounded-full shadow-md group-hover:scale-105 transition-transform"
+            />
             <span class="font-bold tracking-tight text-lg text-white">
               Tchê Empório <span class="text-[#e67e84]">Gaúcho</span>
             </span>
@@ -137,7 +139,14 @@ const navLinks = [
                 <div class="p-6 flex flex-col h-full justify-between">
                   <div>
                     <div class="flex items-center justify-between pb-6 border-b border-[#2d2422]">
-                      <span class="font-bold text-white text-base">Tchê Empório</span>
+                      <div class="flex items-center gap-2">
+                        <img
+                          src="/images/logo.png"
+                          alt="Logo Tchê Empório Gaúcho"
+                          class="w-8 h-8 object-contain rounded-full shadow-sm"
+                        />
+                        <span class="font-bold text-white text-base">Tchê Empório</span>
+                      </div>
                       <button
                         type="button"
                         id="mobile-nav__close"
