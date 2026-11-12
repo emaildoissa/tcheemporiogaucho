@@ -1,72 +1,38 @@
 ---
 import { products } from "../data/products";
 
-// Distinct categories for tabs
-const topCategories = [
-  "Todos",
-  "Vinhos Finos",
-  "Carnes & Embutidos",
-  "Geléias & Chimias",
-  "Doces de Leite e/ou Ovos",
-  "Amendoim em Grãos",
-  "Palmitos",
-  "Espumantes",
-  "Sucos",
-];
+// Top 4 itens mais vendidos emblemáticos para vitrine da home
+const bestSellerIds = ["637", "360", "291", "3139"];
+const bestSellers = bestSellerIds
+  .map((id) => products.find((p) => p.id === id))
+  .filter(Boolean);
 
-const featuredProducts = products.filter((p) => p.featured);
+// Fallback caso algum id não seja encontrado
+const displayProducts = bestSellers.length === 4 ? bestSellers : products.slice(0, 4);
 ---
 
 <section id="produtos" class="editorial" data-product-section>
   <div class="catalog-head section-head" data-mos="fade-up">
     <div>
-      <span class="catalog-eyebrow">Tradição & Qualidade Colonial</span>
-      <h2>Catálogo Tchê Empório Gaúcho<small id="filter-label"></small></h2>
-      <p>Iguarias autênticas da Serra e do Pampa Gaúcho. Peça diretamente pelo WhatsApp ou monte sua sacola.</p>
+      <span class="catalog-eyebrow">Destaques Coloniais</span>
+      <h2>Mais Vendidos da Nossa Terra</h2>
+      <p>Uma seleção das delícias gaúchas mais pedidas pelos nossos clientes. Feitas por famílias e cooperativas da Serra e do Pampa.</p>
     </div>
     <div class="catalog-actions">
-      <a href="/catalogo" class="admin-link" style="background:#8b1b22;border-color:#8b1b22;color:#fff;" title="Abrir catálogo completo com filtros laterais">
-        🔍 Ver Catálogo com Filtros Laterais →
-      </a>
-      <a href="/admin" class="admin-link" title="Gerenciar produtos e preços no painel">
-        ⚙️ Painel Admin
+      <a href="/catalogo" class="btn-view-all" title="Ver todo o catálogo com mais de 220 produtos">
+        Ver Todos os Produtos (228) →
       </a>
     </div>
   </div>
 
-  <!-- Filter & Search Toolbar -->
-  <div class="product-toolbar" data-mos="fade-up">
-    <div class="category-tabs" role="tablist">
-      {
-        topCategories.map((cat, i) => (
-          <button
-            type="button"
-            class={`category-tab ${i === 0 ? "active" : ""}`}
-            data-category-tab={cat === "Todos" ? "all" : cat}
-          >
-            {cat}
-          </button>
-        ))
-      }
-    </div>
-    <div class="search-box">
-      <input
-        type="text"
-        id="store-search-input"
-        placeholder="Buscar vinhos, queijos, chimias, amendoim..."
-        aria-label="Buscar produtos no catálogo"
-      />
-    </div>
-  </div>
-
-  <!-- Grid de Produtos -->
+  <!-- Grid de 4 Produtos em Destaque (1 Linha Limpa) -->
   <div class="product-grid" id="main-product-grid">
     {
-      featuredProducts.map((product, idx) => (
+      displayProducts.map((product, idx) => (
         <article
           class="product"
           data-category-name={product.category}
-          data-mos={idx % 2 === 0 ? "fade-right" : "fade-left"}
+          data-mos="fade-up"
           data-product={product.id}
           id={`product-${product.id}`}
         >
@@ -92,7 +58,7 @@ const featuredProducts = products.filter((p) => p.featured);
             </svg>
           </button>
           
-          <div class="product-image-container" data-quick-view>
+          <a href={`/produto/${product.id}`} class="product-image-container" title={`Ver detalhes de ${product.name}`}>
             <img
               src={product.image || "/images/shop/cosmic-products.png"}
               alt={product.name}
@@ -100,14 +66,16 @@ const featuredProducts = products.filter((p) => p.featured);
               loading="lazy"
               onerror="this.src='/images/shop/cosmic-products.png'"
             />
-          </div>
+          </a>
 
           <div class="product-info">
             <span class="product-category-tag">{product.category}</span>
-            <h3 data-quick-view>{product.name}</h3>
+            <a href={`/produto/${product.id}`} class="product-title-link">
+              <h3>{product.name}</h3>
+            </a>
             <b>R$ {product.price.toFixed(2).replace(".", ",")}</b>
             <p>
-              <span>★★★★★</span> <small>({product.reviews})</small>
+              <span>★★★★★</span> <small>({product.reviews || 24})</small>
             </p>
             
             <div class="product-card-actions">
@@ -120,7 +88,7 @@ const featuredProducts = products.filter((p) => p.featured);
                 data-price={product.price}
                 title="Pedir este produto direto pelo WhatsApp"
               >
-                <span>💬 Pedir no WhatsApp</span>
+                <span>💬 WhatsApp</span>
               </button>
               <button
                 class="add-cart"
@@ -140,13 +108,13 @@ const featuredProducts = products.filter((p) => p.featured);
     }
   </div>
 
-  <!-- Modal Detalhes do Produto -->
-  <dialog aria-labelledby="reusable-product-title" class="product-modal" data-product-modal>
-    <button class="modal-close" type="button" aria-label="Fechar detalhes do produto" data-close-product>
-      ×
-    </button>
-    <div data-product-modal-content></div>
-  </dialog>
+  <!-- Botão Inferior de Acesso ao Catálogo Completo -->
+  <div class="catalog-bottom-cta" data-mos="fade-up">
+    <a href="/catalogo" class="btn-see-full-catalog">
+      <span>Explorar Catálogo Completo com Filtros Laterais</span>
+      <span class="arrow">→</span>
+    </a>
+  </div>
 
   <!-- Sacola Lateral / Drawer -->
   <aside class="product-cart" aria-hidden="true" data-product-cart>
@@ -157,7 +125,7 @@ const featuredProducts = products.filter((p) => p.featured);
     <div data-cart-items></div>
     <footer>
       <p>Subtotal <b data-cart-total>R$ 0,00</b></p>
-      <a href="#produtos" class="view-cart" data-close-cart>Continuar escolhendo</a>
+      <a href="/catalogo" class="view-cart" data-close-cart>Continuar escolhendo no catálogo</a>
       <button type="button" data-checkout class="btn-checkout-wa">
         <span>💬 Finalizar Pedido via WhatsApp</span>
       </button>
@@ -180,7 +148,7 @@ const featuredProducts = products.filter((p) => p.featured);
   .section-head {
     justify-content: space-between;
     align-items: flex-end;
-    margin-bottom: 22px;
+    margin-bottom: 24px;
     display: flex;
     flex-wrap: wrap;
     gap: 16px;
@@ -202,86 +170,35 @@ const featuredProducts = products.filter((p) => p.featured);
     align-items: center;
     gap: 12px;
   }
-  .admin-link {
-    font-size: 12px;
-    font-weight: 600;
-    padding: 6px 14px;
-    border-radius: 6px;
-    border: 1px solid var(--commerce-border);
-    background: var(--commerce-surface);
-    color: var(--commerce-foreground);
-    text-decoration: none;
-    transition: all 0.2s;
-  }
-  .admin-link:hover {
-    background: var(--commerce-surface-raised);
-    border-color: var(--commerce-accent);
-  }
-
-  /* Toolbar */
-  .product-toolbar {
-    margin-bottom: 24px;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-  }
-  .category-tabs {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  .category-tab {
-    cursor: pointer;
-    background: var(--commerce-surface);
-    border: 1px solid var(--commerce-border);
-    color: var(--commerce-muted);
-    font-size: 12px;
-    font-weight: 600;
-    padding: 6px 14px;
-    border-radius: 20px;
-    transition: all 0.2s;
-  }
-  .category-tab:hover {
-    color: var(--commerce-foreground);
-    border-color: var(--commerce-muted);
-  }
-  .category-tab.active {
-    background: var(--commerce-accent);
-    color: #fff;
-    border-color: var(--commerce-accent);
-  }
-  .search-box {
-    flex: 1;
-    min-width: 240px;
-    max-width: 360px;
-  }
-  .search-box input {
-    width: 100%;
-    background: var(--commerce-surface);
-    border: 1px solid var(--commerce-border);
-    color: var(--commerce-foreground);
-    padding: 8px 14px;
-    border-radius: 8px;
+  .btn-view-all {
     font-size: 13px;
-    outline: none;
-    transition: border-color 0.2s;
+    font-weight: 700;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background: #8b1b22;
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    box-shadow: 0 4px 14px rgba(139, 27, 34, 0.35);
   }
-  .search-box input:focus {
-    border-color: var(--commerce-accent);
+  .btn-view-all:hover {
+    background: #a52129;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(139, 27, 34, 0.45);
   }
 
-  /* Grid */
+  /* Grid de 4 Produtos em 1 linha */
   .product-grid {
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
     display: grid;
   }
   .product {
     border: 1px solid var(--commerce-border);
     background: var(--commerce-surface);
-    border-radius: 12px;
+    border-radius: 16px;
     position: relative;
     overflow: hidden;
     display: flex;
@@ -291,20 +208,20 @@ const featuredProducts = products.filter((p) => p.featured);
   }
   .product:hover {
     border-color: var(--commerce-accent);
-    box-shadow: 0 10px 24px -10px rgba(0, 0, 0, 0.5);
-    transform: translateY(-2px);
+    box-shadow: 0 12px 28px -10px rgba(0, 0, 0, 0.6);
+    transform: translateY(-3px);
   }
   .product-badge {
     position: absolute;
-    top: 10px;
-    left: 10px;
+    top: 12px;
+    left: 12px;
     background: var(--commerce-accent);
     color: #fff;
     font-size: 10px;
     font-weight: 700;
     text-transform: uppercase;
     padding: 3px 8px;
-    border-radius: 4px;
+    border-radius: 5px;
     z-index: 2;
     letter-spacing: 0.04em;
   }
@@ -315,9 +232,9 @@ const featuredProducts = products.filter((p) => p.featured);
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
     padding: 16px;
     overflow: hidden;
+    text-decoration: none;
   }
   .product-image {
     max-width: 100%;
@@ -368,13 +285,21 @@ const featuredProducts = products.filter((p) => p.featured);
     margin-bottom: 4px;
     display: block;
   }
+  .product-title-link {
+    text-decoration: none;
+    color: inherit;
+  }
   .product-info h3 {
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
     color: var(--commerce-foreground);
     margin: 0 0 8px;
     line-height: 1.35;
-    cursor: pointer;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    transition: color 0.2s;
   }
   .product-info h3:hover {
     color: var(--commerce-accent);
@@ -396,7 +321,7 @@ const featuredProducts = products.filter((p) => p.featured);
   }
   .product-card-actions {
     display: grid;
-    grid-template-columns: 1.4fr 1fr;
+    grid-template-columns: 1.3fr 1fr;
     gap: 8px;
     margin-top: auto;
   }
@@ -404,7 +329,7 @@ const featuredProducts = products.filter((p) => p.featured);
     background: #166534;
     color: #fff;
     border: 0;
-    border-radius: 6px;
+    border-radius: 7px;
     padding: 8px 10px;
     font-size: 11px;
     font-weight: 700;
@@ -419,7 +344,7 @@ const featuredProducts = products.filter((p) => p.featured);
     background: var(--commerce-surface-raised);
     color: var(--commerce-foreground);
     border: 1px solid var(--commerce-border);
-    border-radius: 6px;
+    border-radius: 7px;
     padding: 8px 10px;
     font-size: 11px;
     font-weight: 700;
@@ -431,82 +356,36 @@ const featuredProducts = products.filter((p) => p.featured);
     color: var(--commerce-accent);
   }
 
-  /* Modal */
-  .product-modal {
-    border: 1px solid var(--commerce-border);
-    background: var(--commerce-surface);
-    color: var(--commerce-foreground);
-    border-radius: 16px;
-    width: min(92vw, 680px);
-    padding: 28px;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+  /* Bottom CTA */
+  .catalog-bottom-cta {
+    margin-top: 28px;
+    text-align: center;
   }
-  .product-modal::backdrop {
-    background: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(6px);
-  }
-  .modal-close {
-    position: absolute;
-    top: 14px;
-    right: 18px;
-    background: transparent;
-    border: 0;
-    color: var(--commerce-muted);
-    font-size: 26px;
-    cursor: pointer;
-  }
-  .modal-close:hover {
-    color: #fff;
-  }
-  .modal-layout {
-    display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap: 24px;
+  .btn-see-full-catalog {
+    display: inline-flex;
     align-items: center;
-  }
-  .modal-image-wrap {
-    background: var(--commerce-surface-raised);
-    border-radius: 12px;
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 280px;
-  }
-  .modal-image-wrap img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-  }
-  .modal-category {
-    color: var(--commerce-accent);
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin: 0 0 6px;
-  }
-  .modal-details h2 {
-    font-size: 22px;
-    margin: 0 0 10px;
-    line-height: 1.25;
-  }
-  .modal-price {
-    font-size: 24px;
-    font-weight: 800;
-    color: #fff;
-    margin-bottom: 12px;
-    display: block;
-  }
-  .modal-desc {
-    color: var(--commerce-muted);
-    font-size: 13px;
-    line-height: 1.6;
-    margin-bottom: 20px;
-  }
-  .modal-actions {
-    display: flex;
     gap: 10px;
+    padding: 12px 28px;
+    border-radius: 12px;
+    background: #141212;
+    border: 1px solid #362e2c;
+    color: #f2ede6;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  .btn-see-full-catalog:hover {
+    border-color: #8b1b22;
+    background: #1c1817;
+    color: #ff9da3;
+    transform: translateY(-2px);
+  }
+  .btn-see-full-catalog .arrow {
+    transition: transform 0.2s ease;
+  }
+  .btn-see-full-catalog:hover .arrow {
+    transform: translateX(4px);
   }
 
   /* Cart Drawer */
@@ -686,9 +565,16 @@ const featuredProducts = products.filter((p) => p.featured);
     transform: translateX(-50%) translateY(0);
   }
 
+  @media (max-width: 1024px) {
+    .product-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+  }
+
   @media (max-width: 640px) {
     .product-grid {
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      grid-template-columns: repeat(2, 1fr);
       gap: 12px;
     }
     .product-image-container {
@@ -699,7 +585,7 @@ const featuredProducts = products.filter((p) => p.featured);
       padding: 12px 10px;
     }
     .product-info h3 {
-      font-size: 13px;
+      font-size: 12px;
     }
     .product-info b {
       font-size: 15px;
@@ -708,8 +594,9 @@ const featuredProducts = products.filter((p) => p.featured);
       grid-template-columns: 1fr;
       gap: 6px;
     }
-    .modal-layout {
-      grid-template-columns: 1fr;
+    .section-head {
+      flex-direction: column;
+      align-items: flex-start;
     }
   }
 </style>
@@ -718,7 +605,7 @@ const featuredProducts = products.filter((p) => p.featured);
   import { loadCart, saveCart, loadWishlist, saveWishlist, loadCatalogFromStorage } from "../lib/storefrontStorage";
   import type { Product } from "../data/products";
 
-  const WHATSAPP_PHONE = "5551993257923"; // Telefone Sigel / Marcos Issa
+  const WHATSAPP_PHONE = "5551993257923";
 
   function initProductSection() {
     document.querySelectorAll<HTMLElement>("[data-product-section]").forEach((section) => {
@@ -727,8 +614,6 @@ const featuredProducts = products.filter((p) => p.featured);
 
       const defaultCatalogEl = section.querySelector("[data-product-catalog]");
       const defaultCatalog: Product[] = JSON.parse(defaultCatalogEl?.textContent || "[]");
-
-      // Check if user has updated catalog in Admin (localStorage)
       const catalog: Product[] = loadCatalogFromStorage<Product>() || defaultCatalog;
 
       const cart = loadCart(catalog.map((p) => p.id));
@@ -746,14 +631,12 @@ const featuredProducts = products.filter((p) => p.featured);
 
       const formatBRL = (val: number) => `R$ ${val.toFixed(2).replace(".", ",")}`;
 
-      // Direct WhatsApp Order
       const sendWhatsAppOrder = (productName: string, price: number) => {
         const text = `Olá Tchê Empório Gaúcho!\n\nTenho interesse no produto *${productName}* (${formatBRL(price)}).\n\nEstá disponível para pronta entrega ou retirada? Poderia me informar o valor do frete?`;
         const url = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(text)}`;
         window.open(url, "_blank");
       };
 
-      // Cart Checkout WhatsApp Order
       const sendCartCheckout = () => {
         const entries = Object.entries(cart)
           .map(([id, qty]) => ({ item: catalog.find((p) => p.id === id), qty }))
@@ -764,7 +647,7 @@ const featuredProducts = products.filter((p) => p.featured);
           return;
         }
 
-        let msg = `Olá Tchê Empório Gaúcho!\n\nGostaria de fazer o pedido dos seguintes produtos do catálogo:\n\n`;
+        let msg = `Olá Tchê Empório Gaúcho!\n\nGostaria de fazer o pedido dos seguintes produtos da sacola:\n\n`;
         let total = 0;
         entries.forEach((e) => {
           const sub = e.item.price * e.qty;
@@ -807,40 +690,6 @@ const featuredProducts = products.filter((p) => p.featured);
         saveCart(cart);
       };
 
-      // Category filter and Search
-      const grid = document.getElementById("main-product-grid");
-      const searchInput = document.getElementById("store-search-input") as HTMLInputElement;
-      let currentCategory = "all";
-
-      const filterProducts = () => {
-        const query = (searchInput?.value || "").toLowerCase().trim();
-        const articles = grid?.querySelectorAll<HTMLElement>("article.product") || [];
-
-        articles.forEach((art) => {
-          const cat = art.dataset.categoryName || "";
-          const title = art.querySelector("h3")?.textContent?.toLowerCase() || "";
-          const matchesCat = currentCategory === "all" || cat === currentCategory;
-          const matchesSearch = !query || title.includes(query) || cat.toLowerCase().includes(query);
-
-          if (matchesCat && matchesSearch) {
-            art.style.display = "flex";
-          } else {
-            art.style.display = "none";
-          }
-        });
-      };
-
-      section.querySelectorAll<HTMLButtonElement>("[data-category-tab]").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          section.querySelectorAll(".category-tab").forEach((t) => t.classList.remove("active"));
-          btn.classList.add("active");
-          currentCategory = btn.dataset.categoryTab || "all";
-          filterProducts();
-        });
-      });
-
-      searchInput?.addEventListener("input", filterProducts);
-
       // Wishlist init
       section.querySelectorAll<HTMLElement>(".wish").forEach((btn) => {
         const prodEl = btn.closest<HTMLElement>("[data-product]");
@@ -850,14 +699,13 @@ const featuredProducts = products.filter((p) => p.featured);
         }
       });
 
-      const modal = section.querySelector<HTMLDialogElement>("[data-product-modal]");
       const cartDrawer = section.querySelector<HTMLElement>("[data-product-cart]");
 
       section.addEventListener(
         "click",
         (ev) => {
           const target = (ev.target as HTMLElement).closest<HTMLElement>(
-            ".wish,[data-add-cart],[data-order-whatsapp],[data-quick-view],[data-close-product],[data-open-cart],[data-close-cart],[data-remove-item],[data-checkout]"
+            ".wish,[data-add-cart],[data-order-whatsapp],[data-open-cart],[data-close-cart],[data-remove-item],[data-checkout]"
           );
           if (!target) return;
           ev.stopImmediatePropagation();
@@ -880,37 +728,6 @@ const featuredProducts = products.filter((p) => p.featured);
             cart[id] = (cart[id] || 0) + 1;
             renderCart();
             showToast(`${target.dataset.name} adicionado à sacola`);
-          } else if (target.matches("[data-quick-view]")) {
-            const prodId = target.closest<HTMLElement>("[data-product]")?.dataset.product;
-            const prod = catalog.find((p) => p.id === prodId);
-            const modalContent = section.querySelector("[data-product-modal-content]");
-            if (prod && modalContent && modal) {
-              const imgSrc = prod.image || "/images/shop/cosmic-products.png";
-              modalContent.innerHTML = `
-                <div class="modal-layout">
-                  <div class="modal-image-wrap">
-                    <img src="${imgSrc}" alt="${prod.name}" onerror="this.src='/images/shop/cosmic-products.png'" />
-                  </div>
-                  <div class="modal-details">
-                    <p class="modal-category">${prod.category}</p>
-                    <h2 id="reusable-product-title">${prod.name}</h2>
-                    <span class="modal-price">${formatBRL(prod.price)}</span>
-                    <p class="modal-desc">${prod.description}</p>
-                    <div class="modal-actions">
-                      <button class="btn-whatsapp" type="button" data-order-whatsapp data-name="${prod.name}" data-price="${prod.price}">
-                        💬 Pedir no WhatsApp
-                      </button>
-                      <button class="add-cart" type="button" data-add-cart data-id="${prod.id}" data-name="${prod.name}">
-                        + Sacola
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              `;
-              modal.showModal();
-            }
-          } else if (target.matches("[data-close-product]")) {
-            modal?.close();
           } else if (target.matches("[data-open-cart]")) {
             cartDrawer?.classList.add("open");
             cartDrawer?.setAttribute("aria-hidden", "false");
@@ -930,13 +747,10 @@ const featuredProducts = products.filter((p) => p.featured);
         true
       );
 
-      modal?.addEventListener("click", (ev) => {
-        if (ev.target === modal) modal.close();
-      });
-
       renderCart();
     });
   }
 
   initProductSection();
+  document.addEventListener("astro:page-load", initProductSection);
 </script>
