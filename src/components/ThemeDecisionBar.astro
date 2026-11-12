@@ -1,0 +1,162 @@
+---
+// Barra de Decisão Visual para a Página Inicial
+// Concebida com a consultoria do bot Lens (Design)
+---
+
+<div
+  class="theme-decision-bar sticky top-[72px] sm:top-[86px] z-30 bg-[var(--commerce-surface)]/95 backdrop-blur-md border-b border-[var(--commerce-border)] shadow-md transition-colors duration-300"
+  id="theme-decision-bar"
+>
+  <div class="site-container py-2.5">
+    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
+      <!-- Identificação & Resumo do Lens -->
+      <div class="flex items-center gap-2.5">
+        <div class="flex items-center justify-center size-8 rounded-lg bg-[var(--commerce-accent)] text-white shadow-sm font-bold text-sm shrink-0">
+          🎨
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-bold uppercase tracking-wider text-[var(--commerce-foreground)]">
+              Decisão de Identidade Visual (Lens)
+            </span>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[var(--commerce-ouro)]/20 text-[var(--commerce-ouro)] border border-[var(--commerce-ouro)]/30">
+              Só na Página Inicial
+            </span>
+          </div>
+          <p class="text-[11px] text-[var(--commerce-muted)] m-0 leading-tight">
+            Clique nas opções abaixo para comparar o contraste e a atmosfera colonial em tempo real.
+          </p>
+        </div>
+      </div>
+
+      <!-- 3 Opções de Design -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 w-full lg:w-auto">
+        <!-- Opção 1: Adega & Galpão -->
+        <button
+          type="button"
+          data-home-theme-select="adega"
+          class="theme-opt-btn flex items-center justify-between sm:justify-center gap-2 px-3 py-1.5 rounded-xl border text-xs font-bold transition text-left sm:text-center"
+          title="Opção 1: Escuro sofisticado (Carvão #18181B, Vinho Tinto #B91C1C e Ouro #F59E0B)"
+        >
+          <div class="flex items-center gap-2">
+            <span class="text-base">🍷</span>
+            <div>
+              <div class="leading-none text-[var(--commerce-foreground)]">1. Adega & Galpão</div>
+              <span class="text-[10px] font-normal text-[var(--commerce-muted)]">Dark + Vinho Tinto</span>
+            </div>
+          </div>
+          <span class="active-badge text-[10px] font-bold text-[var(--commerce-accent)] sm:hidden">✓</span>
+        </button>
+
+        <!-- Opção 2: Tradição Colonial -->
+        <button
+          type="button"
+          data-home-theme-select="colonial"
+          class="theme-opt-btn flex items-center justify-between sm:justify-center gap-2 px-3 py-1.5 rounded-xl border text-xs font-bold transition text-left sm:text-center"
+          title="Opção 2: Linho Cru Colonial #FDFBF7, Marrom Café #292524 e Tinto #881337"
+        >
+          <div class="flex items-center gap-2">
+            <span class="text-base">🌾</span>
+            <div>
+              <div class="leading-none text-[var(--commerce-foreground)]">2. Tradição Colonial</div>
+              <span class="text-[10px] font-normal text-[var(--commerce-muted)]">Linho Cru & Rústico</span>
+            </div>
+          </div>
+          <span class="active-badge text-[10px] font-bold text-[var(--commerce-accent)] sm:hidden">✓</span>
+        </button>
+
+        <!-- Opção 3: Farroupilha Tricolor -->
+        <button
+          type="button"
+          data-home-theme-select="farroupilha"
+          class="theme-opt-btn flex items-center justify-between sm:justify-center gap-2 px-3 py-1.5 rounded-xl border text-xs font-bold transition text-left sm:text-center"
+          title="Opção 3: Cores oficiais do RS (Verde Pampa #14532D, Vermelho #DC2626 e Ouro #D97706)"
+        >
+          <div class="flex items-center gap-2">
+            <span class="text-base">🟢</span>
+            <div>
+              <div class="leading-none text-[var(--commerce-foreground)]">3. Farroupilha</div>
+              <span class="text-[10px] font-normal text-[var(--commerce-muted)]">Bandeira do RS</span>
+            </div>
+          </div>
+          <span class="active-badge text-[10px] font-bold text-[var(--commerce-accent)] sm:hidden">✓</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .theme-opt-btn {
+    background: var(--commerce-surface);
+    border-color: var(--commerce-border);
+    color: var(--commerce-foreground);
+    cursor: pointer;
+  }
+  .theme-opt-btn:hover {
+    border-color: var(--commerce-accent);
+  }
+  .theme-opt-btn.is-active {
+    background: color-mix(in srgb, var(--commerce-accent) 14%, var(--commerce-surface));
+    border-color: var(--commerce-accent);
+    box-shadow: 0 0 0 2px var(--commerce-glow);
+  }
+</style>
+
+<script>
+  function setupThemeBar() {
+    const buttons = document.querySelectorAll<HTMLButtonElement>("[data-home-theme-select]");
+    const navPills = document.querySelectorAll<HTMLButtonElement>("[data-theme-pill]");
+
+    function updateActiveState(theme: string) {
+      document.documentElement.setAttribute("data-home-theme", theme);
+      localStorage.setItem("tche_home_theme", theme);
+
+      if (theme === "adega") {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+
+      buttons.forEach((btn) => {
+        const btnTheme = btn.getAttribute("data-home-theme-select");
+        if (btnTheme === theme) {
+          btn.classList.add("is-active");
+        } else {
+          btn.classList.remove("is-active");
+        }
+      });
+
+      navPills.forEach((pill) => {
+        const pillTheme = pill.getAttribute("data-theme-pill");
+        if (pillTheme === theme) {
+          pill.classList.add("bg-[var(--commerce-accent)]", "text-white");
+          pill.classList.remove("text-[var(--commerce-muted)]");
+        } else {
+          pill.classList.remove("bg-[var(--commerce-accent)]", "text-white");
+          pill.classList.add("text-[var(--commerce-muted)]");
+        }
+      });
+    }
+
+    const currentTheme = localStorage.getItem("tche_home_theme") || "adega";
+    updateActiveState(currentTheme);
+
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const theme = btn.getAttribute("data-home-theme-select");
+        if (theme) updateActiveState(theme);
+      });
+    });
+
+    navPills.forEach((pill) => {
+      pill.addEventListener("click", () => {
+        const theme = pill.getAttribute("data-theme-pill");
+        if (theme) updateActiveState(theme);
+      });
+    });
+  }
+
+  setupThemeBar();
+  document.addEventListener("astro:page-load", setupThemeBar);
+</script>

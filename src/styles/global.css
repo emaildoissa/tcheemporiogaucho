@@ -31,41 +31,42 @@
 }
 
 :root {
-  /* TEMA CLARO: Linho colonial cru, madeira nobre, chimia e parreirais */
-  --background: #fbf9f5;
-  --foreground: #221c19;
-  --card: #ffffff;
-  --card-foreground: #221c19;
-  --popover: #ffffff;
-  --popover-foreground: #221c19;
-  --primary: #8b1b22;
+  /* TEMA PADRÃO GLOBAL: Adega & Galpão (Dark Premium / Reserva Gaúcha) */
+  --background: #18181b;
+  --foreground: #f4f4f5;
+  --card: #27272a;
+  --card-foreground: #f4f4f5;
+  --popover: #27272a;
+  --popover-foreground: #f4f4f5;
+  --primary: #991b1b;
   --primary-foreground: #ffffff;
-  --primary-accent: #a52129;
-  --secondary: #24421b;
+  --primary-accent: #b91c1c;
+  --secondary: #166534;
   --secondary-foreground: #ffffff;
-  --secondary-accent: #355f26;
-  --muted: #f3ede4;
-  --muted-foreground: #6c5f59;
-  --accent: #e8dcc8;
-  --accent-foreground: #3d2a1b;
-  --border: #e6ded3;
-  --input: #e6ded3;
-  --outline: #8b1b22;
+  --secondary-accent: #27272a;
+  --muted: #27272a;
+  --muted-foreground: #a1a1aa;
+  --accent: #3f3f46;
+  --accent-foreground: #f4f4f5;
+  --border: #3f3f46;
+  --input: #3f3f46;
+  --outline: #f59e0b;
 
-  --commerce-background: #fbf9f5;
-  --commerce-surface: #ffffff;
-  --commerce-surface-raised: #f5f0e6;
-  --commerce-foreground: #221c19;
-  --commerce-muted: #6c5f59;
-  --commerce-border: #e6ded3;
-  --commerce-accent: #8b1b22;
-  --commerce-accent-hover: #a52129;
-  --commerce-ouro: #c28b38;
-  --commerce-verde: #24421b;
-  --commerce-glow: rgba(139, 27, 34, 0.15);
+  --commerce-background: #18181b;
+  --commerce-surface: #27272a;
+  --commerce-surface-raised: #323238;
+  --commerce-foreground: #f4f4f5;
+  --commerce-muted: #a1a1aa;
+  --commerce-border: #3f3f46;
+  --commerce-accent: #b91c1c;
+  --commerce-accent-hover: #dc2626;
+  --commerce-ouro: #f59e0b;
+  --commerce-verde: #166534;
+  --commerce-glow: rgba(185, 28, 28, 0.35);
   --commerce-on-media: #ffffff;
-  --commerce-on-media-muted: #e6ded3;
-  --commerce-media-overlay: rgba(20, 16, 14, 0.85);
+  --commerce-on-media-muted: #a1a1aa;
+  --commerce-media-overlay: rgba(24, 24, 27, 0.9);
+  --commerce-announcement-bg: linear-gradient(90deg, #450a0a, #991b1b, #450a0a);
 
   --page-max-width: 96rem;
   --page-gutter: clamp(1.25rem, 2.5vw, 2.75rem);
@@ -77,41 +78,171 @@
 }
 
 .dark {
-  /* TEMA ESCURO: Adega colonial de pedra, barricas de carvalho e vinho tinto */
-  --background: #090807;
-  --foreground: #f4eee7;
-  --card: #12100f;
-  --card-foreground: #f4eee7;
-  --popover: #12100f;
-  --popover-foreground: #f4eee7;
-  --primary: #9e1f26;
+  --background: #18181b;
+  --foreground: #f4f4f5;
+  --card: #27272a;
+  --card-foreground: #f4f4f5;
+  --popover: #27272a;
+  --popover-foreground: #f4f4f5;
+  --primary: #991b1b;
   --primary-foreground: #ffffff;
-  --primary-accent: #e67e84;
-  --secondary: #f4eee7;
-  --secondary-foreground: #090807;
-  --secondary-accent: #2e2825;
-  --muted: #171412;
-  --muted-foreground: #a69a92;
-  --accent: #241d1a;
-  --accent-foreground: #f4eee7;
-  --border: #26201c;
-  --input: #26201c;
-  --outline: #e67e84;
+  --primary-accent: #b91c1c;
+  --secondary: #166534;
+  --secondary-foreground: #ffffff;
+  --secondary-accent: #27272a;
+  --muted: #27272a;
+  --muted-foreground: #a1a1aa;
+  --accent: #3f3f46;
+  --accent-foreground: #f4f4f5;
+  --border: #3f3f46;
+  --input: #3f3f46;
+  --outline: #f59e0b;
 
-  --commerce-background: #090807;
-  --commerce-surface: #12100f;
-  --commerce-surface-raised: #1a1614;
-  --commerce-foreground: #f4eee7;
-  --commerce-muted: #a69a92;
-  --commerce-border: #26201c;
-  --commerce-accent: #9e1f26;
-  --commerce-accent-hover: #b8252d;
-  --commerce-ouro: #d4af37;
+  --commerce-background: #18181b;
+  --commerce-surface: #27272a;
+  --commerce-surface-raised: #323238;
+  --commerce-foreground: #f4f4f5;
+  --commerce-muted: #a1a1aa;
+  --commerce-border: #3f3f46;
+  --commerce-accent: #b91c1c;
+  --commerce-accent-hover: #dc2626;
+  --commerce-ouro: #f59e0b;
   --commerce-verde: #166534;
-  --commerce-glow: rgba(158, 31, 38, 0.35);
+  --commerce-glow: rgba(185, 28, 28, 0.35);
   --commerce-on-media: #ffffff;
-  --commerce-on-media-muted: #a69a92;
-  --commerce-media-overlay: rgba(0, 0, 0, 0.9);
+  --commerce-on-media-muted: #a1a1aa;
+  --commerce-media-overlay: rgba(24, 24, 27, 0.9);
+  --commerce-announcement-bg: linear-gradient(90deg, #450a0a, #991b1b, #450a0a);
+}
+
+/* ============================================================
+   3 OPÇÕES VISUAIS CONCEBIDAS PELO LENS PARA A PÁGINA INICIAL
+   ============================================================ */
+
+/* 1. Adega & Galpão (Dark Premium / Reserva Gaúcha) */
+html[data-page="home"][data-home-theme="adega"],
+html[data-page="home"][data-home-theme="adega"] body,
+html[data-home-theme="adega"] {
+  --background: #18181b;
+  --foreground: #f4f4f5;
+  --card: #27272a;
+  --card-foreground: #f4f4f5;
+  --popover: #27272a;
+  --popover-foreground: #f4f4f5;
+  --primary: #991b1b;
+  --primary-foreground: #ffffff;
+  --primary-accent: #b91c1c;
+  --secondary: #166534;
+  --secondary-foreground: #ffffff;
+  --secondary-accent: #27272a;
+  --muted: #27272a;
+  --muted-foreground: #a1a1aa;
+  --accent: #3f3f46;
+  --accent-foreground: #f4f4f5;
+  --border: #3f3f46;
+  --input: #3f3f46;
+  --outline: #f59e0b;
+
+  --commerce-background: #18181b;
+  --commerce-surface: #27272a;
+  --commerce-surface-raised: #323238;
+  --commerce-foreground: #f4f4f5;
+  --commerce-muted: #a1a1aa;
+  --commerce-border: #3f3f46;
+  --commerce-accent: #b91c1c;
+  --commerce-accent-hover: #dc2626;
+  --commerce-ouro: #f59e0b;
+  --commerce-verde: #166534;
+  --commerce-glow: rgba(185, 28, 28, 0.4);
+  --commerce-on-media: #ffffff;
+  --commerce-on-media-muted: #a1a1aa;
+  --commerce-media-overlay: rgba(24, 24, 27, 0.9);
+  --commerce-announcement-bg: linear-gradient(90deg, #450a0a, #991b1b, #450a0a);
+  color-scheme: dark;
+}
+
+/* 2. Tradição Colonial (Linho, Farinha & Pampa - Rústico Artesanal Acolhedor) */
+html[data-page="home"][data-home-theme="colonial"],
+html[data-page="home"][data-home-theme="colonial"] body,
+html[data-home-theme="colonial"] {
+  --background: #fdfbf7;
+  --foreground: #292524;
+  --card: #ffffff;
+  --card-foreground: #292524;
+  --popover: #ffffff;
+  --popover-foreground: #292524;
+  --primary: #881337;
+  --primary-foreground: #ffffff;
+  --primary-accent: #9f1239;
+  --secondary: #1e3a2f;
+  --secondary-foreground: #ffffff;
+  --secondary-accent: #2d5a49;
+  --muted: #f5efe6;
+  --muted-foreground: #78716c;
+  --accent: #e7e5e4;
+  --accent-foreground: #292524;
+  --border: #e7e5e4;
+  --input: #e7e5e4;
+  --outline: #881337;
+
+  --commerce-background: #fdfbf7;
+  --commerce-surface: #ffffff;
+  --commerce-surface-raised: #f5efe6;
+  --commerce-foreground: #292524;
+  --commerce-muted: #78716c;
+  --commerce-border: #e7e5e4;
+  --commerce-accent: #881337;
+  --commerce-accent-hover: #9f1239;
+  --commerce-ouro: #d97706;
+  --commerce-verde: #1e3a2f;
+  --commerce-glow: rgba(136, 19, 55, 0.18);
+  --commerce-on-media: #ffffff;
+  --commerce-on-media-muted: #e7e5e4;
+  --commerce-media-overlay: rgba(41, 37, 36, 0.85);
+  --commerce-announcement-bg: linear-gradient(90deg, #1e3a2f, #881337, #1e3a2f);
+  color-scheme: light;
+}
+
+/* 3. Farroupilha Tricolor (Contemporâneo & Identidade Gaúcha com as Cores do RS) */
+html[data-page="home"][data-home-theme="farroupilha"],
+html[data-page="home"][data-home-theme="farroupilha"] body,
+html[data-home-theme="farroupilha"] {
+  --background: #f1f5f9;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --popover: #ffffff;
+  --popover-foreground: #0f172a;
+  --primary: #14532d;
+  --primary-foreground: #ffffff;
+  --primary-accent: #166534;
+  --secondary: #dc2626;
+  --secondary-foreground: #ffffff;
+  --secondary-accent: #b91c1c;
+  --muted: #e2e8f0;
+  --muted-foreground: #64748b;
+  --accent: #cbd5e1;
+  --accent-foreground: #0f172a;
+  --border: #cbd5e1;
+  --input: #cbd5e1;
+  --outline: #dc2626;
+
+  --commerce-background: #f1f5f9;
+  --commerce-surface: #ffffff;
+  --commerce-surface-raised: #e2e8f0;
+  --commerce-foreground: #0f172a;
+  --commerce-muted: #64748b;
+  --commerce-border: #cbd5e1;
+  --commerce-accent: #dc2626;
+  --commerce-accent-hover: #b91c1c;
+  --commerce-ouro: #d97706;
+  --commerce-verde: #14532d;
+  --commerce-glow: rgba(220, 38, 38, 0.25);
+  --commerce-on-media: #ffffff;
+  --commerce-on-media-muted: #e2e8f0;
+  --commerce-media-overlay: rgba(15, 23, 42, 0.9);
+  --commerce-announcement-bg: linear-gradient(90deg, #14532d 0%, #dc2626 50%, #d97706 100%);
+  color-scheme: light;
 }
 
 * {
@@ -122,13 +253,16 @@
 html {
   background-color: var(--background);
   color: var(--foreground);
-  color-scheme: light;
+  color-scheme: dark;
   line-height: 1.6rem;
   scroll-behavior: smooth;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-html:where(.dark, .dark *) {
-  color-scheme: dark;
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 button {
@@ -184,6 +318,7 @@ button {
 .commerce-landing {
   background-color: var(--commerce-background);
   color: var(--commerce-foreground);
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 .commerce-landing :is(.category, .product, .collection, .look, .shop-look, .reviews blockquote) {

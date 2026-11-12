@@ -33,16 +33,21 @@ const {
     <meta name="generator" content={Astro.generator} />
     <script is:inline>
       function initTheme() {
-        const theme = localStorage.getItem("colorTheme");
-        if (theme) {
-          if (theme === "dark") {
+        const path = window.location.pathname;
+        const isHome = path === "/" || path === "" || path.endsWith("/index.html");
+        if (isHome) {
+          document.documentElement.setAttribute("data-page", "home");
+          const savedHomeTheme = localStorage.getItem("tche_home_theme") || "adega";
+          document.documentElement.setAttribute("data-home-theme", savedHomeTheme);
+          if (savedHomeTheme === "adega") {
             document.documentElement.classList.add("dark");
-          } else if (theme === "light") {
+          } else {
             document.documentElement.classList.remove("dark");
           }
         } else {
+          document.documentElement.removeAttribute("data-page");
+          document.documentElement.removeAttribute("data-home-theme");
           document.documentElement.classList.add("dark");
-          localStorage.setItem("colorTheme", "dark");
         }
       }
       initTheme();
