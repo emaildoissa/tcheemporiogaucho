@@ -31,54 +31,42 @@
 }
 
 :root {
-  --color-base-50: oklch(98.5% 0 0);
-  --color-base-100: oklch(97% 0 0);
-  --color-base-200: oklch(92.2% 0 0);
-  --color-base-300: oklch(87% 0 0);
-  --color-base-400: oklch(70.8% 0 0);
-  --color-base-500: oklch(55.6% 0 0);
-  --color-base-600: oklch(43.9% 0 0);
-  --color-base-700: oklch(37.1% 0 0);
-  --color-base-800: oklch(26.9% 0 0);
-  --color-base-900: oklch(20.5% 0 0);
-  --color-base-950: oklch(14.5% 0 0);
-  --color-primary-300: var(--color-red-300);
-  --color-primary-400: var(--color-red-400);
-  --color-primary-600: var(--color-red-600);
-  --color-primary-700: var(--color-red-700);
+  /* TEMA CLARO: Linho colonial cru, madeira nobre, chimia e parreirais */
+  --background: #fbf9f5;
+  --foreground: #221c19;
+  --card: #ffffff;
+  --card-foreground: #221c19;
+  --popover: #ffffff;
+  --popover-foreground: #221c19;
+  --primary: #8b1b22;
+  --primary-foreground: #ffffff;
+  --primary-accent: #a52129;
+  --secondary: #24421b;
+  --secondary-foreground: #ffffff;
+  --secondary-accent: #355f26;
+  --muted: #f3ede4;
+  --muted-foreground: #6c5f59;
+  --accent: #e8dcc8;
+  --accent-foreground: #3d2a1b;
+  --border: #e6ded3;
+  --input: #e6ded3;
+  --outline: #8b1b22;
 
-  --background: var(--color-base-50);
-  --foreground: var(--color-base-950);
-  --card: var(--color-base-50);
-  --card-foreground: var(--color-base-950);
-  --popover: var(--color-base-50);
-  --popover-foreground: var(--color-base-950);
-  --primary: var(--color-red-600);
-  --primary-foreground: var(--color-base-50);
-  --primary-accent: var(--color-primary-600);
-  --secondary: var(--color-base-950);
-  --secondary-foreground: var(--color-base-50);
-  --secondary-accent: var(--color-base-950);
-  --muted: var(--color-base-100);
-  --muted-foreground: var(--color-base-600);
-  --accent: var(--color-base-100);
-  --accent-foreground: var(--color-base-900);
-  --border: var(--color-base-200);
-  --input: var(--color-base-200);
-  --outline: var(--color-primary-600);
+  --commerce-background: #fbf9f5;
+  --commerce-surface: #ffffff;
+  --commerce-surface-raised: #f5f0e6;
+  --commerce-foreground: #221c19;
+  --commerce-muted: #6c5f59;
+  --commerce-border: #e6ded3;
+  --commerce-accent: #8b1b22;
+  --commerce-accent-hover: #a52129;
+  --commerce-ouro: #c28b38;
+  --commerce-verde: #24421b;
+  --commerce-glow: rgba(139, 27, 34, 0.15);
+  --commerce-on-media: #ffffff;
+  --commerce-on-media-muted: #e6ded3;
+  --commerce-media-overlay: rgba(20, 16, 14, 0.85);
 
-  --commerce-background: var(--color-base-50);
-  --commerce-surface: white;
-  --commerce-surface-raised: var(--color-base-100);
-  --commerce-foreground: var(--color-base-950);
-  --commerce-muted: var(--color-base-600);
-  --commerce-border: var(--color-base-200);
-  --commerce-accent: var(--color-red-600);
-  --commerce-accent-hover: var(--color-red-700);
-  --commerce-glow: #dc26263d;
-  --commerce-on-media: white;
-  --commerce-on-media-muted: var(--color-base-300);
-  --commerce-media-overlay: #000000e6;
   --page-max-width: 96rem;
   --page-gutter: clamp(1.25rem, 2.5vw, 2.75rem);
   --hero-content-gutter: clamp(0.75rem, 1.5vw, 1.5rem);
@@ -89,38 +77,41 @@
 }
 
 .dark {
-  --background: var(--color-base-950);
-  --foreground: var(--color-base-50);
-  --card: var(--color-base-900);
-  --card-foreground: var(--color-base-50);
-  --popover: var(--color-base-900);
-  --popover-foreground: var(--color-base-50);
-  --primary: var(--color-red-700);
-  --primary-foreground: var(--color-base-50);
-  --primary-accent: var(--color-red-400);
-  --secondary: var(--color-base-50);
-  --secondary-foreground: var(--color-base-950);
-  --secondary-accent: var(--color-base-200);
-  --muted: var(--color-base-900);
-  --muted-foreground: var(--color-base-400);
-  --accent: var(--color-base-700);
-  --accent-foreground: var(--color-base-100);
-  --border: color-mix(in oklab, var(--color-base-50) 10%, transparent);
-  --input: color-mix(in oklab, var(--color-base-50) 15%, transparent);
-  --outline: var(--color-primary-400);
+  /* TEMA ESCURO: Adega colonial de pedra, barricas de carvalho e vinho tinto */
+  --background: #090807;
+  --foreground: #f4eee7;
+  --card: #12100f;
+  --card-foreground: #f4eee7;
+  --popover: #12100f;
+  --popover-foreground: #f4eee7;
+  --primary: #9e1f26;
+  --primary-foreground: #ffffff;
+  --primary-accent: #e67e84;
+  --secondary: #f4eee7;
+  --secondary-foreground: #090807;
+  --secondary-accent: #2e2825;
+  --muted: #171412;
+  --muted-foreground: #a69a92;
+  --accent: #241d1a;
+  --accent-foreground: #f4eee7;
+  --border: #26201c;
+  --input: #26201c;
+  --outline: #e67e84;
 
-  --commerce-background: #030405;
-  --commerce-surface: #090a0b;
-  --commerce-surface-raised: #111214;
-  --commerce-foreground: var(--color-base-50);
-  --commerce-muted: var(--color-base-400);
-  --commerce-border: #292929;
-  --commerce-accent: var(--color-red-600);
-  --commerce-accent-hover: var(--color-red-500);
-  --commerce-glow: #ef444457;
-  --commerce-on-media: white;
-  --commerce-on-media-muted: var(--color-base-300);
-  --commerce-media-overlay: #000000e6;
+  --commerce-background: #090807;
+  --commerce-surface: #12100f;
+  --commerce-surface-raised: #1a1614;
+  --commerce-foreground: #f4eee7;
+  --commerce-muted: #a69a92;
+  --commerce-border: #26201c;
+  --commerce-accent: #9e1f26;
+  --commerce-accent-hover: #b8252d;
+  --commerce-ouro: #d4af37;
+  --commerce-verde: #166534;
+  --commerce-glow: rgba(158, 31, 38, 0.35);
+  --commerce-on-media: #ffffff;
+  --commerce-on-media-muted: #a69a92;
+  --commerce-media-overlay: rgba(0, 0, 0, 0.9);
 }
 
 * {

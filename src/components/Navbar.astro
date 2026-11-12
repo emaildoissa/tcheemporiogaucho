@@ -10,38 +10,44 @@ const navLinks = [
 ---
 
 <div
-  class="w-full flex duration-300 border-b dark fixed flex-col left-0 logo-initial-dark navbar--initial top-0 transition-all z-30"
+  class="w-full flex duration-300 border-b fixed flex-col left-0 navbar--initial top-0 transition-all z-30"
   data-nav-container
 >
   <div class="w-full flex mx-auto">
-    <div class="w-full flex items-center h-14 site-container">
-      <header class="w-full flex items-center relative gap-2">
-        <div class="flex-auto flex justify-start">
+    <div class="w-full flex items-center h-20 site-container">
+      <header class="w-full flex items-center relative gap-4">
+        <!-- Logo Principal Grande (Emblema Colonial Oficial) -->
+        <div class="flex-auto flex justify-start items-center">
           <a
             href="/"
-            class="inline-flex items-center gap-2.5 primary-focus text-foreground group"
+            class="inline-flex items-center gap-3.5 primary-focus text-foreground group py-1"
             aria-label="Início Tchê Empório Gaúcho"
           >
             <img
               src="/images/logo.png"
               alt="Logo Tchê Empório Gaúcho"
-              class="w-9 h-9 object-contain rounded-full shadow-md group-hover:scale-105 transition-transform"
+              class="h-14 sm:h-16 w-auto object-contain drop-shadow-md group-hover:scale-105 transition-transform duration-200"
             />
-            <span class="font-bold tracking-tight text-lg text-white">
-              Tchê Empório <span class="text-[#e67e84]">Gaúcho</span>
-            </span>
+            <div class="flex flex-col">
+              <span class="font-extrabold tracking-tight text-xl sm:text-2xl text-[var(--foreground)] leading-none">
+                Tchê Empório
+              </span>
+              <span class="text-xs sm:text-sm font-semibold tracking-wider uppercase text-[var(--commerce-accent)] mt-0.5">
+                Gaúcho • Tradição Colonial
+              </span>
+            </div>
           </a>
         </div>
 
-        <div class="justify-end flex flex-auto">
+        <div class="justify-end flex flex-auto items-center">
           <nav class="hidden md:block my-auto">
-            <ul class="h-fit flex items-center px-4">
+            <ul class="h-fit flex items-center px-2">
               {
                 navLinks.map((link) => (
                   <li>
                     <a
                       href={link.href}
-                      class="w-full flex items-center nav__link--base primary-focus py-2 rounded-md px-3.5 gap-1.5 h-10 relative font-medium text-xs tracking-wide"
+                      class="w-full flex items-center nav__link--base primary-focus py-2 rounded-md px-3 gap-1.5 h-10 relative font-semibold text-xs tracking-wide"
                     >
                       {link.label}
                     </a>
@@ -54,65 +60,58 @@ const navLinks = [
           <a
             href="https://wa.me/5551993257923?text=Ol%C3%A1%20Tch%C3%AA%20Emp%C3%B3rio!%20Gostaria%20de%20tirar%20uma%20d%C3%BAvida%20sobre%20os%20produtos."
             target="_blank"
-            class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-lg bg-[#166534] hover:bg-[#15803d] text-white transition shadow-sm mr-2"
+            class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold rounded-xl bg-[#166534] hover:bg-[#15803d] text-white transition shadow-sm mr-2"
           >
             <span>💬 WhatsApp</span>
           </a>
 
+          <!-- Botão Alternador Claro / Escuro -->
           <button
-            class="hidden md:block -ml-2 mr-3 nav__link--base p-2 primary-focus rounded-full theme-toggle"
-            aria-label="Alternar tema de cores"
+            class="theme-toggle p-2.5 rounded-full primary-focus border border-[var(--border)] bg-[var(--card)] hover:bg-[var(--muted)] text-[var(--foreground)] transition shadow-sm ml-1"
+            aria-label="Alternar entre tema Claro e Escuro"
+            title="Alternar entre tema Claro e Escuro"
           >
-            <div class="size-5 relative">
+            <div class="size-5 relative flex items-center justify-center">
+              <!-- Ícone Sol (aparece no modo escuro para ir ao claro) -->
               <svg
-                height="1em"
-                width="1em"
-                class="size-5 absolute inset-0 theme-toggle__dark-icon"
-                viewBox="0 0 24 24"
-                data-current-theme="false"
-                style="--animation-duration:300ms"
-              >
-                <g
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                >
-                  <path d="M0 0h24v24H0z" stroke="none"></path>
-                  <path
-                    d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446A9 9 0 1 1 12 2.992z"
-                  ></path>
-                </g>
-              </svg>
-              <svg
-                height="1em"
-                width="1em"
                 class="size-5 absolute inset-0 theme-toggle__light-icon"
                 viewBox="0 0 24 24"
-                data-current-theme="false"
-                style="--animation-duration:300ms"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
               >
-                <g
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                >
-                  <path d="M0 0h24v24H0z" stroke="none"></path>
-                  <path
-                    d="M8 12a4 4 0 1 0 8 0 4 4 0 1 0-8 0m-5 0h1m8-9v1m8 8h1m-9 8v1M5.6 5.6l.7.7m12.1-.7-.7.7m0 11.4.7.7m-12.1-.7-.7.7"
-                  ></path>
-                </g>
+                <circle cx="12" cy="12" r="4"></circle>
+                <path d="M12 2v2"></path>
+                <path d="M12 20v2"></path>
+                <path d="m4.93 4.93 1.41 1.41"></path>
+                <path d="m17.66 17.66 1.41 1.41"></path>
+                <path d="M2 12h2"></path>
+                <path d="M20 12h2"></path>
+                <path d="m6.34 17.66-1.41 1.41"></path>
+                <path d="m19.07 4.93-1.41 1.41"></path>
+              </svg>
+              <!-- Ícone Lua (aparece no modo claro para ir ao escuro) -->
+              <svg
+                class="size-5 absolute inset-0 theme-toggle__dark-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
               </svg>
             </div>
           </button>
 
-          <div class="flex items-center md:hidden">
+          <!-- Menu Mobile -->
+          <div class="flex items-center md:hidden ml-2">
             <div id="mobile-nav__container">
               <button
-                class="flex items-center justify-center p-2 rounded-md primary-focus text-foreground"
+                class="flex items-center justify-center p-2 rounded-lg primary-focus text-[var(--foreground)] border border-[var(--border)]"
                 aria-label="Abrir menu de navegação"
                 id="mobile-nav__burger"
                 aria-expanded="false"
@@ -121,7 +120,7 @@ const navLinks = [
                   class="size-6"
                   fill="none"
                   viewBox="0 0 24 24"
-                  stroke-width="1.5"
+                  stroke-width="1.8"
                   stroke="currentColor"
                   aria-hidden="true"
                 >
@@ -133,24 +132,24 @@ const navLinks = [
                 </svg>
               </button>
               <div
-                class="bg-[#141212] border-l border-[#2d2422] fixed h-screen hidden overflow-y-auto right-0 top-0 w-72 z-20"
+                class="bg-[var(--card)] border-l border-[var(--border)] fixed h-screen hidden overflow-y-auto right-0 top-0 w-72 z-20 shadow-2xl"
                 id="mobile-nav__content"
               >
                 <div class="p-6 flex flex-col h-full justify-between">
                   <div>
-                    <div class="flex items-center justify-between pb-6 border-b border-[#2d2422]">
-                      <div class="flex items-center gap-2">
+                    <div class="flex items-center justify-between pb-6 border-b border-[var(--border)]">
+                      <div class="flex items-center gap-2.5">
                         <img
                           src="/images/logo.png"
                           alt="Logo Tchê Empório Gaúcho"
-                          class="w-8 h-8 object-contain rounded-full shadow-sm"
+                          class="h-10 w-auto object-contain drop-shadow-sm"
                         />
-                        <span class="font-bold text-white text-base">Tchê Empório</span>
+                        <span class="font-bold text-[var(--foreground)] text-base">Tchê Empório</span>
                       </div>
                       <button
                         type="button"
                         id="mobile-nav__close"
-                        class="text-gray-400 hover:text-white text-xl"
+                        class="text-[var(--muted-foreground)] hover:text-[var(--foreground)] text-xl"
                       >
                         ✕
                       </button>
@@ -161,7 +160,7 @@ const navLinks = [
                           <li>
                             <a
                               href={link.href}
-                              class="block py-2 text-sm font-semibold text-[#f2ede6] hover:text-[#8b1b22]"
+                              class="block py-2 text-sm font-semibold text-[var(--foreground)] hover:text-[var(--commerce-accent)]"
                             >
                               {link.label}
                             </a>
@@ -170,11 +169,11 @@ const navLinks = [
                       }
                     </ul>
                   </div>
-                  <div class="pt-6 border-t border-[#2d2422]">
+                  <div class="pt-6 border-t border-[var(--border)]">
                     <a
                       href="https://wa.me/5551993257923"
                       target="_blank"
-                      class="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg bg-[#166534] text-white font-bold text-sm"
+                      class="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-[#166534] text-white font-bold text-sm shadow-md"
                     >
                       💬 Falar no WhatsApp
                     </a>
@@ -182,7 +181,7 @@ const navLinks = [
                 </div>
               </div>
               <button
-                class="bg-black fixed h-screen left-0 mobile-nav__backdrop--fade-out top-0 z-10"
+                class="bg-black/60 fixed h-screen left-0 mobile-nav__backdrop--fade-out top-0 z-10 backdrop-blur-xs"
                 aria-label="Fechar menu de navegação"
                 id="mobile-nav__backdrop"
               ></button>
@@ -195,54 +194,21 @@ const navLinks = [
 </div>
 
 <style is:global>
-  @keyframes icon-enter {
-    0% {
-      opacity: 0;
-      transform: rotate(180deg);
-    }
-    to {
-      opacity: 1;
-      transform: rotate(0);
-    }
-  }
-  @keyframes icon-exit {
-    0% {
-      opacity: 1;
-      transform: rotate(0);
-    }
-    to {
-      opacity: 0;
-      transform: rotate(-180deg);
-    }
-  }
   .theme-toggle__dark-icon {
-    opacity: 0;
-    transform: rotate(180deg);
-  }
-  .theme-toggle__dark-icon[data-current-theme="true"] {
-    opacity: 1;
-    transform: rotate(0);
-  }
-  .can-animate .theme-toggle__dark-icon[data-current-theme="true"] {
-    animation: icon-enter var(--animation-duration) forwards;
-  }
-  .can-animate .theme-toggle__dark-icon[data-current-theme="false"] {
-    animation: icon-exit var(--animation-duration) forwards;
+    display: none;
   }
   .theme-toggle__light-icon {
-    opacity: 0;
-    transform: rotate(180deg);
+    display: block;
   }
-  .theme-toggle__light-icon[data-current-theme="true"] {
-    opacity: 1;
-    transform: rotate(0);
+
+  /* Quando o documento está em modo claro: mostra a lua para alternar ao escuro */
+  html:not(.dark) .theme-toggle__dark-icon {
+    display: block;
   }
-  .can-animate .theme-toggle__light-icon[data-current-theme="true"] {
-    animation: icon-enter var(--animation-duration) forwards;
+  html:not(.dark) .theme-toggle__light-icon {
+    display: none;
   }
-  .can-animate .theme-toggle__light-icon[data-current-theme="false"] {
-    animation: icon-exit var(--animation-duration) forwards;
-  }
+
   .mobile-nav__backdrop--fade-in {
     width: 100vw;
     animation: 0.3s ease-in-out forwards MobileNavFadeInAnimation;
@@ -285,25 +251,20 @@ const navLinks = [
   }
   .navbar--scrolled {
     background-color: var(--background);
-    border-bottom-width: 1px;
+    border-bottom-color: var(--border);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 20px -5px rgba(0, 0, 0, 0.15);
   }
   .navbar--initial {
-    padding-block: 0.5rem;
-    background-color: transparent;
-    border-bottom-color: transparent;
-  }
-  .navbar--scrolled.dark .nav__link--base {
-    color: var(--color-base-400);
-  }
-  .navbar--scrolled.dark .nav__link--base:hover,
-  .navbar--scrolled.dark .nav__link--base:focus-visible {
-    color: var(--color-base-50);
+    background-color: color-mix(in srgb, var(--background) 92%, transparent);
+    border-bottom-color: var(--border);
+    backdrop-filter: blur(8px);
   }
 </style>
 
 <script>
-  function setTheme(theme: "dark" | "light") {
-    if (theme === "dark") {
+  function applyTheme(isDark: boolean) {
+    if (isDark) {
       document.documentElement.classList.add("dark");
       localStorage.setItem("colorTheme", "dark");
     } else {
@@ -313,30 +274,11 @@ const navLinks = [
   }
 
   function initThemeToggle() {
-    const darkIcons = document.querySelectorAll(".theme-toggle__dark-icon");
-    const lightIcons = document.querySelectorAll(".theme-toggle__light-icon");
     const toggles = document.querySelectorAll(".theme-toggle");
-
-    const isDark = localStorage.getItem("colorTheme") === "dark";
-    darkIcons.forEach((el) => el.setAttribute("data-current-theme", String(isDark)));
-    lightIcons.forEach((el) => el.setAttribute("data-current-theme", String(!isDark)));
-
     toggles.forEach((btn) => {
       btn.addEventListener("click", () => {
-        btn.classList.add("can-animate");
-        darkIcons.forEach((el) => {
-          const cur = el.getAttribute("data-current-theme") === "true";
-          el.setAttribute("data-current-theme", String(!cur));
-        });
-        lightIcons.forEach((el) => {
-          const cur = el.getAttribute("data-current-theme") === "true";
-          el.setAttribute("data-current-theme", String(!cur));
-        });
-        if (localStorage.getItem("colorTheme") === "light") {
-          setTheme("dark");
-        } else {
-          setTheme("light");
-        }
+        const isCurrentlyDark = document.documentElement.classList.contains("dark");
+        applyTheme(!isCurrentlyDark);
       });
     });
   }
@@ -345,7 +287,7 @@ const navLinks = [
     const navContainer = document.querySelector("[data-nav-container]");
     const onScroll = () => {
       if (!navContainer) return;
-      if (window.scrollY > 50) {
+      if (window.scrollY > 30) {
         navContainer.classList.add("navbar--scrolled");
         navContainer.classList.remove("navbar--initial");
       } else {
@@ -393,4 +335,9 @@ const navLinks = [
   initThemeToggle();
   initNavScroll();
   initMobileNav();
+  document.addEventListener("astro:after-swap", () => {
+    initThemeToggle();
+    initNavScroll();
+    initMobileNav();
+  });
 </script>

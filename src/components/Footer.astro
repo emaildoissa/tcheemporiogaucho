@@ -1,31 +1,36 @@
-<section class="pb-10 overflow-hidden pt-16 border-t border-[#2d2422]">
+<section class="pb-12 overflow-hidden pt-16 border-t border-[var(--border)] bg-[var(--card)] transition-colors duration-300">
   <div class="site-container">
-    <div class="pb-12 border-b border-[#2d2422]">
+    <div class="pb-12 border-b border-[var(--border)]">
       <div class="flex-wrap flex -m-8">
         <div class="w-full p-8 sm:w-1/2 lg:w-5/12">
           <div class="lg:max-w-sm">
             <a
               href="/"
-              class="inline-flex items-center gap-2.5 primary-focus text-foreground group"
+              class="inline-flex items-center gap-3 primary-focus text-foreground group"
               aria-label="Início Tchê Empório Gaúcho"
             >
               <img
                 src="/images/logo.png"
                 alt="Logo Tchê Empório Gaúcho"
-                class="w-10 h-10 object-contain rounded-full shadow-md group-hover:scale-105 transition-transform"
+                class="h-16 w-auto object-contain drop-shadow-md group-hover:scale-105 transition-transform"
               />
-              <span class="font-bold tracking-tight text-xl text-white">
-                Tchê Empório <span class="text-[#e67e84]">Gaúcho</span>
-              </span>
+              <div class="flex flex-col">
+                <span class="font-extrabold tracking-tight text-xl text-[var(--foreground)] leading-none">
+                  Tchê Empório
+                </span>
+                <span class="text-xs font-semibold tracking-wider uppercase text-[var(--commerce-accent)] mt-0.5">
+                  Gaúcho • Tradição Colonial
+                </span>
+              </div>
             </a>
-            <p class="text-muted-foreground font-medium text-xs leading-relaxed mt-4">
+            <p class="text-[var(--muted-foreground)] font-medium text-xs leading-relaxed mt-4">
               Produtos coloniais autênticos selecionados diretamente de pequenos produtores da Serra Gaúcha e do Pampa. Atendimento direto pelo WhatsApp.
             </p>
             <div class="mt-6">
               <a
                 href="https://wa.me/5551993257923?text=Ol%C3%A1%20Tch%C3%AA%20Emp%C3%B3rio!%20Gostaria%20de%20falar%20com%20o%20atendimento."
                 target="_blank"
-                class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#166534] hover:bg-[#15803d] text-white text-xs font-bold transition"
+                class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#166534] hover:bg-[#15803d] text-white text-xs font-bold transition shadow-sm"
               >
                 <span>💬 Falar no WhatsApp: (51) 99325-7923</span>
               </a>
@@ -36,35 +41,35 @@
         <div class="w-full p-8 sm:w-1/2 lg:w-7/12">
           <div class="flex flex-wrap justify-between gap-6">
             <div>
-              <h4 class="text-xs font-bold uppercase tracking-wider text-white mb-3">Categorias</h4>
-              <ul class="space-y-2 text-xs text-muted-foreground">
-                <li><a href="/catalogo?cat=Vinhos+Finos" class="hover:text-white transition">Vinhos Finos & Espumantes</a></li>
-                <li><a href="/catalogo?cat=Carnes+%26+Embutidos" class="hover:text-white transition">Carnes & Embutidos Coloniais</a></li>
-                <li><a href="/catalogo?cat=Gel%C3%A9ias+%26+Chimias" class="hover:text-white transition">Doces de Leite & Chimias</a></li>
-                <li><a href="/catalogo?cat=Amendoim+em+Gr%C3%A3os" class="hover:text-white transition">Amendoins & Farinhas</a></li>
-                <li><a href="/catalogo?cat=Palmitos" class="hover:text-white transition">Palmitos & Conservas</a></li>
+              <h4 class="text-xs font-bold uppercase tracking-wider text-[var(--foreground)] mb-3">Categorias</h4>
+              <ul class="space-y-2 text-xs text-[var(--muted-foreground)]">
+                <li><a href="/catalogo?cat=Vinhos+Finos" class="hover:text-[var(--commerce-accent)] transition">Vinhos Finos & Espumantes</a></li>
+                <li><a href="/catalogo?cat=Carnes+%26+Embutidos" class="hover:text-[var(--commerce-accent)] transition">Carnes & Embutidos Coloniais</a></li>
+                <li><a href="/catalogo?cat=Gel%C3%A9ias+%26+Chimias" class="hover:text-[var(--commerce-accent)] transition">Doces de Leite & Chimias</a></li>
+                <li><a href="/catalogo?cat=Amendoim+em+Gr%C3%A3os" class="hover:text-[var(--commerce-accent)] transition">Amendoins & Farinhas</a></li>
+                <li><a href="/catalogo?cat=Palmitos" class="hover:text-[var(--commerce-accent)] transition">Palmitos & Conservas</a></li>
               </ul>
             </div>
 
             <div>
-              <h4 class="text-xs font-bold uppercase tracking-wider text-white mb-3">Navegação</h4>
-              <ul class="space-y-2 text-xs text-muted-foreground">
-                <li><a href="/" class="hover:text-white transition">Início</a></li>
-                <li><a href="/catalogo" class="hover:text-white transition">Catálogo Completo</a></li>
-                <li><a href="#sustentabilidade" class="hover:text-white transition">Nossa Origem</a></li>
-                <li><a href="#depoimentos" class="hover:text-white transition">Depoimentos</a></li>
+              <h4 class="text-xs font-bold uppercase tracking-wider text-[var(--foreground)] mb-3">Navegação</h4>
+              <ul class="space-y-2 text-xs text-[var(--muted-foreground)]">
+                <li><a href="/" class="hover:text-[var(--commerce-accent)] transition">Início</a></li>
+                <li><a href="/catalogo" class="hover:text-[var(--commerce-accent)] transition">Catálogo Completo</a></li>
+                <li><a href="#sustentabilidade" class="hover:text-[var(--commerce-accent)] transition">Nossa Origem</a></li>
+                <li><a href="#depoimentos" class="hover:text-[var(--commerce-accent)] transition">Depoimentos</a></li>
               </ul>
             </div>
 
             <div>
-              <h4 class="text-xs font-bold uppercase tracking-wider text-white mb-3">Administração</h4>
-              <ul class="space-y-2 text-xs text-muted-foreground">
+              <h4 class="text-xs font-bold uppercase tracking-wider text-[var(--foreground)] mb-3">Administração</h4>
+              <ul class="space-y-2 text-xs text-[var(--muted-foreground)]">
                 <li>
-                  <a href="/admin" class="inline-flex items-center gap-1.5 text-[#e67e84] hover:underline font-semibold">
+                  <a href="/admin" class="inline-flex items-center gap-1.5 text-[var(--commerce-accent)] hover:underline font-semibold">
                     <span>⚙️ Painel de Produtos</span>
                   </a>
                 </li>
-                <li><span class="text-[#7d7270]">Versão: 2.0 (Astro)</span></li>
+                <li><span class="text-[var(--muted-foreground)]/70">Versão: 2.0 (Astro)</span></li>
               </ul>
             </div>
           </div>
@@ -72,11 +77,11 @@
       </div>
     </div>
 
-    <div class="pt-8 flex flex-wrap justify-between items-center gap-4 text-xs text-[#7d7270]">
+    <div class="pt-8 flex flex-wrap justify-between items-center gap-4 text-xs text-[var(--muted-foreground)]">
       <p>© {new Date().getFullYear()} Tchê Empório Gaúcho. Todos os direitos reservados. Porto Alegre - RS.</p>
       <div class="flex gap-4">
-        <a href="/catalogo" class="hover:text-white transition">Catálogo</a>
-        <a href="/admin" class="hover:text-white transition">Admin</a>
+        <a href="/catalogo" class="hover:text-[var(--foreground)] transition">Catálogo</a>
+        <a href="/admin" class="hover:text-[var(--foreground)] transition">Admin</a>
       </div>
     </div>
   </div>

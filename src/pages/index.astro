@@ -17,7 +17,7 @@ import NewsletterSection from "../components/NewsletterSection.astro";
 >
   <div
     class="commerce-landing landing-page-3"
-    style="--page-max-width:1480px;--page-gutter:24px;--commerce-accent:#8b1b22;--commerce-accent-hover:#a52129;"
+    style="--page-max-width:1480px;--page-gutter:24px;"
   >
     <AnnouncementBar />
     <HeroSection />
@@ -35,10 +35,9 @@ import NewsletterSection from "../components/NewsletterSection.astro";
 
 <style>
   .landing-page-3 {
-    color: #f7f7f7;
-    background: #0b0c0e;
-    padding-top: 72px;
+    padding-top: 86px;
     font: 14px Inter, Arial, sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
   .landing-page-3.commerce-landing {
     background: var(--commerce-background);

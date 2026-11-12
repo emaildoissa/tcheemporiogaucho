@@ -29,7 +29,7 @@ const currentUrl = `https://tcheemporiogaucho.com.br/produto/${product.id}`;
   title={`${product.name} — Tchê Empório Gaúcho`}
   description={product.description?.slice(0, 160) || `Peça ${product.name} diretamente pelo WhatsApp.`}
 >
-  <div class="product-detail-page bg-[#070809] text-[#f2ede6] min-h-screen pt-[72px]">
+  <div class="product-detail-page bg-[var(--background)] text-[var(--foreground)] min-h-screen pt-[96px] transition-colors duration-300">
     <AnnouncementBar text="Atendimento e Pedidos Direto no WhatsApp • Entregas para todo o Brasil" />
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
