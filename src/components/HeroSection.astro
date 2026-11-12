@@ -1,0 +1,147 @@
+---
+interface Props {
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  primaryCta?: { label: string; href: string };
+  secondaryCta?: { label: string; href: string };
+  image?: string;
+}
+
+const {
+  eyebrow = "Design atemporal",
+  title = "Eleve o Seu Dia a Dia",
+  description = "Peças cuidadosamente desenhadas para se integrarem perfeitamente à sua rotina.",
+  primaryCta = { label: "Ver coleção", href: "#produtos" },
+  secondaryCta = { label: "Explorar", href: "#colecoes" },
+  image = "/images/shop/cosmic-minimal.png",
+} = Astro.props;
+---
+
+<section
+  class="hero"
+  style={`--hero-image:url('${image}');--hero-image-position:72% center;--hero-split:1fr 1.35fr;--hero-height:570px;--hero-content-width:500px;--hero-heading-size:clamp(3rem, 5vw, 4.2rem);--hero-accent:var(--commerce-accent);--hero-align:left`}
+>
+  <div class="inner">
+    <div class="copy" data-mos="fade-right">
+      <p class="eyebrow">{eyebrow}</p>
+      <h1>{title}</h1>
+      <p class="description">{description}</p>
+      <div class="actions">
+        <a href={primaryCta.href}>{primaryCta.label}</a>
+        <a href={secondaryCta.href} class="secondary">{secondaryCta.label}</a>
+      </div>
+    </div>
+    <div
+      class="visual"
+      aria-label="Tênis minimalista em ambiente iluminado naturalmente"
+      data-mos="fade-left"
+      role="img"
+    >
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    min-height: var(--hero-height);
+    background: var(--commerce-background);
+    color: var(--commerce-foreground);
+    font-family: Inter, Arial, sans-serif;
+  }
+  .inner {
+    min-height: var(--hero-height);
+    grid-template-columns: var(--hero-split);
+    display: grid;
+  }
+  .copy {
+    width: min(var(--hero-content-width), calc(100% - (var(--page-gutter) * 2)));
+    margin-left: max(var(--page-gutter), calc((100vw - var(--page-max-width)) / 2));
+    text-align: var(--hero-align);
+    flex-direction: column;
+    justify-content: center;
+    padding-right: clamp(2rem, 5vw, 5rem);
+    display: flex;
+  }
+  .visual {
+    background-image: var(--hero-image);
+    background-position: var(--hero-image-position);
+    background-size: cover;
+    min-width: 0;
+    position: relative;
+  }
+  .eyebrow {
+    color: var(--hero-accent);
+    text-transform: uppercase;
+    margin: 0;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  h1 {
+    max-width: 520px;
+    font: 600 var(--hero-heading-size) / 1.02 Georgia, serif;
+    margin: 24px 0;
+  }
+  .description {
+    max-width: 390px;
+    color: color-mix(in srgb, currentColor 68%, transparent);
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.7;
+  }
+  .actions {
+    gap: 26px;
+    margin-top: 32px;
+    display: flex;
+  }
+  .actions a {
+    color: #fff;
+    text-transform: uppercase;
+    background: #c51117;
+    border: 1px solid #c51117;
+    place-items: center;
+    min-height: 50px;
+    padding: 0 28px;
+    font-size: 11px;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-grid;
+  }
+  .actions .secondary {
+    border-color: color-mix(in srgb, currentColor 45%, transparent);
+    color: inherit;
+    background: transparent;
+  }
+  @media (width <= 750px) {
+    .hero,
+    .inner {
+      min-height: 0;
+    }
+    .inner {
+      grid-template-columns: 1fr;
+    }
+    .copy {
+      width: calc(100% - 28px);
+      min-height: 420px;
+      margin-inline: auto;
+      padding-right: 0;
+    }
+    .visual {
+      background-position: 62%;
+      min-height: 340px;
+    }
+    h1 {
+      font-size: 48px;
+    }
+    .description {
+      max-width: 290px;
+      font-size: 14px;
+    }
+    .actions {
+      gap: 12px;
+    }
+    .actions a {
+      padding: 0 19px;
+    }
+  }
+</style>

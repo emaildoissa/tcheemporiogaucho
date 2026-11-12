@@ -1,0 +1,63 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import AnnouncementBar from "../components/AnnouncementBar.astro";
+import HeroSection from "../components/HeroSection.astro";
+import ProductSection from "../components/ProductSection.astro";
+import SustainabilitySection from "../components/SustainabilitySection.astro";
+import CampaignSection from "../components/CampaignSection.astro";
+import TestimonialsSection from "../components/TestimonialsSection.astro";
+import CollectionsSection from "../components/CollectionsSection.astro";
+import PartnersSection from "../components/PartnersSection.astro";
+import NewsletterSection from "../components/NewsletterSection.astro";
+---
+
+<BaseLayout
+  title="Eclipse — Eleve o seu dia a dia"
+  description="Peças essenciais cuidadosamente desenhadas para a vida moderna."
+>
+  <div
+    class="commerce-landing landing-page-3"
+    style="--page-max-width:1480px;--page-gutter:24px;--commerce-accent:#c51117"
+  >
+    <AnnouncementBar />
+    <HeroSection />
+    <div class="content">
+      <ProductSection />
+      <SustainabilitySection />
+      <CampaignSection />
+      <TestimonialsSection />
+      <CollectionsSection />
+      <PartnersSection />
+      <NewsletterSection />
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .landing-page-3 {
+    color: #f7f7f7;
+    background: #050607;
+    padding-top: 72px;
+    font: 14px Inter, Arial, sans-serif;
+  }
+  .landing-page-3.commerce-landing {
+    background: var(--commerce-background);
+    color: var(--commerce-foreground);
+  }
+  .landing-page-3 * {
+    box-sizing: border-box;
+  }
+  .landing-page-3 .content {
+    width: min(var(--page-max-width), calc(100% - (var(--page-gutter) * 2)));
+    margin-inline: auto;
+    padding-top: 35px;
+  }
+  .landing-page-3 .content > :global(section) {
+    margin-bottom: 36px;
+  }
+  @media (width <= 600px) {
+    .landing-page-3 .content {
+      width: calc(100% - 28px);
+    }
+  }
+</style>

@@ -1,0 +1,89 @@
+---
+import "../styles/global.css";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Eclipse — Eleve o seu dia a dia",
+  description = "Peças essenciais com design atemporal para a vida moderna.",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+    <link
+      href="/fonts/inter-latin-wght-normal.woff2"
+      rel="preload"
+      type="font/woff2"
+      as="font"
+      crossorigin="anonymous"
+    />
+    <link href="/favicons/favicon.svg" rel="icon" type="image/svg+xml" />
+    <meta content="Eclipse" name="apple-mobile-web-app-title" />
+    <link href="/favicons/site.webmanifest" rel="manifest" />
+    <meta name="generator" content={Astro.generator} />
+    <script is:inline>
+      function initTheme() {
+        const theme = localStorage.getItem("colorTheme");
+        if (theme) {
+          if (theme === "dark") {
+            document.documentElement.classList.add("dark");
+          } else if (theme === "light") {
+            document.documentElement.classList.remove("dark");
+          }
+        } else {
+          document.documentElement.classList.add("dark");
+          localStorage.setItem("colorTheme", "dark");
+        }
+      }
+      initTheme();
+      document.addEventListener("astro:after-swap", initTheme);
+    </script>
+    <title>{title}</title>
+    <meta content={description} name="description" />
+    <meta content={title} property="og:title" />
+    <meta content="website" property="og:type" />
+    <meta content={description} property="og:description" />
+  </head>
+  <body class="use-animations" id="body">
+    <div id="page">
+      <Navbar />
+      <main class="min-h-[100lvh] overflow-x-clip relative">
+        <slot />
+      </main>
+      <Footer />
+    </div>
+
+    <script>
+      function initScrollAnimations() {
+        const elements = document.querySelectorAll<HTMLElement>("[data-mos]");
+        if (!elements.length) return;
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("mos-animate");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+        );
+
+        elements.forEach((el) => observer.observe(el));
+      }
+
+      initScrollAnimations();
+      document.addEventListener("astro:page-load", initScrollAnimations);
+    </script>
+  </body>
+</html>

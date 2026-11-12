@@ -1,0 +1,186 @@
+<section id="sustentabilidade" class="sustainability" aria-labelledby="sustainability-title">
+  <header data-mos="fade-up">
+    <div>
+      <h2 id="sustainability-title">Projetado pensando no amanhã.</h2>
+      <p>Uma abordagem mais consciente para criar peças essenciais melhores.</p>
+    </div>
+    <span>Nossa responsabilidade</span>
+  </header>
+
+  <div class="sustainability-body">
+    <div class="statement" data-mos="fade-right">
+      <span aria-hidden="true">∞</span>
+      <h3>Compre menos. Use por mais tempo.</h3>
+      <p>
+        Focamos em produtos úteis, construção durável e escolhas conscientes em todas as etapas de produção.
+      </p>
+    </div>
+
+    <ol data-mos="fade-left">
+      <li>
+        <b>01</b>
+        <div>
+          <h3>Materiais selecionados</h3>
+          <p>Materiais escolhidos por sua performance, conforto e maior vida útil.</p>
+        </div>
+      </li>
+      <li>
+        <b>02</b>
+        <div>
+          <h3>Embalagem reduzida</h3>
+          <p>Embalagens sob medida com menos camadas e componentes desnecessários.</p>
+        </div>
+      </li>
+      <li>
+        <b>03</b>
+        <div>
+          <h3>Feito para durar</h3>
+          <p>Formas atemporais e construção confiável projetadas para ir além de uma estação.</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<style>
+  .sustainability {
+    margin-bottom: 36px;
+  }
+  .sustainability > header {
+    border-bottom: 1px solid var(--commerce-border);
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 17px;
+    padding: 4px 0 18px;
+    display: flex;
+  }
+  .sustainability > header > div {
+    gap: 9px;
+    display: grid;
+  }
+  .sustainability h2 {
+    letter-spacing: -0.035em;
+    text-transform: none;
+    margin: 0;
+    font-family: Inter, Arial, sans-serif;
+    font-size: clamp(1.65rem, 2.5vw, 2.35rem);
+    font-weight: 500;
+    line-height: 1.15;
+  }
+  .sustainability header p {
+    color: #85888d;
+    letter-spacing: -0.01em;
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .sustainability header > span {
+    color: var(--commerce-accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding-bottom: 3px;
+    font-size: 10px;
+    font-weight: 600;
+  }
+  .sustainability-body {
+    border: 1px solid var(--commerce-border);
+    background: var(--commerce-surface);
+    grid-template-columns: minmax(280px, 0.82fr) minmax(0, 1.18fr);
+    display: grid;
+  }
+  .statement {
+    border-right: 1px solid var(--commerce-border);
+    flex-direction: column;
+    min-height: 390px;
+    padding: clamp(2rem, 4vw, 3.75rem);
+    display: flex;
+  }
+  .statement > span {
+    color: var(--commerce-accent);
+    font-size: 34px;
+    font-weight: 300;
+  }
+  .statement h3 {
+    letter-spacing: -0.06em;
+    max-width: 430px;
+    margin: auto 0 22px;
+    font-family: Inter, Arial, sans-serif;
+    font-size: clamp(2.8rem, 5vw, 5rem);
+    font-weight: 400;
+    line-height: 0.95;
+  }
+  .statement p {
+    max-width: 390px;
+    color: var(--commerce-muted);
+    margin: 0;
+    line-height: 1.7;
+  }
+  .sustainability ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .sustainability li {
+    border-bottom: 1px solid var(--commerce-border);
+    grid-template-columns: 42px 1fr;
+    align-items: center;
+    gap: 20px;
+    min-height: 130px;
+    padding: 25px clamp(1.5rem, 3vw, 2.75rem);
+    transition: background 0.2s;
+    display: grid;
+  }
+  .sustainability li:last-child {
+    border-bottom: 0;
+  }
+  .sustainability li:hover {
+    background: color-mix(in srgb, var(--commerce-accent) 5%, transparent);
+  }
+  .sustainability li > b {
+    color: var(--commerce-accent);
+    letter-spacing: 0.08em;
+    align-self: start;
+    padding-top: 4px;
+    font-size: 10px;
+  }
+  .sustainability li h3 {
+    margin: 0;
+    font-family: Inter, Arial, sans-serif;
+    font-size: clamp(1.05rem, 1.5vw, 1.3rem);
+    font-weight: 500;
+  }
+  .sustainability li p {
+    max-width: 500px;
+    color: var(--commerce-muted);
+    margin: 9px 0 0;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  @media (width <= 760px) {
+    .sustainability h2 {
+      font-size: 1.65rem;
+    }
+    .sustainability header p {
+      font-size: 12px;
+    }
+    .sustainability header > span {
+      text-align: right;
+      max-width: 88px;
+    }
+    .sustainability-body {
+      grid-template-columns: 1fr;
+    }
+    .statement {
+      border-right: 0;
+      border-bottom: 1px solid var(--commerce-border);
+      min-height: 320px;
+    }
+    .statement h3 {
+      font-size: clamp(2.8rem, 14vw, 4rem);
+    }
+    .sustainability li {
+      min-height: 125px;
+      padding-inline: 20px;
+    }
+  }
+</style>

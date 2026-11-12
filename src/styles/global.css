@@ -1,0 +1,285 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Inter Variable";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url("/fonts/inter-latin-wght-normal.woff2") format("woff2-variations");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url("/fonts/inter-latin-wght-normal.woff2") format("woff2-variations");
+}
+
+@theme {
+  --font-sans: "Inter Variable", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-heading: "Inter Variable", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-border: var(--border);
+}
+
+:root {
+  --color-base-50: oklch(98.5% 0 0);
+  --color-base-100: oklch(97% 0 0);
+  --color-base-200: oklch(92.2% 0 0);
+  --color-base-300: oklch(87% 0 0);
+  --color-base-400: oklch(70.8% 0 0);
+  --color-base-500: oklch(55.6% 0 0);
+  --color-base-600: oklch(43.9% 0 0);
+  --color-base-700: oklch(37.1% 0 0);
+  --color-base-800: oklch(26.9% 0 0);
+  --color-base-900: oklch(20.5% 0 0);
+  --color-base-950: oklch(14.5% 0 0);
+  --color-primary-300: var(--color-red-300);
+  --color-primary-400: var(--color-red-400);
+  --color-primary-600: var(--color-red-600);
+  --color-primary-700: var(--color-red-700);
+
+  --background: var(--color-base-50);
+  --foreground: var(--color-base-950);
+  --card: var(--color-base-50);
+  --card-foreground: var(--color-base-950);
+  --popover: var(--color-base-50);
+  --popover-foreground: var(--color-base-950);
+  --primary: var(--color-red-600);
+  --primary-foreground: var(--color-base-50);
+  --primary-accent: var(--color-primary-600);
+  --secondary: var(--color-base-950);
+  --secondary-foreground: var(--color-base-50);
+  --secondary-accent: var(--color-base-950);
+  --muted: var(--color-base-100);
+  --muted-foreground: var(--color-base-600);
+  --accent: var(--color-base-100);
+  --accent-foreground: var(--color-base-900);
+  --border: var(--color-base-200);
+  --input: var(--color-base-200);
+  --outline: var(--color-primary-600);
+
+  --commerce-background: var(--color-base-50);
+  --commerce-surface: white;
+  --commerce-surface-raised: var(--color-base-100);
+  --commerce-foreground: var(--color-base-950);
+  --commerce-muted: var(--color-base-600);
+  --commerce-border: var(--color-base-200);
+  --commerce-accent: var(--color-red-600);
+  --commerce-accent-hover: var(--color-red-700);
+  --commerce-glow: #dc26263d;
+  --commerce-on-media: white;
+  --commerce-on-media-muted: var(--color-base-300);
+  --commerce-media-overlay: #000000e6;
+  --page-max-width: 96rem;
+  --page-gutter: clamp(1.25rem, 2.5vw, 2.75rem);
+  --hero-content-gutter: clamp(0.75rem, 1.5vw, 1.5rem);
+  --commerce-section-space: clamp(4rem, 6vw, 6rem);
+  --commerce-section-space-mobile: 3.25rem;
+  --commerce-breakout-width: min(100rem, calc(100vw - var(--page-gutter)));
+  --radius: 0.65rem;
+}
+
+.dark {
+  --background: var(--color-base-950);
+  --foreground: var(--color-base-50);
+  --card: var(--color-base-900);
+  --card-foreground: var(--color-base-50);
+  --popover: var(--color-base-900);
+  --popover-foreground: var(--color-base-50);
+  --primary: var(--color-red-700);
+  --primary-foreground: var(--color-base-50);
+  --primary-accent: var(--color-red-400);
+  --secondary: var(--color-base-50);
+  --secondary-foreground: var(--color-base-950);
+  --secondary-accent: var(--color-base-200);
+  --muted: var(--color-base-900);
+  --muted-foreground: var(--color-base-400);
+  --accent: var(--color-base-700);
+  --accent-foreground: var(--color-base-100);
+  --border: color-mix(in oklab, var(--color-base-50) 10%, transparent);
+  --input: color-mix(in oklab, var(--color-base-50) 15%, transparent);
+  --outline: var(--color-primary-400);
+
+  --commerce-background: #030405;
+  --commerce-surface: #090a0b;
+  --commerce-surface-raised: #111214;
+  --commerce-foreground: var(--color-base-50);
+  --commerce-muted: var(--color-base-400);
+  --commerce-border: #292929;
+  --commerce-accent: var(--color-red-600);
+  --commerce-accent-hover: var(--color-red-500);
+  --commerce-glow: #ef444457;
+  --commerce-on-media: white;
+  --commerce-on-media-muted: var(--color-base-300);
+  --commerce-media-overlay: #000000e6;
+}
+
+* {
+  border-color: var(--border);
+  outline-color: color-mix(in oklab, var(--outline) 50%, transparent);
+}
+
+html {
+  background-color: var(--background);
+  color: var(--foreground);
+  color-scheme: light;
+  line-height: 1.6rem;
+  scroll-behavior: smooth;
+}
+
+html:where(.dark, .dark *) {
+  color-scheme: dark;
+}
+
+button {
+  cursor: pointer;
+}
+
+.site-container {
+  width: 100%;
+  max-width: var(--page-max-width);
+  padding-inline: var(--page-gutter);
+  margin-inline: auto;
+}
+
+.nav__link--base {
+  line-height: 1.25;
+  color: var(--muted-foreground);
+  transition: color 0.15s ease;
+}
+
+.nav__link--base:hover,
+.nav__link--base:focus-visible {
+  color: var(--primary-accent);
+}
+
+.button {
+  padding-inline: 1.5rem;
+  padding-block: 0.625rem;
+  text-align: center;
+  border-radius: calc(var(--radius) - 0.125rem);
+  width: fit-content;
+  min-width: 8rem;
+  color: var(--primary-foreground);
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.button--primary {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.button--primary:hover {
+  background-color: color-mix(in oklab, var(--primary) 90%, transparent);
+}
+
+.primary-focus:focus-visible {
+  outline: 2px solid var(--outline);
+}
+
+/* Commerce Landing Global Utilities */
+.commerce-landing {
+  background-color: var(--commerce-background);
+  color: var(--commerce-foreground);
+}
+
+.commerce-landing :is(.category, .product, .collection, .look, .shop-look, .reviews blockquote) {
+  border-color: var(--commerce-border);
+  background-color: var(--commerce-surface);
+}
+
+.commerce-landing :is(.benefits, .feature, .featured article > i, .collections a) {
+  border-color: var(--commerce-border);
+}
+
+.commerce-landing :is(.section-head a, .section-title a, .title a, .hero-copy > b) {
+  color: var(--commerce-accent);
+}
+
+.commerce-landing :is(.btn, .shop-btn, .newsletter button, .signup button) {
+  background-color: var(--commerce-accent);
+  border-color: var(--commerce-accent);
+}
+
+.commerce-landing :is(.btn, .shop-btn, .newsletter button, .signup button):hover {
+  background-color: var(--commerce-accent-hover);
+}
+
+.commerce-landing :is(.description, small, cite) {
+  color: var(--commerce-muted);
+}
+
+.commerce-landing :is(.category, .product, .feature, .collection, .look, .shop-look, .quotes blockquote, .reviews blockquote, .collections a, .journal a) {
+  transition: transform 0.22s, border-color 0.22s, box-shadow 0.22s;
+}
+
+.commerce-landing :is(.category, .product, .feature, .collection, .look, .shop-look, .quotes blockquote, .reviews blockquote, .collections a, .journal a):is(:hover, :focus-within) {
+  border-color: var(--commerce-accent);
+  box-shadow: 0 0 0 1px var(--commerce-glow), 0 10px 32px var(--commerce-glow);
+  transform: translateY(-4px);
+}
+
+.commerce-landing .content > section {
+  margin-block: var(--commerce-section-space) 0;
+}
+
+.commerce-landing :is(.shell, .wrap, .shop-wrap) {
+  width: min(var(--page-max-width), calc(100% - (var(--page-gutter) * 2)));
+  max-width: none;
+  margin-inline: auto;
+}
+
+.commerce-landing :is(.hero, .minimal-hero) {
+  width: 100dvw;
+  max-width: none;
+  margin-left: calc(50% - 50dvw);
+  margin-right: 0;
+  position: relative;
+}
+
+.commerce-landing .content > section + section {
+  margin-top: var(--commerce-section-space);
+}
+
+/* Scroll animations (MOS) */
+.use-animations [data-mos] {
+  opacity: 0;
+  transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.use-animations [data-mos="fade-up"] {
+  transform: translateY(36px);
+}
+
+.use-animations [data-mos="fade-right"] {
+  transform: translateX(-36px);
+}
+
+.use-animations [data-mos="fade-left"] {
+  transform: translateX(36px);
+}
+
+.use-animations [data-mos].mos-animate {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .use-animations [data-mos] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

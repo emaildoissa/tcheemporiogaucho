@@ -1,0 +1,112 @@
+<section aria-labelledby="partner-title">
+  <header data-mos="fade-up">
+    <div>
+      <h2 id="partner-title">Aprovado por equipes no mundo todo.</h2>
+      <p>Marcas que compartilham nosso padrão de design inteligente.</p>
+    </div>
+    <span>Parceiros selecionados</span>
+  </header>
+
+  <ul aria-label="Parceiros selecionados">
+    <li data-mos="fade-up">MOVE</li>
+    <li data-mos="fade-up">ADAPT</li>
+    <li data-mos="fade-up">VOLT</li>
+    <li data-mos="fade-up">BELLROY</li>
+    <li data-mos="fade-up">MVMT</li>
+    <li data-mos="fade-up">SONY</li>
+  </ul>
+</section>
+
+<style>
+  section {
+    color: var(--commerce-foreground);
+    margin-bottom: 36px;
+    font-family: Inter, Arial, sans-serif;
+  }
+  header {
+    border-bottom: 1px solid var(--commerce-border);
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 4px 0 18px;
+    display: flex;
+  }
+  header > div {
+    gap: 9px;
+    display: grid;
+  }
+  h2 {
+    letter-spacing: -0.035em;
+    margin: 0;
+    font-size: clamp(1.65rem, 2.5vw, 2.35rem);
+    font-weight: 500;
+    line-height: 1.15;
+  }
+  header p {
+    color: var(--commerce-muted);
+    letter-spacing: -0.01em;
+    margin: 0;
+    font-size: 13px;
+  }
+  header > span {
+    color: var(--commerce-accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding-bottom: 3px;
+    font-size: 10px;
+    font-weight: 600;
+  }
+  ul {
+    border: 1px solid var(--commerce-border);
+    border-top: 0;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+  }
+  li {
+    border-right: 1px solid var(--commerce-border);
+    min-height: 105px;
+    color: var(--commerce-muted);
+    letter-spacing: 0.025em;
+    place-items: center;
+    font-size: clamp(1rem, 1.7vw, 1.35rem);
+    font-weight: 600;
+    transition: background 0.2s, color 0.2s;
+    display: grid;
+  }
+  li:last-child {
+    border-right: 0;
+  }
+  li:nth-child(2),
+  li:nth-child(5) {
+    font-style: italic;
+  }
+  li:nth-child(3) {
+    letter-spacing: 0.14em;
+  }
+  li:hover {
+    background: var(--commerce-surface-raised);
+    color: var(--commerce-foreground);
+  }
+  @media (width <= 600px) {
+    header p {
+      font-size: 12px;
+    }
+    header > span {
+      text-align: right;
+      max-width: 80px;
+    }
+    ul {
+      scroll-snap-type: x mandatory;
+      display: flex;
+      overflow-x: auto;
+    }
+    li {
+      scroll-snap-align: start;
+      flex: none;
+      min-width: 42%;
+      min-height: 92px;
+    }
+  }
+</style>

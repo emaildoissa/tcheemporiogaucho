@@ -1,0 +1,84 @@
+---
+interface Props {
+  title?: string;
+  subtitle?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+  image?: string;
+}
+
+const {
+  title = "Limpo. Moderno. Essencial.",
+  subtitle = "Peças que nunca saem de moda.",
+  ctaLabel = "Comprar agora",
+  ctaHref = "#produtos",
+  image = "/images/shop/cosmic-hero.png",
+} = Astro.props;
+---
+
+<section
+  class="campaign minimal"
+  style={`--campaign-align:left;--campaign-content-width:42rem;--campaign-min-height:clamp(20rem, 32vw, 27rem);--campaign-padding:clamp(2rem, 7vw, 7rem);--campaign-image:url('${image}');--campaign-position:center 36%;--campaign-overlay:linear-gradient(90deg, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.08));--campaign-accent:var(--commerce-accent)`}
+>
+  <div data-mos="fade-right">
+    <h2>{title}</h2>
+    <p>{subtitle}</p>
+    <a href={ctaHref} class="btn">{ctaLabel}</a>
+  </div>
+</section>
+
+<style>
+  .campaign {
+    min-height: var(--campaign-min-height);
+    align-items: center;
+    justify-content: var(--campaign-align);
+    padding-inline: var(--campaign-padding);
+    border: 1px solid var(--commerce-border);
+    background: var(--campaign-overlay), var(--campaign-image) var(--campaign-position) / cover;
+    color: #fff;
+    border-radius: 6px;
+    display: flex;
+  }
+  .campaign > div {
+    width: min(100%, var(--campaign-content-width));
+    text-align: var(--campaign-align);
+  }
+  .campaign h2 {
+    margin: 0;
+    letter-spacing: -0.035em;
+    max-width: 680px;
+    font-family: Inter, Arial, sans-serif;
+    font-size: clamp(2.25rem, 4.4vw, 4rem);
+    font-weight: 500;
+    line-height: 1.04;
+  }
+  .campaign p {
+    color: #ddd;
+    margin-block: 14px 28px;
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    letter-spacing: -0.01em;
+    font-family: Inter, Arial, sans-serif;
+    font-weight: 400;
+  }
+  .btn {
+    background: var(--campaign-accent);
+    color: #fff;
+    text-transform: uppercase;
+    border-radius: 3px;
+    align-items: center;
+    min-height: 48px;
+    padding-inline: 27px;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-flex;
+  }
+  @media (width <= 600px) {
+    .campaign {
+      min-height: 22rem;
+      padding-inline: 1.5rem;
+    }
+    .campaign h2 {
+      font-size: 2.25rem;
+    }
+  }
+</style>

@@ -1,0 +1,479 @@
+---
+const navLinks = [
+  { label: "Início", href: "/" },
+  { label: "Loja", href: "#produtos" },
+  { label: "Sustentabilidade", href: "#sustentabilidade" },
+  { label: "Coleções", href: "#colecoes" },
+  { label: "Depoimentos", href: "#depoimentos" },
+  { label: "Newsletter", href: "#newsletter" },
+];
+---
+
+<div
+  class="w-full flex duration-300 border-b dark fixed flex-col left-0 logo-initial-dark navbar--initial top-0 transition-all z-30"
+  data-nav-container
+>
+  <div class="w-full flex mx-auto">
+    <div class="w-full flex items-center h-14 site-container">
+      <header class="w-full flex items-center relative gap-2">
+        <div class="flex-auto flex justify-start">
+          <a
+            href="/"
+            class="inline-flex items-center primary-focus text-foreground"
+            aria-label="Início Eclipse"
+          >
+            <svg class="h-9 w-auto" viewBox="0 0 360 96" aria-label="Eclipse" role="img">
+              <path
+                d="M78 20C55 11 38 25 38 48s17 37 40 28C58 73 48 62 48 48s10-25 30-28Z"
+                fill="#ff2638"
+              ></path>
+              <path d="M54 48l7-1.6h15l7 1.6-7 1.6H61Z" fill="#ff2638"></path>
+              <text
+                data-eclipse-wordmark
+                fill="currentColor"
+                font-family="Inter, 'Helvetica Neue', Arial, sans-serif"
+                font-size="52"
+                font-weight="300"
+                letter-spacing="1"
+                x="94"
+                y="66"
+              >
+                clipse
+              </text>
+            </svg>
+          </a>
+        </div>
+
+        <div class="justify-end flex flex-auto">
+          <nav class="hidden md:block my-auto">
+            <ul class="h-fit flex items-center px-4">
+              {
+                navLinks.map((link) => (
+                  <li>
+                    <a
+                      href={link.href}
+                      class="w-full flex items-center nav__link--base primary-focus py-2 rounded-md px-4 gap-1.5 h-10 relative"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </nav>
+
+          <button
+            class="hidden md:block -ml-2 mr-3 nav__link--base p-2 primary-focus rounded-full theme-toggle"
+            aria-label="Alternar tema de cores"
+          >
+            <div class="size-5 relative">
+              <svg
+                height="1em"
+                width="1em"
+                class="size-5 absolute inset-0 theme-toggle__dark-icon"
+                viewBox="0 0 24 24"
+                data-current-theme="false"
+                style="--animation-duration:300ms"
+              >
+                <g
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                >
+                  <path d="M0 0h24v24H0z" stroke="none"></path>
+                  <path
+                    d="M12 3h.393a7.5 7.5 0 0 0 7.92 12.446A9 9 0 1 1 12 2.992zm5 1a2 2 0 0 0 2 2 2 2 0 0 0-2 2 2 2 0 0 0-2-2 2 2 0 0 0 2-2m2 7h2m-1-1v2"
+                  ></path>
+                </g>
+              </svg>
+              <svg
+                height="1em"
+                width="1em"
+                class="size-5 absolute inset-0 theme-toggle__light-icon"
+                viewBox="0 0 24 24"
+                data-current-theme="false"
+                style="--animation-duration:300ms"
+              >
+                <g
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                >
+                  <path d="M0 0h24v24H0z" stroke="none"></path>
+                  <path
+                    d="M8 12a4 4 0 1 0 8 0 4 4 0 1 0-8 0m-5 0h1m8-9v1m8 8h1m-9 8v1M5.6 5.6l.7.7m12.1-.7-.7.7m0 11.4.7.7m-12.1-.7-.7.7"
+                  ></path>
+                </g>
+              </svg>
+            </div>
+          </button>
+
+          <a
+            href="#produtos"
+            class="hidden my-auto button button--primary group md:flex px-4 py-2"
+          >
+            Comprar Agora
+          </a>
+
+          <!-- Mobile Navigation -->
+          <div class="md:hidden">
+            <div id="mobile-nav__container">
+              <button
+                class="w-10 h-10 primary-focus rounded-md"
+                aria-label="Abrir menu de navegação"
+                aria-expanded="false"
+                aria-haspopup="true"
+                id="mobile-nav__burger"
+              >
+                <svg
+                  height="1em"
+                  width="1em"
+                  aria-hidden="true"
+                  class="text-muted-foreground h-8 w-8 inline-block m-auto stroke-current"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M4 6h16M4 12h16M4 18h16"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                  ></path>
+                </svg>
+              </button>
+
+              <div
+                class="duration-300 transition-all hidden -right-72 bg-background fixed font-normal h-screen items-center overflow-x-hidden text-lg top-0 w-72 whitespace-nowrap z-20"
+                id="mobile-nav__content"
+              >
+                <div class="w-full pb-6 px-2">
+                  <div class="w-full flex justify-end mx-1 my-2 pl-6 pr-4">
+                    <button
+                      class="primary-focus p-2"
+                      aria-label="Fechar menu de navegação"
+                      id="mobile-nav__close"
+                    >
+                      <svg
+                        height="1em"
+                        width="1em"
+                        class="text-muted-foreground h-8 w-8"
+                        viewBox="0 0 24 24"
+                      >
+                        <g
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                        >
+                          <path d="M0 0h24v24H0z" stroke="none"></path>
+                          <path d="M18 6 6 18M6 6l12 12"></path>
+                        </g>
+                      </svg>
+                    </button>
+                  </div>
+                  <hr class="border mx-1" />
+                  <nav>
+                    <ul class="mx-1 mt-2 text-xl">
+                      {
+                        navLinks.map((link) => (
+                          <li>
+                            <a
+                              href={link.href}
+                              class="w-full flex items-center nav__link--base primary-focus py-2 rounded-md px-4 gap-1.5 h-10 relative"
+                            >
+                              {link.label}
+                            </a>
+                          </li>
+                        ))
+                      }
+                    </ul>
+                  </nav>
+                  <div class="mx-1 mt-3 px-4">
+                    <a
+                      href="#produtos"
+                      class="w-full transition-all bg-primary font-medium gap-1.5 h-11 hover:bg-primary/90 inline-flex items-center justify-center outline-none px-4 py-2 rounded-md text-base text-primary-foreground whitespace-nowrap"
+                    >
+                      Comprar Agora
+                    </a>
+                  </div>
+                  <div class="mt-4 flex items-start justify-between pl-4 pr-2">
+                    <button
+                      class="theme-toggle nav__link--base p-2 primary-focus rounded-full"
+                      aria-label="Alternar tema de cores"
+                    >
+                      <div class="size-5 relative">
+                        <svg
+                          height="1em"
+                          width="1em"
+                          class="size-5 absolute inset-0 theme-toggle__dark-icon"
+                          viewBox="0 0 24 24"
+                          data-current-theme="false"
+                          style="--animation-duration:300ms"
+                        >
+                          <g
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                          >
+                            <path d="M0 0h24v24H0z" stroke="none"></path>
+                            <path
+                              d="M12 3h.393a7.5 7.5 0 0 0 7.92 12.446A9 9 0 1 1 12 2.992zm5 1a2 2 0 0 0 2 2 2 2 0 0 0-2 2 2 2 0 0 0-2-2 2 2 0 0 0 2-2m2 7h2m-1-1v2"
+                            ></path>
+                          </g>
+                        </svg>
+                        <svg
+                          height="1em"
+                          width="1em"
+                          class="size-5 absolute inset-0 theme-toggle__light-icon"
+                          viewBox="0 0 24 24"
+                          data-current-theme="false"
+                          style="--animation-duration:300ms"
+                        >
+                          <g
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                          >
+                            <path d="M0 0h24v24H0z" stroke="none"></path>
+                            <path
+                              d="M8 12a4 4 0 1 0 8 0 4 4 0 1 0-8 0m-5 0h1m8-9v1m8 8h1m-9 8v1M5.6 5.6l.7.7m12.1-.7-.7.7m0 11.4.7.7m-12.1-.7-.7.7"
+                            ></path>
+                          </g>
+                        </svg>
+                      </div>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <button
+                class="bg-black fixed h-screen left-0 mobile-nav__backdrop--fade-out top-0 z-10"
+                aria-label="Fechar menu de navegação"
+                id="mobile-nav__backdrop"
+              ></button>
+            </div>
+          </div>
+        </div>
+      </header>
+    </div>
+  </div>
+</div>
+
+<style is:global>
+  @keyframes icon-enter {
+    0% {
+      opacity: 0;
+      transform: rotate(180deg);
+    }
+    to {
+      opacity: 1;
+      transform: rotate(0);
+    }
+  }
+  @keyframes icon-exit {
+    0% {
+      opacity: 1;
+      transform: rotate(0);
+    }
+    to {
+      opacity: 0;
+      transform: rotate(-180deg);
+    }
+  }
+  .theme-toggle__dark-icon {
+    opacity: 0;
+    transform: rotate(180deg);
+  }
+  .theme-toggle__dark-icon[data-current-theme="true"] {
+    opacity: 1;
+    transform: rotate(0);
+  }
+  .can-animate .theme-toggle__dark-icon[data-current-theme="true"] {
+    animation: icon-enter var(--animation-duration) forwards;
+  }
+  .can-animate .theme-toggle__dark-icon[data-current-theme="false"] {
+    animation: icon-exit var(--animation-duration) forwards;
+  }
+  .theme-toggle__light-icon {
+    opacity: 0;
+    transform: rotate(180deg);
+  }
+  .theme-toggle__light-icon[data-current-theme="true"] {
+    opacity: 1;
+    transform: rotate(0);
+  }
+  .can-animate .theme-toggle__light-icon[data-current-theme="true"] {
+    animation: icon-enter var(--animation-duration) forwards;
+  }
+  .can-animate .theme-toggle__light-icon[data-current-theme="false"] {
+    animation: icon-exit var(--animation-duration) forwards;
+  }
+  .mobile-nav__backdrop--fade-in {
+    width: 100vw;
+    animation: 0.3s ease-in-out forwards MobileNavFadeInAnimation;
+    display: block;
+  }
+  .mobile-nav__backdrop--fade-out {
+    opacity: 0;
+    width: 0;
+    display: none;
+  }
+  @keyframes MobileNavFadeInAnimation {
+    0% {
+      opacity: 0;
+    }
+    to {
+      opacity: 0.4;
+    }
+  }
+  .mobile-nav--slide-in {
+    animation: 0.3s ease-in-out forwards mobileNavSlideInAnimation;
+  }
+  .mobile-nav--slide-out {
+    animation: 0.3s ease-in-out forwards mobileNavSlideOutAnimation;
+  }
+  @keyframes mobileNavSlideInAnimation {
+    0% {
+      right: -18rem;
+    }
+    to {
+      right: 0;
+    }
+  }
+  @keyframes mobileNavSlideOutAnimation {
+    0% {
+      right: 0;
+    }
+    to {
+      right: -18rem;
+    }
+  }
+  .navbar--scrolled {
+    background-color: var(--background);
+    border-bottom-width: 1px;
+  }
+  .navbar--initial {
+    padding-block: 0.5rem;
+    background-color: transparent;
+    border-bottom-color: transparent;
+  }
+  .navbar--scrolled.dark .nav__link--base {
+    color: var(--color-base-400);
+  }
+  .navbar--scrolled.dark [data-eclipse-wordmark] {
+    fill: var(--color-base-50);
+  }
+  .navbar--initial.logo-initial-dark [data-eclipse-wordmark] {
+    fill: var(--color-base-950);
+  }
+  .dark .navbar--initial.logo-initial-dark [data-eclipse-wordmark] {
+    fill: var(--color-base-50);
+  }
+  .navbar--scrolled.dark .nav__link--base:hover,
+  .navbar--scrolled.dark .nav__link--base:focus-visible {
+    color: var(--color-base-50);
+  }
+</style>
+
+<script>
+  function setTheme(theme: "dark" | "light") {
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("colorTheme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("colorTheme", "light");
+    }
+  }
+
+  function initThemeToggle() {
+    const darkIcons = document.querySelectorAll(".theme-toggle__dark-icon");
+    const lightIcons = document.querySelectorAll(".theme-toggle__light-icon");
+    const toggles = document.querySelectorAll(".theme-toggle");
+
+    const isDark = localStorage.getItem("colorTheme") === "dark";
+    darkIcons.forEach((el) => el.setAttribute("data-current-theme", String(isDark)));
+    lightIcons.forEach((el) => el.setAttribute("data-current-theme", String(!isDark)));
+
+    toggles.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        btn.classList.add("can-animate");
+        darkIcons.forEach((el) => {
+          const cur = el.getAttribute("data-current-theme") === "true";
+          el.setAttribute("data-current-theme", String(!cur));
+        });
+        lightIcons.forEach((el) => {
+          const cur = el.getAttribute("data-current-theme") === "true";
+          el.setAttribute("data-current-theme", String(!cur));
+        });
+        if (localStorage.getItem("colorTheme") === "light") {
+          setTheme("dark");
+        } else {
+          setTheme("light");
+        }
+      });
+    });
+  }
+
+  function initNavScroll() {
+    const navContainer = document.querySelector("[data-nav-container]");
+    const onScroll = () => {
+      if (!navContainer) return;
+      if (window.scrollY > 50) {
+        navContainer.classList.add("navbar--scrolled");
+        navContainer.classList.remove("navbar--initial");
+      } else {
+        navContainer.classList.add("navbar--initial");
+        navContainer.classList.remove("navbar--scrolled");
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+  }
+
+  function initMobileNav() {
+    const container = document.getElementById("mobile-nav__container");
+    const burger = document.getElementById("mobile-nav__burger");
+    const content = document.getElementById("mobile-nav__content");
+    const closeBtn = document.getElementById("mobile-nav__close");
+    const backdrop = document.getElementById("mobile-nav__backdrop");
+
+    const toggleMobile = (e: Event) => {
+      e.preventDefault();
+      if (!container || !burger || !content || !backdrop) return;
+      if (container.classList.contains("open")) {
+        container.classList.remove("open");
+        burger.setAttribute("aria-expanded", "false");
+        content.classList.remove("mobile-nav--slide-in");
+        content.classList.add("mobile-nav--slide-out");
+        setTimeout(() => content.classList.add("hidden"), 300);
+        backdrop.classList.remove("mobile-nav__backdrop--fade-in");
+        backdrop.classList.add("mobile-nav__backdrop--fade-out");
+      } else {
+        container.classList.add("open");
+        burger.setAttribute("aria-expanded", "true");
+        content.classList.remove("hidden", "mobile-nav--slide-out");
+        content.classList.add("mobile-nav--slide-in");
+        backdrop.classList.remove("hidden", "mobile-nav__backdrop--fade-out");
+        backdrop.classList.add("mobile-nav__backdrop--fade-in");
+      }
+    };
+
+    burger?.addEventListener("click", toggleMobile);
+    closeBtn?.addEventListener("click", toggleMobile);
+    backdrop?.addEventListener("click", toggleMobile);
+  }
+
+  initThemeToggle();
+  initNavScroll();
+  initMobileNav();
+</script>
