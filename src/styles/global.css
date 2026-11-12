@@ -31,98 +31,7 @@
 }
 
 :root {
-  /* TEMA PADRÃO GLOBAL: Adega & Galpão (Dark Premium / Reserva Gaúcha) */
-  --background: #18181b;
-  --foreground: #f4f4f5;
-  --card: #27272a;
-  --card-foreground: #f4f4f5;
-  --popover: #27272a;
-  --popover-foreground: #f4f4f5;
-  --primary: #991b1b;
-  --primary-foreground: #ffffff;
-  --primary-accent: #b91c1c;
-  --secondary: #166534;
-  --secondary-foreground: #ffffff;
-  --secondary-accent: #27272a;
-  --muted: #27272a;
-  --muted-foreground: #a1a1aa;
-  --accent: #3f3f46;
-  --accent-foreground: #f4f4f5;
-  --border: #3f3f46;
-  --input: #3f3f46;
-  --outline: #f59e0b;
-
-  --commerce-background: #18181b;
-  --commerce-surface: #27272a;
-  --commerce-surface-raised: #323238;
-  --commerce-foreground: #f4f4f5;
-  --commerce-muted: #a1a1aa;
-  --commerce-border: #3f3f46;
-  --commerce-accent: #b91c1c;
-  --commerce-accent-hover: #dc2626;
-  --commerce-ouro: #f59e0b;
-  --commerce-verde: #166534;
-  --commerce-glow: rgba(185, 28, 28, 0.35);
-  --commerce-on-media: #ffffff;
-  --commerce-on-media-muted: #a1a1aa;
-  --commerce-media-overlay: rgba(24, 24, 27, 0.9);
-  --commerce-announcement-bg: linear-gradient(90deg, #450a0a, #991b1b, #450a0a);
-
-  --page-max-width: 96rem;
-  --page-gutter: clamp(1.25rem, 2.5vw, 2.75rem);
-  --hero-content-gutter: clamp(0.75rem, 1.5vw, 1.5rem);
-  --commerce-section-space: clamp(4rem, 6vw, 6rem);
-  --commerce-section-space-mobile: 3.25rem;
-  --commerce-breakout-width: min(100rem, calc(100vw - var(--page-gutter)));
-  --radius: 0.65rem;
-}
-
-.dark {
-  --background: #18181b;
-  --foreground: #f4f4f5;
-  --card: #27272a;
-  --card-foreground: #f4f4f5;
-  --popover: #27272a;
-  --popover-foreground: #f4f4f5;
-  --primary: #991b1b;
-  --primary-foreground: #ffffff;
-  --primary-accent: #b91c1c;
-  --secondary: #166534;
-  --secondary-foreground: #ffffff;
-  --secondary-accent: #27272a;
-  --muted: #27272a;
-  --muted-foreground: #a1a1aa;
-  --accent: #3f3f46;
-  --accent-foreground: #f4f4f5;
-  --border: #3f3f46;
-  --input: #3f3f46;
-  --outline: #f59e0b;
-
-  --commerce-background: #18181b;
-  --commerce-surface: #27272a;
-  --commerce-surface-raised: #323238;
-  --commerce-foreground: #f4f4f5;
-  --commerce-muted: #a1a1aa;
-  --commerce-border: #3f3f46;
-  --commerce-accent: #b91c1c;
-  --commerce-accent-hover: #dc2626;
-  --commerce-ouro: #f59e0b;
-  --commerce-verde: #166534;
-  --commerce-glow: rgba(185, 28, 28, 0.35);
-  --commerce-on-media: #ffffff;
-  --commerce-on-media-muted: #a1a1aa;
-  --commerce-media-overlay: rgba(24, 24, 27, 0.9);
-  --commerce-announcement-bg: linear-gradient(90deg, #450a0a, #991b1b, #450a0a);
-}
-
-/* ============================================================
-   3 OPÇÕES VISUAIS CONCEBIDAS PELO LENS PARA A PÁGINA INICIAL
-   ============================================================ */
-
-/* 1. Adega & Galpão (Dark Premium / Reserva Gaúcha) */
-html[data-page="home"][data-home-theme="adega"],
-html[data-page="home"][data-home-theme="adega"] body,
-html[data-home-theme="adega"] {
+  /* TEMA PADRÃO: Adega & Galpão (Dark Premium / Reserva Gaúcha) */
   --background: #18181b;
   --foreground: #f4f4f5;
   --card: #27272a;
@@ -158,55 +67,66 @@ html[data-home-theme="adega"] {
   --commerce-on-media-muted: #a1a1aa;
   --commerce-media-overlay: rgba(24, 24, 27, 0.9);
   --commerce-announcement-bg: linear-gradient(90deg, #450a0a, #991b1b, #450a0a);
+  --commerce-banner-gradient: linear-gradient(135deg, #27272a 0%, #1f1f23 50%, #2e1719 100%);
+
+  --page-max-width: 96rem;
+  --page-gutter: clamp(1.25rem, 2.5vw, 2.75rem);
+  --hero-content-gutter: clamp(0.75rem, 1.5vw, 1.5rem);
+  --commerce-section-space: clamp(4rem, 6vw, 6rem);
+  --commerce-section-space-mobile: 3.25rem;
+  --commerce-breakout-width: min(100rem, calc(100vw - var(--page-gutter)));
+  --radius: 0.65rem;
+}
+
+/* ============================================================
+   AS 2 OPÇÕES ESCOLHIDAS PELO MARCOS (ADEGA E FARROUPILHA)
+   ============================================================ */
+
+/* 1. Adega & Galpão (Dark Premium / Reserva Gaúcha) */
+html[data-theme="adega"],
+html.dark[data-theme="adega"],
+html:not([data-theme="farroupilha"]) {
+  --background: #18181b;
+  --foreground: #f4f4f5;
+  --card: #27272a;
+  --card-foreground: #f4f4f5;
+  --popover: #27272a;
+  --popover-foreground: #f4f4f5;
+  --primary: #991b1b;
+  --primary-foreground: #ffffff;
+  --primary-accent: #b91c1c;
+  --secondary: #166534;
+  --secondary-foreground: #ffffff;
+  --secondary-accent: #27272a;
+  --muted: #27272a;
+  --muted-foreground: #a1a1aa;
+  --accent: #3f3f46;
+  --accent-foreground: #f4f4f5;
+  --border: #3f3f46;
+  --input: #3f3f46;
+  --outline: #f59e0b;
+
+  --commerce-background: #18181b;
+  --commerce-surface: #27272a;
+  --commerce-surface-raised: #323238;
+  --commerce-foreground: #f4f4f5;
+  --commerce-muted: #a1a1aa;
+  --commerce-border: #3f3f46;
+  --commerce-accent: #b91c1c;
+  --commerce-accent-hover: #dc2626;
+  --commerce-ouro: #f59e0b;
+  --commerce-verde: #166534;
+  --commerce-glow: rgba(185, 28, 28, 0.4);
+  --commerce-on-media: #ffffff;
+  --commerce-on-media-muted: #a1a1aa;
+  --commerce-media-overlay: rgba(24, 24, 27, 0.9);
+  --commerce-announcement-bg: linear-gradient(90deg, #450a0a, #991b1b, #450a0a);
+  --commerce-banner-gradient: linear-gradient(135deg, #27272a 0%, #1f1f23 50%, #2e1719 100%);
   color-scheme: dark;
 }
 
-/* 2. Tradição Colonial (Linho, Farinha & Pampa - Rústico Artesanal Acolhedor) */
-html[data-page="home"][data-home-theme="colonial"],
-html[data-page="home"][data-home-theme="colonial"] body,
-html[data-home-theme="colonial"] {
-  --background: #fdfbf7;
-  --foreground: #292524;
-  --card: #ffffff;
-  --card-foreground: #292524;
-  --popover: #ffffff;
-  --popover-foreground: #292524;
-  --primary: #881337;
-  --primary-foreground: #ffffff;
-  --primary-accent: #9f1239;
-  --secondary: #1e3a2f;
-  --secondary-foreground: #ffffff;
-  --secondary-accent: #2d5a49;
-  --muted: #f5efe6;
-  --muted-foreground: #78716c;
-  --accent: #e7e5e4;
-  --accent-foreground: #292524;
-  --border: #e7e5e4;
-  --input: #e7e5e4;
-  --outline: #881337;
-
-  --commerce-background: #fdfbf7;
-  --commerce-surface: #ffffff;
-  --commerce-surface-raised: #f5efe6;
-  --commerce-foreground: #292524;
-  --commerce-muted: #78716c;
-  --commerce-border: #e7e5e4;
-  --commerce-accent: #881337;
-  --commerce-accent-hover: #9f1239;
-  --commerce-ouro: #d97706;
-  --commerce-verde: #1e3a2f;
-  --commerce-glow: rgba(136, 19, 55, 0.18);
-  --commerce-on-media: #ffffff;
-  --commerce-on-media-muted: #e7e5e4;
-  --commerce-media-overlay: rgba(41, 37, 36, 0.85);
-  --commerce-announcement-bg: linear-gradient(90deg, #1e3a2f, #881337, #1e3a2f);
-  color-scheme: light;
-}
-
-/* 3. Farroupilha Tricolor (Contemporâneo & Identidade Gaúcha com as Cores do RS) */
-html[data-page="home"][data-home-theme="farroupilha"],
-html[data-page="home"][data-home-theme="farroupilha"] body,
-html[data-home-theme="farroupilha"] {
+/* 2. Farroupilha Tricolor (Contemporâneo & Identidade Gaúcha - Verde, Vermelho e Ouro) */
+html[data-theme="farroupilha"] {
   --background: #f1f5f9;
   --foreground: #0f172a;
   --card: #ffffff;
@@ -229,7 +149,7 @@ html[data-home-theme="farroupilha"] {
 
   --commerce-background: #f1f5f9;
   --commerce-surface: #ffffff;
-  --commerce-surface-raised: #e2e8f0;
+  --commerce-surface-raised: #e8eef5;
   --commerce-foreground: #0f172a;
   --commerce-muted: #64748b;
   --commerce-border: #cbd5e1;
@@ -242,6 +162,7 @@ html[data-home-theme="farroupilha"] {
   --commerce-on-media-muted: #e2e8f0;
   --commerce-media-overlay: rgba(15, 23, 42, 0.9);
   --commerce-announcement-bg: linear-gradient(90deg, #14532d 0%, #dc2626 50%, #d97706 100%);
+  --commerce-banner-gradient: linear-gradient(135deg, #ffffff 0%, #f1f5f9 60%, #e2e8f0 100%);
   color-scheme: light;
 }
 
@@ -253,7 +174,6 @@ html[data-home-theme="farroupilha"] {
 html {
   background-color: var(--background);
   color: var(--foreground);
-  color-scheme: dark;
   line-height: 1.6rem;
   scroll-behavior: smooth;
   transition: background-color 0.25s ease, color 0.25s ease;

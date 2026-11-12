@@ -15,7 +15,7 @@ const {
 ---
 
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="adega" class="dark">
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width,initial-scale=1" name="viewport" />
@@ -33,21 +33,13 @@ const {
     <meta name="generator" content={Astro.generator} />
     <script is:inline>
       function initTheme() {
-        const path = window.location.pathname;
-        const isHome = path === "/" || path === "" || path.endsWith("/index.html");
-        if (isHome) {
-          document.documentElement.setAttribute("data-page", "home");
-          const savedHomeTheme = localStorage.getItem("tche_home_theme") || "adega";
-          document.documentElement.setAttribute("data-home-theme", savedHomeTheme);
-          if (savedHomeTheme === "adega") {
-            document.documentElement.classList.add("dark");
-          } else {
-            document.documentElement.classList.remove("dark");
-          }
-        } else {
-          document.documentElement.removeAttribute("data-page");
-          document.documentElement.removeAttribute("data-home-theme");
+        const savedTheme = localStorage.getItem("tche_theme") || localStorage.getItem("tche_home_theme") || "adega";
+        const theme = savedTheme === "farroupilha" ? "farroupilha" : "adega";
+        document.documentElement.setAttribute("data-theme", theme);
+        if (theme === "adega") {
           document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
         }
       }
       initTheme();

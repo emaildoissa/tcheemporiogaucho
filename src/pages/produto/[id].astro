@@ -34,25 +34,25 @@ const currentUrl = `https://tcheemporiogaucho.com.br/produto/${product.id}`;
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <!-- Breadcrumb -->
-      <nav class="flex items-center gap-2 text-xs text-[#a39a97] mb-8" aria-label="Navegação">
-        <a href="/" class="hover:text-white transition">Início</a>
-        <span class="text-[#453d3b]">/</span>
-        <a href="/catalogo" class="hover:text-white transition">Catálogo</a>
-        <span class="text-[#453d3b]">/</span>
-        <a href={`/catalogo?cat=${encodeURIComponent(product.category)}`} class="hover:text-white transition">
+      <nav class="flex items-center gap-2 text-xs text-[var(--commerce-muted)] mb-8" aria-label="Navegação">
+        <a href="/" class="hover:text-[var(--commerce-foreground)] transition">Início</a>
+        <span class="text-[var(--commerce-border)]">/</span>
+        <a href="/catalogo" class="hover:text-[var(--commerce-foreground)] transition">Catálogo</a>
+        <span class="text-[var(--commerce-border)]">/</span>
+        <a href={`/catalogo?cat=${encodeURIComponent(product.category)}`} class="hover:text-[var(--commerce-foreground)] transition">
           {product.category}
         </a>
-        <span class="text-[#453d3b]">/</span>
-        <span class="text-white font-medium truncate max-w-[200px] sm:max-w-none">{product.name}</span>
+        <span class="text-[var(--commerce-border)]">/</span>
+        <span class="text-[var(--commerce-foreground)] font-semibold truncate max-w-[200px] sm:max-w-none">{product.name}</span>
       </nav>
 
       <!-- Grid Principal do Produto: Imagem + Detalhes Técnicos e Ações -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start mb-16">
         <!-- Coluna da Foto -->
         <div class="lg:col-span-6">
-          <div class="relative aspect-square sm:aspect-[4/3] lg:aspect-square bg-[#121010] border border-[#24201f] rounded-3xl overflow-hidden p-6 sm:p-10 flex items-center justify-center shadow-2xl">
+          <div class="relative aspect-square sm:aspect-[4/3] lg:aspect-square bg-[var(--commerce-surface)] border border-[var(--commerce-border)] rounded-3xl overflow-hidden p-6 sm:p-10 flex items-center justify-center shadow-xl transition-all duration-300">
             {product.badge && (
-              <span class="absolute top-4 left-4 z-10 px-3 py-1 rounded-md bg-[#8b1b22] text-white text-xs font-black uppercase tracking-wider shadow">
+              <span class="absolute top-4 left-4 z-10 px-3 py-1 rounded-md bg-[var(--commerce-accent)] text-white text-xs font-black uppercase tracking-wider shadow">
                 {product.badge}
               </span>
             )}
@@ -66,17 +66,17 @@ const currentUrl = `https://tcheemporiogaucho.com.br/produto/${product.id}`;
 
           <!-- Selos de Confiança -->
           <div class="grid grid-cols-3 gap-3 mt-4 text-center">
-            <div class="p-3 rounded-2xl bg-[#121010] border border-[#221c1b]">
-              <span class="text-lg block mb-1">🌿</span>
-              <span class="text-[11px] font-bold text-[#bfb5b2]">100% Colonial</span>
+            <div class="p-3.5 rounded-2xl bg-[var(--commerce-surface)] border border-[var(--commerce-border)] shadow-xs">
+              <span class="text-xl block mb-1">🌿</span>
+              <span class="text-[11px] font-bold text-[var(--commerce-foreground)]">100% Colonial</span>
             </div>
-            <div class="p-3 rounded-2xl bg-[#121010] border border-[#221c1b]">
-              <span class="text-lg block mb-1">🍷</span>
-              <span class="text-[11px] font-bold text-[#bfb5b2]">Serra Gaúcha</span>
+            <div class="p-3.5 rounded-2xl bg-[var(--commerce-surface)] border border-[var(--commerce-border)] shadow-xs">
+              <span class="text-xl block mb-1">🍷</span>
+              <span class="text-[11px] font-bold text-[var(--commerce-foreground)]">Serra Gaúcha</span>
             </div>
-            <div class="p-3 rounded-2xl bg-[#121010] border border-[#221c1b]">
-              <span class="text-lg block mb-1">💬</span>
-              <span class="text-[11px] font-bold text-[#bfb5b2]">Envio Ágil</span>
+            <div class="p-3.5 rounded-2xl bg-[var(--commerce-surface)] border border-[var(--commerce-border)] shadow-xs">
+              <span class="text-xl block mb-1">💬</span>
+              <span class="text-[11px] font-bold text-[var(--commerce-foreground)]">Envio Ágil</span>
             </div>
           </div>
         </div>
@@ -85,48 +85,48 @@ const currentUrl = `https://tcheemporiogaucho.com.br/produto/${product.id}`;
         <div class="lg:col-span-6 flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between gap-4 mb-3">
-              <span class="text-xs font-bold uppercase tracking-wider text-[#e67e84] bg-[#291416] px-3 py-1 rounded-full border border-[#8b1b22]/40">
+              <span class="text-xs font-bold uppercase tracking-wider text-[var(--commerce-accent)] bg-[var(--commerce-surface-raised)] px-3.5 py-1.5 rounded-full border border-[var(--commerce-border)]">
                 {product.category}
               </span>
-              <span class="text-xs text-[#786e6b]">Cód: #{product.id}</span>
+              <span class="text-xs text-[var(--commerce-muted)]">Cód: #{product.id}</span>
             </div>
 
-            <h1 class="text-2xl sm:text-4xl font-black text-white tracking-tight leading-tight mb-3">
+            <h1 class="text-2xl sm:text-4xl font-black text-[var(--commerce-foreground)] tracking-tight leading-tight mb-3">
               {product.name}
             </h1>
 
             <div class="flex items-center gap-3 mb-6">
-              <div class="flex text-[#f59e0b] text-sm">★★★★★</div>
-              <span class="text-xs text-[#a39a97]">({product.reviews || 24} avaliações de clientes)</span>
-              <span class="text-[#453d3b]">|</span>
-              <span class="text-xs text-[#15803d] font-bold">✓ Disponível para Envio</span>
+              <div class="flex text-[var(--commerce-ouro)] text-sm">★★★★★</div>
+              <span class="text-xs text-[var(--commerce-muted)]">({product.reviews || 24} avaliações)</span>
+              <span class="text-[var(--commerce-border)]">|</span>
+              <span class="text-xs text-[#166534] font-bold">✓ Disponível para Envio</span>
             </div>
 
             <!-- Bloco de Preço -->
-            <div class="p-5 rounded-2xl bg-[#121010] border border-[#24201f] mb-6">
-              <div class="text-xs text-[#a39a97] uppercase tracking-wider mb-1 font-semibold">Valor Unitário</div>
+            <div class="p-6 rounded-2xl bg-[var(--commerce-surface)] border border-[var(--commerce-border)] shadow-sm mb-6 transition-colors duration-300">
+              <div class="text-xs text-[var(--commerce-muted)] uppercase tracking-wider mb-1 font-semibold">Valor Unitário</div>
               <div class="flex items-baseline gap-3">
-                <span class="text-3xl sm:text-4xl font-black text-white">
+                <span class="text-3xl sm:text-4xl font-black text-[var(--commerce-foreground)]">
                   R$ {product.price.toFixed(2).replace(".", ",")}
                 </span>
-                <span class="text-xs text-[#786e6b]">à vista ou via PIX</span>
+                <span class="text-xs text-[var(--commerce-muted)]">à vista ou via PIX</span>
               </div>
             </div>
 
             <!-- Descrição Completa -->
-            <div class="space-y-4 mb-8">
-              <h2 class="text-sm font-bold uppercase tracking-wider text-white">Sobre este Produto</h2>
-              <p class="text-sm sm:text-base text-[#bfb5b2] leading-relaxed whitespace-pre-line">
+            <div class="space-y-3 mb-8">
+              <h2 class="text-xs font-bold uppercase tracking-wider text-[var(--commerce-foreground)]">Sobre este Produto</h2>
+              <div class="p-5 rounded-2xl bg-[var(--commerce-surface-raised)] border border-[var(--commerce-border)] text-sm sm:text-base text-[var(--commerce-foreground)] leading-relaxed whitespace-pre-line">
                 {product.description}
-              </p>
+              </div>
             </div>
 
             <!-- Botões de Ação Híbridos (Pedido Imediato ou Sacola) -->
-            <div class="space-y-3 pt-6 border-t border-[#24201f]">
+            <div class="space-y-3 pt-6 border-t border-[var(--commerce-border)]">
               <button
                 type="button"
                 id="btn-order-single-wa"
-                class="w-full py-4 px-6 rounded-2xl bg-[#166534] hover:bg-[#15803d] text-white font-extrabold text-sm sm:text-base transition shadow-xl flex items-center justify-center gap-3"
+                class="w-full py-4 px-6 rounded-2xl bg-[#166534] hover:bg-[#15803d] text-white font-extrabold text-sm sm:text-base transition shadow-xl flex items-center justify-center gap-3 cursor-pointer"
                 data-name={product.name}
                 data-price={product.price}
                 data-id={product.id}
@@ -139,7 +139,7 @@ const currentUrl = `https://tcheemporiogaucho.com.br/produto/${product.id}`;
                 <button
                   type="button"
                   id="btn-add-to-cart-page"
-                  class="py-3.5 px-4 rounded-xl bg-[#1a1716] hover:bg-[#25201f] border border-[#362e2c] hover:border-[#8b1b22] text-[#f2ede6] font-bold text-xs sm:text-sm transition flex items-center justify-center gap-2"
+                  class="py-3.5 px-4 rounded-xl bg-[var(--commerce-surface-raised)] hover:bg-[var(--commerce-surface)] border border-[var(--commerce-border)] hover:border-[var(--commerce-accent)] text-[var(--commerce-foreground)] font-bold text-xs sm:text-sm transition flex items-center justify-center gap-2 cursor-pointer shadow-xs"
                   data-name={product.name}
                   data-price={product.price}
                   data-id={product.id}
@@ -151,7 +151,7 @@ const currentUrl = `https://tcheemporiogaucho.com.br/produto/${product.id}`;
                 <button
                   type="button"
                   id="btn-share-product"
-                  class="py-3.5 px-4 rounded-xl bg-[#141212] hover:bg-[#1e1a19] border border-[#2b2422] text-[#bfb5b2] hover:text-white font-semibold text-xs sm:text-sm transition flex items-center justify-center gap-2"
+                  class="py-3.5 px-4 rounded-xl bg-[var(--commerce-surface)] hover:bg-[var(--commerce-surface-raised)] border border-[var(--commerce-border)] text-[var(--commerce-muted)] hover:text-[var(--commerce-foreground)] font-semibold text-xs sm:text-sm transition flex items-center justify-center gap-2 cursor-pointer shadow-xs"
                 >
                   <span>🔗</span>
                   <span>Compartilhar</span>
@@ -164,13 +164,13 @@ const currentUrl = `https://tcheemporiogaucho.com.br/produto/${product.id}`;
 
       <!-- Produtos Relacionados -->
       {relatedProducts.length > 0 && (
-        <section class="border-t border-[#221c1b] pt-12">
+        <section class="border-t border-[var(--commerce-border)] pt-12">
           <div class="flex items-center justify-between mb-8">
             <div>
-              <span class="text-xs font-bold uppercase tracking-wider text-[#e67e84]">Sugestões Coloniais</span>
-              <h2 class="text-xl sm:text-2xl font-black text-white mt-1">Outros produtos em {product.category}</h2>
+              <span class="text-xs font-bold uppercase tracking-wider text-[var(--commerce-accent)]">Sugestões Coloniais</span>
+              <h2 class="text-xl sm:text-2xl font-black text-[var(--commerce-foreground)] mt-1">Outros produtos em {product.category}</h2>
             </div>
-            <a href={`/catalogo?cat=${encodeURIComponent(product.category)}`} class="text-xs text-[#bfb5b2] hover:text-[#e67e84] font-semibold transition">
+            <a href={`/catalogo?cat=${encodeURIComponent(product.category)}`} class="text-xs text-[var(--commerce-muted)] hover:text-[var(--commerce-accent)] font-semibold transition">
               Ver categoria completa →
             </a>
           </div>
@@ -179,9 +179,9 @@ const currentUrl = `https://tcheemporiogaucho.com.br/produto/${product.id}`;
             {relatedProducts.map((rel) => (
               <a
                 href={`/produto/${rel.id}`}
-                class="group bg-[#121010] border border-[#24201f] hover:border-[#8b1b22] rounded-2xl p-4 transition-all duration-300 hover:-translate-y-1 block shadow-md hover:shadow-xl"
+                class="group bg-[var(--commerce-surface)] border border-[var(--commerce-border)] hover:border-[var(--commerce-accent)] rounded-2xl p-4 transition-all duration-300 hover:-translate-y-1 block shadow-sm hover:shadow-xl"
               >
-                <div class="aspect-square bg-[#181514] rounded-xl p-3 flex items-center justify-center overflow-hidden mb-3">
+                <div class="aspect-square bg-[var(--commerce-surface-raised)] rounded-xl p-3 flex items-center justify-center overflow-hidden mb-3">
                   <img
                     src={rel.image || "/images/shop/cosmic-products.png"}
                     alt={rel.name}
@@ -189,10 +189,10 @@ const currentUrl = `https://tcheemporiogaucho.com.br/produto/${product.id}`;
                     onerror="this.src='/images/shop/cosmic-products.png'"
                   />
                 </div>
-                <h3 class="text-xs sm:text-sm font-semibold text-white line-clamp-2 group-hover:text-[#ff9da3] transition mb-2">
+                <h3 class="text-xs sm:text-sm font-semibold text-[var(--commerce-foreground)] line-clamp-2 group-hover:text-[var(--commerce-accent)] transition mb-2">
                   {rel.name}
                 </h3>
-                <div class="text-sm font-bold text-white">
+                <div class="text-sm font-bold text-[var(--commerce-foreground)]">
                   R$ {rel.price.toFixed(2).replace(".", ",")}
                 </div>
               </a>
@@ -205,28 +205,28 @@ const currentUrl = `https://tcheemporiogaucho.com.br/produto/${product.id}`;
     <!-- Sacola Drawer Lateral -->
     <aside
       id="product-cart-drawer"
-      class="fixed top-0 right-0 w-full sm:w-[380px] h-screen bg-[#141212] border-l border-[#2d2422] z-50 transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col p-6 shadow-2xl"
+      class="fixed top-0 right-0 w-full sm:w-[380px] h-screen bg-[var(--commerce-surface)] text-[var(--commerce-foreground)] border-l border-[var(--commerce-border)] z-50 transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col p-6 shadow-2xl"
     >
-      <header class="flex items-center justify-between pb-4 border-b border-[#2d2422]">
+      <header class="flex items-center justify-between pb-4 border-b border-[var(--commerce-border)]">
         <div class="flex items-center gap-2">
           <span class="text-xl">🛍️</span>
-          <h2 class="text-base font-bold text-white">Sua Sacola</h2>
-          <span id="page-cart-count-badge" class="px-2 py-0.5 rounded-full text-xs font-extrabold bg-[#8b1b22] text-white">0</span>
+          <h2 class="text-base font-bold text-[var(--commerce-foreground)]">Sua Sacola</h2>
+          <span id="page-cart-count-badge" class="px-2 py-0.5 rounded-full text-xs font-extrabold bg-[var(--commerce-accent)] text-white">0</span>
         </div>
-        <button type="button" id="page-cart-drawer-close" class="text-gray-400 hover:text-white text-xl">✕</button>
+        <button type="button" id="page-cart-drawer-close" class="text-[var(--commerce-muted)] hover:text-[var(--commerce-foreground)] text-xl cursor-pointer">✕</button>
       </header>
 
       <div class="flex-1 overflow-y-auto py-4 space-y-3" id="page-cart-drawer-items"></div>
 
-      <footer class="pt-4 border-t border-[#2d2422] space-y-3">
+      <footer class="pt-4 border-t border-[var(--commerce-border)] space-y-3">
         <div class="flex items-center justify-between text-sm">
-          <span class="text-[#a39a97]">Subtotal</span>
-          <strong id="page-cart-drawer-total" class="text-lg font-black text-white">R$ 0,00</strong>
+          <span class="text-[var(--commerce-muted)]">Subtotal</span>
+          <strong id="page-cart-drawer-total" class="text-lg font-black text-[var(--commerce-foreground)]">R$ 0,00</strong>
         </div>
         <button
           type="button"
           id="page-cart-checkout-btn"
-          class="w-full py-3 rounded-xl bg-[#166534] hover:bg-[#15803d] text-white text-xs sm:text-sm font-bold transition flex items-center justify-center gap-2 shadow-lg"
+          class="w-full py-3.5 rounded-xl bg-[#166534] hover:bg-[#15803d] text-white text-xs sm:text-sm font-bold transition flex items-center justify-center gap-2 shadow-lg cursor-pointer"
         >
           <span>💬 Finalizar Pedido via WhatsApp</span>
         </button>
@@ -237,18 +237,21 @@ const currentUrl = `https://tcheemporiogaucho.com.br/produto/${product.id}`;
     <button
       type="button"
       id="page-floating-cart-btn"
-      class="fixed bottom-6 right-6 z-40 flex items-center gap-2.5 px-5 py-3 rounded-full bg-[#8b1b22] hover:bg-[#a52129] text-white font-bold text-xs sm:text-sm shadow-2xl hover:scale-105 transition"
+      class="fixed bottom-6 right-6 z-40 flex items-center gap-2.5 px-5 py-3 rounded-full bg-[var(--commerce-accent)] hover:opacity-90 text-white font-bold text-xs sm:text-sm shadow-2xl hover:scale-105 transition cursor-pointer"
       aria-label="Abrir Sacola"
     >
       <span>🛍️ Sacola</span>
-      <span id="page-floating-cart-badge" class="px-2 py-0.5 rounded-full bg-white text-[#8b1b22] font-black text-xs">0</span>
+      <span id="page-floating-cart-badge" class="px-2 py-0.5 rounded-full bg-white text-[var(--commerce-accent)] font-black text-xs">0</span>
     </button>
 
     <!-- Toast de Notificações -->
     <div
       id="page-toast"
-      class="fixed bottom-8 left-1/2 -translate-x-1/2 translate-y-10 opacity-0 pointer-events-none transition-all duration-300 z-50 px-5 py-2.5 rounded-full bg-[#1c1817] text-white border border-[#8b1b22] text-xs font-bold shadow-2xl"
+      class="fixed bottom-8 left-1/2 -translate-x-1/2 translate-y-10 opacity-0 pointer-events-none transition-all duration-300 z-50 px-5 py-2.5 rounded-full bg-[var(--commerce-surface)] text-[var(--commerce-foreground)] border border-[var(--commerce-accent)] text-xs font-bold shadow-2xl"
     ></div>
+
+    <!-- Catálogo de fallback embutido -->
+    <script type="application/json" id="embedded-product-catalog" set:html={JSON.stringify(products)} />
   </div>
 </BaseLayout>
 
@@ -261,13 +264,18 @@ const currentUrl = `https://tcheemporiogaucho.com.br/produto/${product.id}`;
 
 <script>
   import { loadCart, saveCart, loadCatalogFromStorage } from "../../lib/storefrontStorage";
-  import { products, type Product } from "../../data/products";
+  import type { Product } from "../../data/products";
 
   const WHATSAPP_PHONE = "5551993257923";
 
   function initProductPage() {
-    const catalog: Product[] = loadCatalogFromStorage<Product>() || products;
+    const embeddedCatalogEl = document.getElementById("embedded-product-catalog");
+    const defaultCatalog: Product[] = JSON.parse(embeddedCatalogEl?.textContent || "[]");
+    const customCatalog = loadCatalogFromStorage<Product>();
+    const catalog: Product[] = customCatalog || defaultCatalog;
+
     const cart = loadCart(catalog.map((p) => p.id));
+    const formatBRL = (val: number) => `R$ ${val.toFixed(2).replace(".", ",")}`;
 
     const toast = document.getElementById("page-toast");
     let toastTimeout = 0;
@@ -279,42 +287,15 @@ const currentUrl = `https://tcheemporiogaucho.com.br/produto/${product.id}`;
       toastTimeout = window.setTimeout(() => toast.classList.remove("toast-active"), 2200);
     };
 
-    const formatBRL = (val: number) => `R$ ${val.toFixed(2).replace(".", ",")}`;
-
-    // Single item order via WhatsApp
-    const orderBtn = document.getElementById("btn-order-single-wa");
-    orderBtn?.addEventListener("click", () => {
-      const name = orderBtn.dataset.name || "Produto";
-      const price = parseFloat(orderBtn.dataset.price || "0");
-      const text = `Olá Tchê Empório Gaúcho!\n\nTenho interesse no produto *${name}* (${formatBRL(price)}).\nLink: ${window.location.href}\n\nEstá disponível para pronta entrega ou retirada? Poderia me informar o valor do frete para o meu CEP?`;
-      const url = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(text)}`;
-      window.open(url, "_blank");
-    });
-
-    // Share button
-    const shareBtn = document.getElementById("btn-share-product");
-    shareBtn?.addEventListener("click", () => {
-      if (navigator.share) {
-        navigator.share({
-          title: document.title,
-          url: window.location.href,
-        }).catch(() => {});
-      } else {
-        navigator.clipboard.writeText(window.location.href);
-        showToast("Link do produto copiado para a área de transferência!");
-      }
-    });
-
-    // Cart drawer elements
+    // Cart Drawer Elements
     const cartDrawer = document.getElementById("product-cart-drawer");
-    const floatingBtn = document.getElementById("page-floating-cart-btn");
-    const closeBtn = document.getElementById("page-cart-drawer-close");
+    const floatingCartBtn = document.getElementById("page-floating-cart-btn");
+    const cartDrawerClose = document.getElementById("page-cart-drawer-close");
     const countBadge = document.getElementById("page-cart-count-badge");
-    const floatingBadge = document.getElementById("page-floating-cart-badge");
-    const totalEl = document.getElementById("page-cart-drawer-total");
-    const itemsEl = document.getElementById("page-cart-drawer-items");
+    const floatingCountBadge = document.getElementById("page-floating-cart-badge");
+    const drawerTotal = document.getElementById("page-cart-drawer-total");
+    const drawerItems = document.getElementById("page-cart-drawer-items");
     const checkoutBtn = document.getElementById("page-cart-checkout-btn");
-    const addCartBtn = document.getElementById("btn-add-to-cart-page");
 
     const toggleCart = (open: boolean) => {
       if (!cartDrawer) return;
@@ -325,8 +306,8 @@ const currentUrl = `https://tcheemporiogaucho.com.br/produto/${product.id}`;
       }
     };
 
-    floatingBtn?.addEventListener("click", () => toggleCart(true));
-    closeBtn?.addEventListener("click", () => toggleCart(false));
+    floatingCartBtn?.addEventListener("click", () => toggleCart(true));
+    cartDrawerClose?.addEventListener("click", () => toggleCart(false));
 
     const renderCart = () => {
       const entries = Object.entries(cart)
@@ -337,30 +318,30 @@ const currentUrl = `https://tcheemporiogaucho.com.br/produto/${product.id}`;
       const totalPrice = entries.reduce((s, e) => s + e.item.price * e.qty, 0);
 
       if (countBadge) countBadge.textContent = String(totalQty);
-      if (floatingBadge) floatingBadge.textContent = String(totalQty);
-      if (totalEl) totalEl.textContent = formatBRL(totalPrice);
+      if (floatingCountBadge) floatingCountBadge.textContent = String(totalQty);
+      if (drawerTotal) drawerTotal.textContent = formatBRL(totalPrice);
 
-      if (itemsEl) {
+      if (drawerItems) {
         if (!entries.length) {
-          itemsEl.innerHTML = `
-            <div class="text-center py-12 text-[#786e6b]">
+          drawerItems.innerHTML = `
+            <div class="text-center py-12 text-[var(--commerce-muted)]">
               <p class="text-3xl mb-2">🛍️</p>
               <p class="text-xs">Sua sacola de compras está vazia.</p>
             </div>
           `;
         } else {
-          itemsEl.innerHTML = entries
+          drawerItems.innerHTML = entries
             .map(
               (e) => `
-              <div class="flex items-center justify-between p-3 rounded-xl bg-[#1c1817] border border-[#2d2422]">
+              <div class="flex items-center justify-between p-3 rounded-xl bg-[var(--commerce-surface-raised)] border border-[var(--commerce-border)]">
                 <div class="min-w-0 pr-2">
-                  <h4 class="text-xs font-bold text-white truncate">${e.item.name}</h4>
-                  <p class="text-[11px] text-[#a39a97] mt-0.5">${formatBRL(e.item.price)} × ${e.qty}</p>
+                  <h4 class="text-xs font-bold text-[var(--commerce-foreground)] truncate">${e.item.name}</h4>
+                  <p class="text-[11px] text-[var(--commerce-muted)] mt-0.5">${formatBRL(e.item.price)} × ${e.qty}</p>
                 </div>
                 <button
                   type="button"
                   class="text-xs text-red-400 hover:text-red-300 font-bold shrink-0 p-1"
-                  data-remove-item="${e.item.id}"
+                  data-remove-cart="${e.item.id}"
                 >
                   Remover
                 </button>
@@ -374,24 +355,58 @@ const currentUrl = `https://tcheemporiogaucho.com.br/produto/${product.id}`;
       saveCart(cart);
     };
 
-    addCartBtn?.addEventListener("click", () => {
-      const id = addCartBtn.dataset.id;
-      const name = addCartBtn.dataset.name || "Produto";
-      if (!id) return;
-      cart[id] = (cart[id] || 0) + 1;
-      renderCart();
-      showToast(`${name} adicionado à sacola!`);
-      toggleCart(true);
+    // Add to Cart Button
+    const addBtn = document.getElementById("btn-add-to-cart-page");
+    addBtn?.addEventListener("click", () => {
+      const id = addBtn.getAttribute("data-id");
+      const name = addBtn.getAttribute("data-name") || "Produto";
+      if (id) {
+        cart[id] = (cart[id] || 0) + 1;
+        renderCart();
+        showToast(`+1 "${name}" adicionado à sacola!`);
+      }
     });
 
-    itemsEl?.addEventListener("click", (e) => {
-      const btn = (e.target as HTMLElement).closest<HTMLElement>("[data-remove-item]");
-      if (!btn) return;
-      const id = btn.dataset.removeItem;
-      if (id && cart[id]) {
-        delete cart[id];
-        renderCart();
-        showToast("Item removido da sacola.");
+    // Single item direct order via WhatsApp
+    const singleWaBtn = document.getElementById("btn-order-single-wa");
+    singleWaBtn?.addEventListener("click", () => {
+      const name = singleWaBtn.getAttribute("data-name") || "";
+      const price = parseFloat(singleWaBtn.getAttribute("data-price") || "0");
+      const text = `Olá Tchê Empório Gaúcho!\n\nTenho interesse no produto *${name}* (${formatBRL(price)}).\n\nLink do item: ${window.location.href}\n\nPoderia me confirmar a disponibilidade e o valor do frete?`;
+      const url = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(text)}`;
+      window.open(url, "_blank");
+    });
+
+    // Share Button
+    const shareBtn = document.getElementById("btn-share-product");
+    shareBtn?.addEventListener("click", async () => {
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: document.title,
+            text: `Confira este produto colonial no Tchê Empório Gaúcho:`,
+            url: window.location.href,
+          });
+        } catch {
+          // cancelled or failed
+        }
+      } else {
+        await navigator.clipboard.writeText(window.location.href);
+        showToast("Link copiado para a área de transferência!");
+      }
+    });
+
+    // Cart remove delegation
+    drawerItems?.addEventListener("click", (e) => {
+      const target = e.target as HTMLElement;
+      const removeBtn = target.closest<HTMLButtonElement>("[data-remove-cart]");
+      if (removeBtn) {
+        const id = removeBtn.dataset.removeCart;
+        if (id && cart[id]) {
+          delete cart[id];
+          renderCart();
+          showToast("Item removido da sacola.");
+        }
       }
     });
 
@@ -406,14 +421,14 @@ const currentUrl = `https://tcheemporiogaucho.com.br/produto/${product.id}`;
         return;
       }
 
-      let msg = `Olá Tchê Empório Gaúcho!\n\nGostaria de fazer o pedido dos seguintes itens da minha sacola:\n\n`;
+      let msg = `Olá Tchê Empório Gaúcho!\n\nGostaria de fechar o pedido dos seguintes itens da minha sacola:\n\n`;
       let total = 0;
       entries.forEach((e) => {
         const sub = e.item.price * e.qty;
         total += sub;
         msg += `• ${e.qty}x ${e.item.name} (${formatBRL(e.item.price)}) = ${formatBRL(sub)}\n`;
       });
-      msg += `\n*Total Estimado: ${formatBRL(total)}*\n\nPoderia me confirmar a disponibilidade e o frete para o meu CEP?`;
+      msg += `\n*Total Estimado: ${formatBRL(total)}*\n\nPoderia me informar as opções de pagamento e o frete para o meu CEP?`;
 
       const url = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(msg)}`;
       window.open(url, "_blank");
@@ -422,10 +437,6 @@ const currentUrl = `https://tcheemporiogaucho.com.br/produto/${product.id}`;
     renderCart();
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initProductPage);
-  } else {
-    initProductPage();
-  }
+  initProductPage();
   document.addEventListener("astro:page-load", initProductPage);
 </script>

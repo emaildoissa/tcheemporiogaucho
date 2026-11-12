@@ -31,65 +31,65 @@ const maxPrice = Math.ceil(
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <!-- Breadcrumb -->
-      <nav class="flex items-center gap-2 text-xs text-[#a39a97] mb-6" aria-label="Navegação Estrutural">
-        <a href="/" class="hover:text-white transition-colors">Início</a>
-        <span class="text-[#453d3b]">/</span>
-        <span class="text-white font-semibold">Catálogo Geral</span>
+      <nav class="flex items-center gap-2 text-xs text-[var(--commerce-muted)] mb-6" aria-label="Navegação Estrutural">
+        <a href="/" class="hover:text-[var(--commerce-foreground)] transition-colors">Início</a>
+        <span class="text-[var(--commerce-border)]">/</span>
+        <span class="text-[var(--commerce-foreground)] font-semibold">Catálogo Geral</span>
       </nav>
 
-      <!-- Banner de Coleção (Estilo Vortexwear) -->
-      <section class="shop-collection-banner relative overflow-hidden rounded-3xl border border-[#2d2220] bg-gradient-to-r from-[#170e0f] via-[#121010] to-[#1a1213] p-6 sm:p-9 mb-8 shadow-xl">
+      <!-- Banner de Coleção -->
+      <section class="shop-collection-banner relative overflow-hidden rounded-3xl border border-[var(--commerce-border)] bg-[var(--commerce-banner-gradient)] p-6 sm:p-9 mb-8 shadow-xl transition-all duration-300">
         <div class="relative z-10 max-w-2xl">
-          <p class="text-xs font-bold uppercase tracking-[.2em] text-[#e67e84] flex items-center gap-2">
+          <p class="text-xs font-bold uppercase tracking-[.2em] text-[var(--commerce-accent)] flex items-center gap-2">
             <span>🍷</span> Tradição & Sabor Colonial Gaúcho
           </p>
-          <h1 class="mt-3 text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
+          <h1 class="mt-3 text-3xl sm:text-5xl font-black text-[var(--commerce-foreground)] tracking-tight leading-tight">
             O Autêntico Sabor do Rio Grande
           </h1>
-          <p class="mt-3 text-sm text-[#b8adaa] leading-relaxed">
+          <p class="mt-3 text-sm text-[var(--commerce-muted)] leading-relaxed">
             Vinhos finos da Serra, chimias artesanais, embutidos coloniais, queijos, mel puro e compotas das melhores cooperativas e famílias do Sul.
           </p>
-          <div class="mt-6 flex flex-wrap gap-2.5 text-xs font-semibold text-[#ded5d2]">
-            <span class="rounded-full bg-[#241a1b] border border-[#3e2c2e] px-3.5 py-1.5 flex items-center gap-1.5">
+          <div class="mt-6 flex flex-wrap gap-2.5 text-xs font-semibold text-[var(--commerce-foreground)]">
+            <span class="rounded-full bg-[var(--commerce-surface)] border border-[var(--commerce-border)] px-3.5 py-1.5 flex items-center gap-1.5 shadow-xs">
               📦 228 produtos no catálogo
             </span>
-            <span class="rounded-full bg-[#241a1b] border border-[#3e2c2e] px-3.5 py-1.5 flex items-center gap-1.5">
+            <span class="rounded-full bg-[var(--commerce-surface)] border border-[var(--commerce-border)] px-3.5 py-1.5 flex items-center gap-1.5 shadow-xs">
               💬 Atendimento direto no WhatsApp
             </span>
-            <span class="rounded-full bg-[#241a1b] border border-[#3e2c2e] px-3.5 py-1.5 flex items-center gap-1.5">
+            <span class="rounded-full bg-[var(--commerce-surface)] border border-[var(--commerce-border)] px-3.5 py-1.5 flex items-center gap-1.5 shadow-xs">
               🧀 100% Colonial & Artesanal
             </span>
           </div>
         </div>
-        <div class="shop-banner-orb absolute -right-12 -top-12 h-72 w-72 rounded-full bg-[#8b1b22]/15 blur-3xl pointer-events-none"></div>
+        <div class="shop-banner-orb absolute -right-12 -top-12 h-72 w-72 rounded-full bg-[var(--commerce-accent)]/15 blur-3xl pointer-events-none"></div>
       </section>
 
       <!-- Top Toolbar (Título, Contador, Busca, Ordenação, Botão Mobile) -->
-      <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between mb-8 pb-4 border-b border-[#221c1b]">
+      <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between mb-8 pb-4 border-b border-[var(--commerce-border)]">
         <div>
-          <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">Todos os Produtos</h2>
-          <p class="text-xs sm:text-sm text-[#a39a97] mt-1">
-            Mostrando <span id="product-count" class="font-bold text-white">{defaultProducts.length}</span> itens
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[var(--commerce-foreground)] tracking-tight">Todos os Produtos</h2>
+          <p class="text-xs sm:text-sm text-[var(--commerce-muted)] mt-1">
+            Mostrando <span id="product-count" class="font-bold text-[var(--commerce-foreground)]">{defaultProducts.length}</span> itens
           </p>
         </div>
 
         <div class="flex flex-wrap items-center gap-3">
           <!-- Campo de Busca -->
           <div class="relative min-w-[200px] sm:w-64">
-            <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-500 text-sm">
+            <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[var(--commerce-muted)] text-sm">
               🔍
             </span>
             <input
               id="product-search"
               type="search"
               placeholder="Buscar produtos..."
-              class="w-full rounded-lg border border-[#362e2c] bg-[#141212] pl-9 pr-8 py-2 text-xs sm:text-sm text-white placeholder-[#786e6b] focus:outline-none focus:border-[#8b1b22] transition"
+              class="w-full rounded-xl border border-[var(--commerce-border)] bg-[var(--commerce-surface)] pl-9 pr-8 py-2 text-xs sm:text-sm text-[var(--commerce-foreground)] placeholder-[var(--commerce-muted)] focus:outline-none focus:border-[var(--commerce-accent)] shadow-xs transition"
               autocomplete="off"
             />
             <button
               type="button"
               id="clear-search-btn"
-              class="absolute inset-y-0 right-0 pr-2.5 flex items-center text-xs text-[#786e6b] hover:text-white hidden"
+              class="absolute inset-y-0 right-0 pr-2.5 flex items-center text-xs text-[var(--commerce-muted)] hover:text-[var(--commerce-foreground)] hidden"
               title="Limpar busca"
             >
               ✕
@@ -100,7 +100,7 @@ const maxPrice = Math.ceil(
           <div>
             <select
               id="sort-products"
-              class="rounded-lg border border-[#362e2c] bg-[#141212] px-3 py-2 text-xs sm:text-sm text-white focus:outline-none focus:border-[#8b1b22] transition cursor-pointer"
+              class="rounded-xl border border-[var(--commerce-border)] bg-[var(--commerce-surface)] px-3 py-2 text-xs sm:text-sm text-[var(--commerce-foreground)] focus:outline-none focus:border-[var(--commerce-accent)] shadow-xs transition cursor-pointer"
             >
               <option value="featured">Destaques</option>
               <option value="price-asc">Menor Preço</option>
@@ -114,10 +114,10 @@ const maxPrice = Math.ceil(
           <button
             type="button"
             id="filter-toggle-btn"
-            class="lg:hidden inline-flex items-center gap-2 rounded-lg border border-[#362e2c] bg-[#141212] px-3.5 py-2 text-xs font-bold text-white hover:border-[#8b1b22] transition"
+            class="lg:hidden inline-flex items-center gap-2 rounded-xl border border-[var(--commerce-border)] bg-[var(--commerce-surface)] px-3.5 py-2 text-xs font-bold text-[var(--commerce-foreground)] hover:border-[var(--commerce-accent)] shadow-xs transition"
           >
             <span>⚡ Filtros</span>
-            <span id="mobile-filter-badge" class="hidden px-2 py-0.5 rounded-full text-[10px] bg-[#8b1b22] text-white font-extrabold">0</span>
+            <span id="mobile-filter-badge" class="hidden px-2 py-0.5 rounded-full text-[10px] bg-[var(--commerce-accent)] text-white font-extrabold">0</span>
           </button>
         </div>
       </div>
@@ -130,17 +130,17 @@ const maxPrice = Math.ceil(
           class="shop-sidebar w-64 shrink-0 hidden lg:block"
           aria-label="Filtros do Catálogo"
         >
-          <div class="sticky top-24 space-y-6 bg-[#121010] border border-[#24201f] p-5 rounded-2xl shadow-lg">
+          <div class="sticky top-24 space-y-6 bg-[var(--commerce-surface)] border border-[var(--commerce-border)] p-5 rounded-2xl shadow-lg transition-colors duration-300">
             <!-- Cabeçalho do Filtro -->
-            <div class="flex items-center justify-between pb-3 border-b border-[#24201f]">
+            <div class="flex items-center justify-between pb-3 border-b border-[var(--commerce-border)]">
               <div class="flex items-center gap-2">
                 <span class="text-sm">⚡</span>
-                <h3 class="font-bold text-xs uppercase tracking-wider text-white">Filtros</h3>
+                <h3 class="font-bold text-xs uppercase tracking-wider text-[var(--commerce-foreground)]">Filtros</h3>
               </div>
               <button
                 type="button"
                 id="clear-all-filters-btn"
-                class="text-xs text-[#e67e84] hover:text-[#ff9da3] font-semibold underline underline-offset-2 transition"
+                class="text-xs text-[var(--commerce-accent)] hover:underline font-semibold transition"
               >
                 Limpar Todos
               </button>
@@ -148,43 +148,43 @@ const maxPrice = Math.ceil(
 
             <!-- Categorias (com Radio Inputs e Contagem de Produtos) -->
             <div>
-              <h4 class="font-bold text-xs uppercase tracking-wider text-[#bfb5b2] mb-3">
+              <h4 class="font-bold text-xs uppercase tracking-wider text-[var(--commerce-muted)] mb-3">
                 Categorias
               </h4>
               <div class="space-y-1.5 max-h-[340px] overflow-y-auto pr-1 custom-scrollbar" id="categories-container">
-                <label class="flex items-center justify-between gap-2 cursor-pointer group py-1.5 px-2 rounded-lg hover:bg-[#1a1716] transition">
+                <label class="flex items-center justify-between gap-2 cursor-pointer group py-1.5 px-2 rounded-lg hover:bg-[var(--commerce-surface-raised)] transition">
                   <div class="flex items-center gap-2 min-w-0">
                     <input
                       type="radio"
                       name="filter-category"
                       value="all"
-                      class="filter-cat-radio accent-[#8b1b22] cursor-pointer"
+                      class="filter-cat-radio accent-[var(--commerce-accent)] cursor-pointer"
                       checked
                     />
-                    <span class="text-xs sm:text-sm text-[#bfb5b2] group-hover:text-white transition truncate">
+                    <span class="text-xs sm:text-sm text-[var(--commerce-foreground)] group-hover:text-[var(--commerce-accent)] transition truncate">
                       Todas as Categorias
                     </span>
                   </div>
-                  <span class="text-[11px] text-[#786e6b] group-hover:text-white bg-[#1a1716] px-2 py-0.5 rounded-full font-medium shrink-0">
+                  <span class="text-[11px] text-[var(--commerce-muted)] group-hover:text-[var(--commerce-foreground)] bg-[var(--commerce-surface-raised)] px-2 py-0.5 rounded-full font-medium shrink-0">
                     {defaultProducts.length}
                   </span>
                 </label>
 
                 {
                   categoriesList.map((cat) => (
-                    <label class="flex items-center justify-between gap-2 cursor-pointer group py-1.5 px-2 rounded-lg hover:bg-[#1a1716] transition">
+                    <label class="flex items-center justify-between gap-2 cursor-pointer group py-1.5 px-2 rounded-lg hover:bg-[var(--commerce-surface-raised)] transition">
                       <div class="flex items-center gap-2 min-w-0">
                         <input
                           type="radio"
                           name="filter-category"
                           value={cat}
-                          class="filter-cat-radio accent-[#8b1b22] cursor-pointer"
+                          class="filter-cat-radio accent-[var(--commerce-accent)] cursor-pointer"
                         />
-                        <span class="text-xs sm:text-sm text-[#bfb5b2] group-hover:text-white transition truncate" title={cat}>
+                        <span class="text-xs sm:text-sm text-[var(--commerce-foreground)] group-hover:text-[var(--commerce-accent)] transition truncate" title={cat}>
                           {cat}
                         </span>
                       </div>
-                      <span class="text-[11px] text-[#786e6b] group-hover:text-white bg-[#1a1716] px-2 py-0.5 rounded-full font-medium shrink-0">
+                      <span class="text-[11px] text-[var(--commerce-muted)] group-hover:text-[var(--commerce-foreground)] bg-[var(--commerce-surface-raised)] px-2 py-0.5 rounded-full font-medium shrink-0">
                         {categoryCounts[cat] || 0}
                       </span>
                     </label>
@@ -194,12 +194,12 @@ const maxPrice = Math.ceil(
             </div>
 
             <!-- Faixa de Preço (Slider e Display Dinâmico) -->
-            <div class="border-t border-[#24201f] pt-4">
+            <div class="border-t border-[var(--commerce-border)] pt-4">
               <div class="flex items-center justify-between mb-2">
-                <h4 class="font-bold text-xs uppercase tracking-wider text-[#bfb5b2]">
+                <h4 class="font-bold text-xs uppercase tracking-wider text-[var(--commerce-muted)]">
                   Faixa de Preço
                 </h4>
-                <span id="price-display" class="text-xs font-bold text-[#e67e84]">
+                <span id="price-display" class="text-xs font-bold text-[var(--commerce-ouro)]">
                   Até R$ {maxPrice},00
                 </span>
               </div>
@@ -210,26 +210,26 @@ const maxPrice = Math.ceil(
                 max={maxPrice}
                 value={maxPrice}
                 step="5"
-                class="w-full accent-[#8b1b22] cursor-pointer"
+                class="w-full accent-[var(--commerce-accent)] cursor-pointer"
               />
-              <div class="flex justify-between text-[11px] text-[#786e6b] mt-1">
+              <div class="flex justify-between text-[11px] text-[var(--commerce-muted)] mt-1">
                 <span>R$ 0</span>
                 <span>R$ {maxPrice}</span>
               </div>
             </div>
 
             <!-- Filtro Rápido: Mais Vendidos -->
-            <div class="border-t border-[#24201f] pt-4">
-              <h4 class="font-bold text-xs uppercase tracking-wider text-[#bfb5b2] mb-2.5">
+            <div class="border-t border-[var(--commerce-border)] pt-4">
+              <h4 class="font-bold text-xs uppercase tracking-wider text-[var(--commerce-muted)] mb-2.5">
                 Filtros Especiais
               </h4>
               <label class="flex items-center gap-2.5 cursor-pointer group py-1">
                 <input
                   type="checkbox"
                   id="filter-featured"
-                  class="accent-[#8b1b22] rounded cursor-pointer w-4 h-4"
+                  class="accent-[var(--commerce-accent)] rounded cursor-pointer w-4 h-4"
                 />
-                <span class="text-xs sm:text-sm text-[#bfb5b2] group-hover:text-white transition">
+                <span class="text-xs sm:text-sm text-[var(--commerce-foreground)] group-hover:text-[var(--commerce-accent)] transition">
                   Apenas Mais Vendidos / Selos
                 </span>
               </label>
@@ -239,7 +239,7 @@ const maxPrice = Math.ceil(
             <button
               type="button"
               id="clear-filters-btn-secondary"
-              class="w-full py-2.5 rounded-lg border border-[#362e2c] bg-[#161413] hover:bg-[#201b1a] text-xs font-bold text-[#bfb5b2] hover:text-white transition"
+              class="w-full py-2.5 rounded-xl border border-[var(--commerce-border)] bg-[var(--commerce-surface-raised)] hover:bg-[var(--commerce-surface)] text-xs font-bold text-[var(--commerce-muted)] hover:text-[var(--commerce-foreground)] transition shadow-xs"
             >
               Limpar Todos os Filtros
             </button>
@@ -259,7 +259,7 @@ const maxPrice = Math.ceil(
             {
               defaultProducts.map((product) => (
                 <article
-                  class="product-card group relative bg-[#121010] rounded-2xl overflow-hidden border border-[#24201f] hover:border-[#8b1b22] transition-all duration-300 flex flex-col justify-between shadow-md hover:shadow-xl hover:-translate-y-1"
+                  class="product-card group relative bg-[var(--commerce-surface)] rounded-2xl overflow-hidden border border-[var(--commerce-border)] hover:border-[var(--commerce-accent)] transition-all duration-300 flex flex-col justify-between shadow-sm hover:shadow-xl hover:-translate-y-1"
                   data-product-id={product.id}
                   data-product-name={product.name.toLowerCase()}
                   data-product-category={product.category}
@@ -269,7 +269,7 @@ const maxPrice = Math.ceil(
                 >
                   <!-- Selo Superior -->
                   {product.badge && (
-                    <span class="absolute top-3 left-3 z-10 px-2.5 py-1 rounded-md bg-[#8b1b22] text-white text-[10px] font-black uppercase tracking-wider shadow">
+                    <span class="absolute top-3 left-3 z-10 px-2.5 py-1 rounded-md bg-[var(--commerce-accent)] text-white text-[10px] font-black uppercase tracking-wider shadow">
                       {product.badge}
                     </span>
                   )}
@@ -277,7 +277,7 @@ const maxPrice = Math.ceil(
                   <!-- Botão Favoritos -->
                   <button
                     type="button"
-                    class="wish-btn absolute top-3 right-3 z-10 p-2 rounded-full bg-black/40 backdrop-blur text-gray-400 hover:text-white hover:bg-black/70 transition"
+                    class="wish-btn absolute top-3 right-3 z-10 p-2 rounded-full bg-black/30 backdrop-blur text-gray-300 hover:text-white hover:bg-black/60 transition"
                     aria-label={`Salvar ${product.name}`}
                     data-wish-id={product.id}
                   >
@@ -288,7 +288,7 @@ const maxPrice = Math.ceil(
 
                   <!-- Imagem do Produto -->
                   <div
-                    class="relative aspect-[4/3] bg-[#181514] overflow-hidden flex items-center justify-center p-3 cursor-pointer"
+                    class="relative aspect-[4/3] bg-[var(--commerce-surface-raised)] overflow-hidden flex items-center justify-center p-3 cursor-pointer"
                     data-product-link={`/produto/${product.id}`}
                   >
                     <img
@@ -303,25 +303,25 @@ const maxPrice = Math.ceil(
                   <!-- Detalhes do Produto -->
                   <div class="p-4 flex flex-col flex-grow justify-between">
                     <div>
-                      <span class="text-[10px] font-bold uppercase tracking-wider text-[#e67e84] block mb-1">
+                      <span class="text-[10px] font-bold uppercase tracking-wider text-[var(--commerce-accent)] block mb-1">
                         {product.category}
                       </span>
                       <h3
-                        class="font-semibold text-xs sm:text-sm text-white line-clamp-2 group-hover:text-[#ff9da3] transition-colors leading-snug cursor-pointer"
+                        class="font-semibold text-xs sm:text-sm text-[var(--commerce-foreground)] line-clamp-2 group-hover:text-[var(--commerce-accent)] transition-colors leading-snug cursor-pointer"
                         data-product-link={`/produto/${product.id}`}
                         title={product.name}
                       >
                         {product.name}
                       </h3>
                       <div class="flex items-center gap-1.5 mt-2 text-xs">
-                        <span class="text-[#f59e0b] text-[11px]">★★★★★</span>
-                        <span class="text-[#786e6b] text-[11px]">({product.reviews || 18})</span>
+                        <span class="text-[var(--commerce-ouro)] text-[11px]">★★★★★</span>
+                        <span class="text-[var(--commerce-muted)] text-[11px]">({product.reviews || 18})</span>
                       </div>
                     </div>
 
-                    <div class="mt-4 pt-3 border-t border-[#1f1b1a]">
+                    <div class="mt-4 pt-3 border-t border-[var(--commerce-border)]">
                       <div class="mb-3">
-                        <span class="text-base sm:text-lg font-black text-white">
+                        <span class="text-base sm:text-lg font-black text-[var(--commerce-foreground)]">
                           R$ {product.price.toFixed(2).replace(".", ",")}
                         </span>
                       </div>
@@ -329,7 +329,7 @@ const maxPrice = Math.ceil(
                       <div class="grid grid-cols-2 gap-2">
                         <button
                           type="button"
-                          class="btn-order-wa flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-lg bg-[#166534] hover:bg-[#15803d] text-white text-[11px] font-bold transition shadow-sm"
+                          class="btn-order-wa flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-xl bg-[#166534] hover:bg-[#15803d] text-white text-[11px] font-bold transition shadow-sm"
                           data-wa-order
                           data-id={product.id}
                           data-name={product.name}
@@ -340,7 +340,7 @@ const maxPrice = Math.ceil(
                         </button>
                         <button
                           type="button"
-                          class="btn-add-cart flex items-center justify-center gap-1 py-2 px-2.5 rounded-lg bg-[#1c1817] hover:bg-[#25201f] border border-[#362e2c] hover:border-[#8b1b22] text-[#f2ede6] text-[11px] font-bold transition"
+                          class="btn-add-cart flex items-center justify-center gap-1 py-2 px-2.5 rounded-xl bg-[var(--commerce-surface-raised)] hover:bg-[var(--commerce-surface)] border border-[var(--commerce-border)] hover:border-[var(--commerce-accent)] text-[var(--commerce-foreground)] text-[11px] font-bold transition"
                           data-add-cart
                           data-id={product.id}
                           data-name={product.name}
@@ -360,17 +360,17 @@ const maxPrice = Math.ceil(
           <!-- Empty State (Sem Produtos Correspondentes) -->
           <div
             id="empty-state"
-            class="hidden text-center py-20 px-4 bg-[#121010] border border-dashed border-[#2d2422] rounded-3xl"
+            class="hidden text-center py-20 px-4 bg-[var(--commerce-surface)] border border-dashed border-[var(--commerce-border)] rounded-3xl"
           >
             <div class="text-5xl mb-4">🧺</div>
-            <h3 class="text-xl font-bold text-white mb-2">Nenhum produto encontrado</h3>
-            <p class="text-sm text-[#a39a97] max-w-md mx-auto mb-6">
+            <h3 class="text-xl font-bold text-[var(--commerce-foreground)] mb-2">Nenhum produto encontrado</h3>
+            <p class="text-sm text-[var(--commerce-muted)] max-w-md mx-auto mb-6">
               Não encontramos nenhum item correspondente aos filtros selecionados. Tente ajustar os critérios ou limpar os filtros.
             </p>
             <button
               type="button"
               id="empty-reset-btn"
-              class="px-5 py-2.5 rounded-xl bg-[#8b1b22] hover:bg-[#a52129] text-white text-xs font-bold transition shadow-lg"
+              class="px-5 py-2.5 rounded-xl bg-[var(--commerce-accent)] hover:opacity-90 text-white text-xs font-bold transition shadow-lg"
             >
               Ver Todos os Produtos
             </button>
@@ -382,12 +382,12 @@ const maxPrice = Math.ceil(
     <!-- Modal Detalhes do Produto (QuickView) -->
     <dialog
       id="quickview-modal"
-      class="rounded-3xl bg-[#141212] text-[#f2ede6] border border-[#362e2c] p-6 sm:p-8 max-w-xl w-[92vw] shadow-2xl backdrop:bg-black/85 backdrop:backdrop-blur-sm"
+      class="rounded-3xl bg-[var(--commerce-surface)] text-[var(--commerce-foreground)] border border-[var(--commerce-border)] p-6 sm:p-8 max-w-xl w-[92vw] shadow-2xl backdrop:bg-black/80 backdrop:backdrop-blur-sm"
     >
       <button
         type="button"
         id="quickview-close-btn"
-        class="absolute top-4 right-5 text-gray-400 hover:text-white text-xl"
+        class="absolute top-4 right-5 text-[var(--commerce-muted)] hover:text-[var(--commerce-foreground)] text-xl"
         aria-label="Fechar"
       >
         ✕
@@ -398,28 +398,28 @@ const maxPrice = Math.ceil(
     <!-- Sacola Drawer Lateral -->
     <aside
       id="cart-drawer"
-      class="fixed top-0 right-0 w-full sm:w-[380px] h-screen bg-[#141212] border-l border-[#2d2422] z-50 transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col p-6 shadow-2xl"
+      class="fixed top-0 right-0 w-full sm:w-[380px] h-screen bg-[var(--commerce-surface)] text-[var(--commerce-foreground)] border-l border-[var(--commerce-border)] z-50 transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col p-6 shadow-2xl"
     >
-      <header class="flex items-center justify-between pb-4 border-b border-[#2d2422]">
+      <header class="flex items-center justify-between pb-4 border-b border-[var(--commerce-border)]">
         <div class="flex items-center gap-2">
           <span class="text-xl">🛍️</span>
-          <h2 class="text-base font-bold text-white">Sua Sacola</h2>
-          <span id="drawer-count-badge" class="px-2 py-0.5 rounded-full text-xs font-extrabold bg-[#8b1b22] text-white">0</span>
+          <h2 class="text-base font-bold text-[var(--commerce-foreground)]">Sua Sacola</h2>
+          <span id="drawer-count-badge" class="px-2 py-0.5 rounded-full text-xs font-extrabold bg-[var(--commerce-accent)] text-white">0</span>
         </div>
-        <button type="button" id="cart-drawer-close" class="text-gray-400 hover:text-white text-xl">✕</button>
+        <button type="button" id="cart-drawer-close" class="text-[var(--commerce-muted)] hover:text-[var(--commerce-foreground)] text-xl">✕</button>
       </header>
 
       <div class="flex-1 overflow-y-auto py-4 space-y-3 custom-scrollbar" id="cart-drawer-items"></div>
 
-      <footer class="pt-4 border-t border-[#2d2422] space-y-3">
+      <footer class="pt-4 border-t border-[var(--commerce-border)] space-y-3">
         <div class="flex items-center justify-between text-sm">
-          <span class="text-[#a39a97]">Subtotal</span>
-          <strong id="cart-drawer-total" class="text-lg font-black text-white">R$ 0,00</strong>
+          <span class="text-[var(--commerce-muted)]">Subtotal</span>
+          <strong id="cart-drawer-total" class="text-lg font-black text-[var(--commerce-foreground)]">R$ 0,00</strong>
         </div>
         <button
           type="button"
           id="cart-checkout-btn"
-          class="w-full py-3 rounded-xl bg-[#166534] hover:bg-[#15803d] text-white text-xs sm:text-sm font-bold transition flex items-center justify-center gap-2 shadow-lg"
+          class="w-full py-3.5 rounded-xl bg-[#166534] hover:bg-[#15803d] text-white text-xs sm:text-sm font-bold transition flex items-center justify-center gap-2 shadow-lg"
         >
           <span>💬 Finalizar Pedido via WhatsApp</span>
         </button>
@@ -430,17 +430,17 @@ const maxPrice = Math.ceil(
     <button
       type="button"
       id="floating-cart-btn"
-      class="fixed bottom-6 right-6 z-40 flex items-center gap-2.5 px-5 py-3 rounded-full bg-[#8b1b22] hover:bg-[#a52129] text-white font-bold text-xs sm:text-sm shadow-2xl hover:scale-105 transition"
+      class="fixed bottom-6 right-6 z-40 flex items-center gap-2.5 px-5 py-3 rounded-full bg-[var(--commerce-accent)] hover:opacity-90 text-white font-bold text-xs sm:text-sm shadow-2xl hover:scale-105 transition"
       aria-label="Abrir Sacola"
     >
       <span>🛍️ Sacola</span>
-      <span id="floating-cart-badge" class="px-2 py-0.5 rounded-full bg-white text-[#8b1b22] font-black text-xs">0</span>
+      <span id="floating-cart-badge" class="px-2 py-0.5 rounded-full bg-white text-[var(--commerce-accent)] font-black text-xs">0</span>
     </button>
 
     <!-- Toast de Notificações -->
     <div
       id="shop-toast"
-      class="fixed bottom-8 left-1/2 -translate-x-1/2 translate-y-10 opacity-0 pointer-events-none transition-all duration-300 z-50 px-5 py-2.5 rounded-full bg-[#1c1817] text-white border border-[#8b1b22] text-xs font-bold shadow-2xl"
+      class="fixed bottom-8 left-1/2 -translate-x-1/2 translate-y-10 opacity-0 pointer-events-none transition-all duration-300 z-50 px-5 py-2.5 rounded-full bg-[var(--commerce-surface)] text-[var(--commerce-foreground)] border border-[var(--commerce-accent)] text-xs font-bold shadow-2xl"
     ></div>
 
     <!-- Catálogo de fallback embutido -->
@@ -453,7 +453,7 @@ const maxPrice = Math.ceil(
     width: 4px;
   }
   .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: #362e2c;
+    background: var(--commerce-border);
     border-radius: 9999px;
   }
   .custom-scrollbar::-webkit-scrollbar-track {
@@ -466,8 +466,8 @@ const maxPrice = Math.ceil(
   }
 
   .wish-btn[aria-pressed="true"] svg {
-    fill: #e67e84;
-    color: #e67e84;
+    fill: var(--commerce-accent);
+    color: var(--commerce-accent);
   }
 
   /* Estado visível do Toast */
@@ -715,11 +715,11 @@ const maxPrice = Math.ceil(
       if (!filterSidebar || !mobileBackdrop) return;
       if (open) {
         filterSidebar.classList.remove("hidden");
-        filterSidebar.classList.add("fixed", "top-0", "left-0", "z-50", "h-full", "max-w-[320px]", "w-[85vw]", "bg-[#121010]", "p-6", "overflow-y-auto");
+        filterSidebar.classList.add("fixed", "top-0", "left-0", "z-50", "h-full", "max-w-[320px]", "w-[85vw]", "bg-[var(--commerce-surface)]", "p-6", "overflow-y-auto");
         mobileBackdrop.classList.remove("hidden");
       } else {
         filterSidebar.classList.add("hidden");
-        filterSidebar.classList.remove("fixed", "top-0", "left-0", "z-50", "h-full", "max-w-[320px]", "w-[85vw]", "bg-[#121010]", "p-6", "overflow-y-auto");
+        filterSidebar.classList.remove("fixed", "top-0", "left-0", "z-50", "h-full", "max-w-[320px]", "w-[85vw]", "bg-[var(--commerce-surface)]", "p-6", "overflow-y-auto");
         mobileBackdrop.classList.add("hidden");
       }
     };
@@ -764,7 +764,7 @@ const maxPrice = Math.ceil(
       if (cartDrawerItems) {
         if (!entries.length) {
           cartDrawerItems.innerHTML = `
-            <div class="text-center py-12 text-[#786e6b]">
+            <div class="text-center py-12 text-[var(--commerce-muted)]">
               <p class="text-3xl mb-2">🛍️</p>
               <p class="text-xs">Sua sacola de compras está vazia.</p>
             </div>
@@ -773,10 +773,10 @@ const maxPrice = Math.ceil(
           cartDrawerItems.innerHTML = entries
             .map(
               (e) => `
-              <div class="flex items-center justify-between p-3 rounded-xl bg-[#1c1817] border border-[#2d2422]">
+              <div class="flex items-center justify-between p-3 rounded-xl bg-[var(--commerce-surface-raised)] border border-[var(--commerce-border)]">
                 <div class="min-w-0 pr-2">
-                  <h4 class="text-xs font-bold text-white truncate">${e.item.name}</h4>
-                  <p class="text-[11px] text-[#a39a97] mt-0.5">${formatBRL(e.item.price)} × ${e.qty}</p>
+                  <h4 class="text-xs font-bold text-[var(--commerce-foreground)] truncate">${e.item.name}</h4>
+                  <p class="text-[11px] text-[var(--commerce-muted)] mt-0.5">${formatBRL(e.item.price)} × ${e.qty}</p>
                 </div>
                 <button
                   type="button"
@@ -847,107 +847,111 @@ const maxPrice = Math.ceil(
 
       modalContent.innerHTML = `
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 items-center">
-          <div class="aspect-square bg-[#1a1716] rounded-2xl p-4 flex items-center justify-center">
-            <img src="${prod.image || '/images/shop/cosmic-products.png'}" alt="${prod.name}" class="max-h-full max-w-full object-contain" onerror="this.src='/images/shop/cosmic-products.png'" />
+          <div class="aspect-square bg-[var(--commerce-surface-raised)] rounded-2xl p-4 flex items-center justify-center">
+            <img src="${prod.image || "/images/shop/cosmic-products.png"}" alt="${prod.name}" class="max-h-full max-w-full object-contain" />
           </div>
           <div>
-            <span class="text-xs font-bold uppercase tracking-wider text-[#e67e84] block mb-1">${prod.category}</span>
-            <h2 class="text-lg sm:text-xl font-bold text-white mb-2 leading-tight">${prod.name}</h2>
-            <div class="text-xl font-black text-white mb-3">${formatBRL(prod.price)}</div>
-            <p class="text-xs text-[#a39a97] leading-relaxed mb-6">${prod.description}</p>
+            <span class="text-xs font-bold uppercase text-[var(--commerce-accent)]">${prod.category}</span>
+            <h3 class="text-lg font-bold text-[var(--commerce-foreground)] mt-1 mb-2">${prod.name}</h3>
+            <p class="text-xl font-black text-[var(--commerce-foreground)] mb-3">${formatBRL(prod.price)}</p>
+            <p class="text-xs text-[var(--commerce-muted)] line-clamp-4 leading-relaxed mb-4">${prod.description}</p>
             <div class="flex gap-2">
-              <button
-                type="button"
-                class="flex-1 py-2.5 rounded-xl bg-[#166534] hover:bg-[#15803d] text-white text-xs font-bold transition flex items-center justify-center gap-1.5"
-                data-modal-wa
-                data-name="${prod.name}"
-                data-price="${prod.price}"
-              >
-                💬 WhatsApp
-              </button>
-              <button
-                type="button"
-                class="flex-1 py-2.5 rounded-xl bg-[#1c1817] hover:bg-[#25201f] border border-[#362e2c] text-white text-xs font-bold transition"
-                data-modal-cart
-                data-id="${prod.id}"
-                data-name="${prod.name}"
-              >
-                + Sacola
+              <a href="/produto/${prod.id}" class="py-2.5 px-4 rounded-xl bg-[var(--commerce-accent)] text-white text-xs font-bold hover:opacity-90 transition">
+                Ver Página Completa
+              </a>
+              <button type="button" class="py-2.5 px-4 rounded-xl bg-[#166534] text-white text-xs font-bold hover:bg-[#15803d] transition" id="quickview-wa-btn">
+                💬 Pedir no WhatsApp
               </button>
             </div>
           </div>
         </div>
       `;
+
+      document.getElementById("quickview-wa-btn")?.addEventListener("click", () => {
+        orderSingleItemWA(prod.name, prod.price);
+      });
+
       modal.showModal();
     };
 
-    modalClose?.addEventListener("click", () => modal?.close());
+    modalClose?.addEventListener("click", () => modal.close());
     modal?.addEventListener("click", (e) => {
       if (e.target === modal) modal.close();
     });
 
-    // Event Delegation
-    document.addEventListener("click", (e) => {
-      const target = (e.target as HTMLElement).closest<HTMLElement>(
-        "[data-wa-order], [data-add-cart], [data-wish-id], [data-quickview-id], [data-remove-cart], [data-modal-wa], [data-modal-cart]"
-      );
-      if (!target) return;
+    // Event Delegation for Grid Actions
+    grid?.addEventListener("click", (e) => {
+      const target = e.target as HTMLElement;
 
-      if (target.matches("[data-wa-order]")) {
-        const name = target.dataset.name || "Produto";
-        const price = parseFloat(target.dataset.price || "0");
+      // Click to view product details page
+      const linkContainer = target.closest<HTMLElement>("[data-product-link]");
+      if (linkContainer && !target.closest("button")) {
+        const href = linkContainer.dataset.productLink;
+        if (href) window.location.href = href;
+        return;
+      }
+
+      // WhatsApp direct order
+      const waBtn = target.closest<HTMLButtonElement>("[data-wa-order]");
+      if (waBtn) {
+        const name = waBtn.dataset.name || "Produto";
+        const price = parseFloat(waBtn.dataset.price || "0");
         orderSingleItemWA(name, price);
-      } else if (target.matches("[data-add-cart]")) {
-        const id = target.dataset.id;
-        const name = target.dataset.name || "Produto";
+        return;
+      }
+
+      // Add to Cart
+      const cartBtn = target.closest<HTMLButtonElement>("[data-add-cart]");
+      if (cartBtn) {
+        const id = cartBtn.dataset.id;
+        const name = cartBtn.dataset.name || "Produto";
         if (id) {
           cart[id] = (cart[id] || 0) + 1;
           renderCart();
-          showToast(`${name} adicionado à sacola!`);
+          showToast(`+1 "${name}" adicionado à sacola!`);
         }
-      } else if (target.matches("[data-wish-id]")) {
-        const id = target.dataset.wishId;
+        return;
+      }
+
+      // Wishlist toggle
+      const wishBtn = target.closest<HTMLButtonElement>("[data-wish-id]");
+      if (wishBtn) {
+        const id = wishBtn.dataset.wishId;
         if (id) {
-          const exists = wishlist.includes(id);
-          wishlist = exists ? wishlist.filter((item) => item !== id) : [...wishlist, id];
+          if (wishlist.includes(id)) {
+            wishlist = wishlist.filter((item) => item !== id);
+            showToast("Item removido dos favoritos.");
+          } else {
+            wishlist.push(id);
+            showToast("Item salvo nos favoritos!");
+          }
           saveWishlist(wishlist);
           syncWishlist();
-          showToast(exists ? "Removido dos favoritos" : "Salvo nos seus favoritos");
         }
-      } else if (target.matches("[data-product-link]")) {
-        const link = target.dataset.productLink;
-        if (link) window.location.href = link;
-      } else if (target.matches("[data-remove-cart]")) {
-        const id = target.dataset.removeCart;
+        return;
+      }
+    });
+
+    // Cart remove delegation
+    cartDrawerItems?.addEventListener("click", (e) => {
+      const target = e.target as HTMLElement;
+      const removeBtn = target.closest<HTMLButtonElement>("[data-remove-cart]");
+      if (removeBtn) {
+        const id = removeBtn.dataset.removeCart;
         if (id && cart[id]) {
           delete cart[id];
           renderCart();
           showToast("Item removido da sacola.");
         }
-      } else if (target.matches("[data-modal-wa]")) {
-        const name = target.dataset.name || "Produto";
-        const price = parseFloat(target.dataset.price || "0");
-        orderSingleItemWA(name, price);
-      } else if (target.matches("[data-modal-cart]")) {
-        const id = target.dataset.id;
-        const name = target.dataset.name || "Produto";
-        if (id) {
-          cart[id] = (cart[id] || 0) + 1;
-          renderCart();
-          showToast(`${name} adicionado à sacola!`);
-        }
       }
     });
 
+    // Initial setup
+    applyFilters();
     renderCart();
     syncWishlist();
-    applyFilters();
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initCatalog);
-  } else {
-    initCatalog();
-  }
+  initCatalog();
   document.addEventListener("astro:page-load", initCatalog);
 </script>

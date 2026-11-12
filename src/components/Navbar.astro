@@ -65,38 +65,29 @@ const navLinks = [
             <span>💬 WhatsApp</span>
           </a>
 
-          <!-- Seletor Rápido de 3 Temas na Navbar (Mapeado com a Home) -->
+          <!-- Seletor dos 2 Temas Finalistas na Navbar -->
           <div
-            class="theme-nav-switcher inline-flex items-center rounded-xl p-0.5 bg-[var(--card)] border border-[var(--border)] shadow-xs ml-1"
+            class="theme-nav-switcher inline-flex items-center rounded-xl p-0.5 bg-[var(--commerce-surface)] border border-[var(--commerce-border)] shadow-xs ml-1"
             role="group"
-            aria-label="3 Opções Visuais da Home"
+            aria-label="Alternar entre Adega e Farroupilha"
           >
             <button
               type="button"
               data-theme-pill="adega"
               title="1. Adega & Galpão (Dark Premium & Vinho Tinto)"
-              class="px-2 py-1 rounded-lg text-xs font-bold transition flex items-center gap-1 text-[var(--muted-foreground)] hover:text-[var(--foreground)]"
+              class="px-2.5 py-1 rounded-lg text-xs font-bold transition flex items-center gap-1.5 text-[var(--commerce-muted)] hover:text-[var(--commerce-foreground)]"
             >
               <span>🍷</span>
-              <span class="hidden xl:inline">Adega</span>
-            </button>
-            <button
-              type="button"
-              data-theme-pill="colonial"
-              title="2. Tradição Colonial (Linho Cru & Rústico)"
-              class="px-2 py-1 rounded-lg text-xs font-bold transition flex items-center gap-1 text-[var(--muted-foreground)] hover:text-[var(--foreground)]"
-            >
-              <span>🌾</span>
-              <span class="hidden xl:inline">Colonial</span>
+              <span class="hidden sm:inline">Adega</span>
             </button>
             <button
               type="button"
               data-theme-pill="farroupilha"
-              title="3. Farroupilha Tricolor (Cores da Bandeira do RS)"
-              class="px-2 py-1 rounded-lg text-xs font-bold transition flex items-center gap-1 text-[var(--muted-foreground)] hover:text-[var(--foreground)]"
+              title="2. Farroupilha Tricolor (Cores da Bandeira do RS)"
+              class="px-2.5 py-1 rounded-lg text-xs font-bold transition flex items-center gap-1.5 text-[var(--commerce-muted)] hover:text-[var(--commerce-foreground)]"
             >
               <span>🟢</span>
-              <span class="hidden xl:inline">RS</span>
+              <span class="hidden sm:inline">Farroupilha</span>
             </button>
           </div>
 
@@ -125,12 +116,12 @@ const navLinks = [
                 </svg>
               </button>
               <div
-                class="bg-[var(--card)] border-l border-[var(--border)] fixed h-screen hidden overflow-y-auto right-0 top-0 w-72 z-20 shadow-2xl"
+                class="bg-[var(--commerce-surface)] border-l border-[var(--commerce-border)] fixed h-screen hidden overflow-y-auto right-0 top-0 w-72 z-20 shadow-2xl"
                 id="mobile-nav__content"
               >
                 <div class="p-6 flex flex-col h-full justify-between">
                   <div>
-                    <div class="flex items-center justify-between pb-6 border-b border-[var(--border)]">
+                    <div class="flex items-center justify-between pb-6 border-b border-[var(--commerce-border)]">
                       <div class="flex items-center gap-2.5">
                         <img
                           src="/images/logo.png"
@@ -163,36 +154,29 @@ const navLinks = [
                     </ul>
 
                     <!-- Seletor de Temas no Mobile -->
-                    <div class="py-4 border-t border-[var(--border)]">
-                      <span class="text-xs font-bold uppercase tracking-wider text-[var(--muted-foreground)] mb-2 block">
-                        🎨 Decisão Visual (Home):
+                    <div class="py-4 border-t border-[var(--commerce-border)]">
+                      <span class="text-xs font-bold uppercase tracking-wider text-[var(--commerce-muted)] mb-2 block">
+                        🎨 Identidade Visual:
                       </span>
-                      <div class="grid grid-cols-3 gap-1.5 text-center">
+                      <div class="grid grid-cols-2 gap-2 text-center">
                         <button
                           type="button"
                           data-theme-pill="adega"
-                          class="p-2 rounded-lg border border-[var(--border)] text-xs font-semibold bg-[var(--card)]"
+                          class="p-2.5 rounded-xl border border-[var(--commerce-border)] text-xs font-bold bg-[var(--commerce-surface-raised)]"
                         >
-                          🍷 Adega
-                        </button>
-                        <button
-                          type="button"
-                          data-theme-pill="colonial"
-                          class="p-2 rounded-lg border border-[var(--border)] text-xs font-semibold bg-[var(--card)]"
-                        >
-                          🌾 Colonial
+                          🍷 1. Adega
                         </button>
                         <button
                           type="button"
                           data-theme-pill="farroupilha"
-                          class="p-2 rounded-lg border border-[var(--border)] text-xs font-semibold bg-[var(--card)]"
+                          class="p-2.5 rounded-xl border border-[var(--commerce-border)] text-xs font-bold bg-[var(--commerce-surface-raised)]"
                         >
-                          🟢 RS
+                          🟢 2. Farroupilha
                         </button>
                       </div>
                     </div>
                   </div>
-                  <div class="pt-6 border-t border-[var(--border)]">
+                  <div class="pt-6 border-t border-[var(--commerce-border)]">
                     <a
                       href="https://wa.me/5551993257923"
                       target="_blank"
@@ -272,53 +256,50 @@ const navLinks = [
 
 <script>
   function initThemeSwitcher() {
-    const isHome = window.location.pathname === "/" || window.location.pathname === "" || window.location.pathname.endsWith("/index.html");
     const pills = document.querySelectorAll<HTMLButtonElement>("[data-theme-pill]");
 
-    function updatePills(theme: string) {
+    function updateThemeUI(theme: string) {
+      document.documentElement.setAttribute("data-theme", theme);
+      localStorage.setItem("tche_theme", theme);
+      localStorage.setItem("tche_home_theme", theme);
+
+      if (theme === "adega") {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+
       pills.forEach((pill) => {
         const pTheme = pill.getAttribute("data-theme-pill");
         if (pTheme === theme) {
           pill.classList.add("bg-[var(--commerce-accent)]", "text-white");
-          pill.classList.remove("text-[var(--muted-foreground)]");
+          pill.classList.remove("text-[var(--commerce-muted)]");
         } else {
           pill.classList.remove("bg-[var(--commerce-accent)]", "text-white");
-          pill.classList.add("text-[var(--muted-foreground)]");
+          pill.classList.add("text-[var(--commerce-muted)]");
+        }
+      });
+
+      // Se houver botões da barra de decisão na página:
+      document.querySelectorAll<HTMLButtonElement>("[data-site-theme-select]").forEach((b) => {
+        if (b.getAttribute("data-site-theme-select") === theme) {
+          b.classList.add("is-active");
+        } else {
+          b.classList.remove("is-active");
         }
       });
     }
 
-    const currentTheme = localStorage.getItem("tche_home_theme") || "adega";
-    updatePills(currentTheme);
+    const currentTheme = localStorage.getItem("tche_theme") || localStorage.getItem("tche_home_theme") || "adega";
+    const normalized = currentTheme === "farroupilha" ? "farroupilha" : "adega";
+    updateThemeUI(normalized);
 
     pills.forEach((pill) => {
       pill.onclick = () => {
         const theme = pill.getAttribute("data-theme-pill");
-        if (!theme) return;
-
-        localStorage.setItem("tche_home_theme", theme);
-        if (!isHome) {
-          window.location.href = "/";
-          return;
+        if (theme) {
+          updateThemeUI(theme);
         }
-
-        document.documentElement.setAttribute("data-home-theme", theme);
-        if (theme === "adega") {
-          document.documentElement.classList.add("dark");
-        } else {
-          document.documentElement.classList.remove("dark");
-        }
-
-        updatePills(theme);
-
-        // Atualiza a barra de decisão na página se presente
-        document.querySelectorAll<HTMLButtonElement>("[data-home-theme-select]").forEach((b) => {
-          if (b.getAttribute("data-home-theme-select") === theme) {
-            b.classList.add("is-active");
-          } else {
-            b.classList.remove("is-active");
-          }
-        });
       };
     });
   }
