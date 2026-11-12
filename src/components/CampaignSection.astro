@@ -8,22 +8,22 @@ interface Props {
 }
 
 const {
-  title = "Limpo. Moderno. Essencial.",
-  subtitle = "Peças que nunca saem de moda.",
-  ctaLabel = "Comprar agora",
-  ctaHref = "#produtos",
-  image = "/images/shop/cosmic-hero.png",
+  title = "Monte sua Cesta Colonial Personalizada",
+  subtitle = "Combine seus vinhos, salames, chimias e queijos prediletos. Nós embalamos com carinho para presente ou para o seu consumo especial.",
+  ctaLabel = "Montar Cesta pelo WhatsApp",
+  ctaHref = "https://wa.me/5551993257923?text=Ol%C3%A1%20Tch%C3%AA%20Emp%C3%B3rio!%20Gostaria%20de%20montar%20uma%20Cesta%20Colonial%20personalizada.",
+  image = "/uploads/2025/10/vinhos-sao-joao.jpg",
 } = Astro.props;
 ---
 
 <section
   class="campaign minimal"
-  style={`--campaign-align:left;--campaign-content-width:42rem;--campaign-min-height:clamp(20rem, 32vw, 27rem);--campaign-padding:clamp(2rem, 7vw, 7rem);--campaign-image:url('${image}');--campaign-position:center 36%;--campaign-overlay:linear-gradient(90deg, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.08));--campaign-accent:var(--commerce-accent)`}
+  style={`--campaign-align:left;--campaign-content-width:44rem;--campaign-min-height:clamp(20rem, 30vw, 26rem);--campaign-padding:clamp(2rem, 6vw, 6rem);--campaign-image:url('${image}');--campaign-position:center center;--campaign-overlay:linear-gradient(90deg, rgba(12, 10, 10, 0.95) 45%, rgba(12, 10, 10, 0.35));--campaign-accent:var(--commerce-accent)`}
 >
   <div data-mos="fade-right">
     <h2>{title}</h2>
     <p>{subtitle}</p>
-    <a href={ctaHref} class="btn">{ctaLabel}</a>
+    <a href={ctaHref} target="_blank" class="btn"><span>💬 {ctaLabel}</span></a>
   </div>
 </section>
 
@@ -36,49 +36,40 @@ const {
     border: 1px solid var(--commerce-border);
     background: var(--campaign-overlay), var(--campaign-image) var(--campaign-position) / cover;
     color: #fff;
-    border-radius: 6px;
+    border-radius: 12px;
     display: flex;
+    margin-bottom: 36px;
   }
   .campaign > div {
     width: min(100%, var(--campaign-content-width));
     text-align: var(--campaign-align);
   }
   .campaign h2 {
-    margin: 0;
-    letter-spacing: -0.035em;
-    max-width: 680px;
-    font-family: Inter, Arial, sans-serif;
-    font-size: clamp(2.25rem, 4.4vw, 4rem);
-    font-weight: 500;
-    line-height: 1.04;
+    margin: 0 0 14px;
+    letter-spacing: -0.03em;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 800;
+    line-height: 1.15;
   }
   .campaign p {
-    color: #ddd;
-    margin-block: 14px 28px;
-    font-size: clamp(1rem, 1.5vw, 1.25rem);
-    letter-spacing: -0.01em;
-    font-family: Inter, Arial, sans-serif;
-    font-weight: 400;
+    color: #e5e5e5;
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0 0 24px;
   }
   .btn {
-    background: var(--campaign-accent);
+    background: #166534;
     color: #fff;
-    text-transform: uppercase;
-    border-radius: 3px;
-    align-items: center;
-    min-height: 48px;
-    padding-inline: 27px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 13px;
     font-weight: 700;
     text-decoration: none;
-    display: inline-flex;
+    display: inline-block;
+    transition: background 0.2s, transform 0.2s;
   }
-  @media (width <= 600px) {
-    .campaign {
-      min-height: 22rem;
-      padding-inline: 1.5rem;
-    }
-    .campaign h2 {
-      font-size: 2.25rem;
-    }
+  .btn:hover {
+    background: #15803d;
+    transform: translateY(-2px);
   }
 </style>

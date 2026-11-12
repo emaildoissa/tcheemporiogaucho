@@ -6,13 +6,13 @@ interface Props {
 }
 
 const {
-  text = "Frete grátis em todos os pedidos",
-  ctaLabel = "Comprar agora",
+  text = "Tradição & Sabor Colonial Gaúcho • Peça direto pelo WhatsApp",
+  ctaLabel = "Ver Catálogo",
   ctaHref = "#produtos",
 } = Astro.props;
 ---
 
-<aside class="announcement-bar" aria-label="Promoção de frete grátis">
+<aside class="announcement-bar" aria-label="Aviso do Empório">
   <div class="announcement-bar__content">
     <span>{text}</span>
     <a href={ctaHref}>
@@ -25,15 +25,16 @@ const {
   .announcement-bar {
     z-index: 2;
     color: #fff;
-    background: linear-gradient(90deg, var(--color-red-800), var(--commerce-accent), var(--color-red-800));
+    background: linear-gradient(90deg, #5b1016, var(--commerce-accent), #5b1016);
     width: 100%;
     position: relative;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
   .announcement-bar__content {
     min-height: 2.5rem;
     padding: 0.55rem var(--page-gutter);
     text-align: center;
-    letter-spacing: 0.025em;
+    letter-spacing: 0.03em;
     text-transform: uppercase;
     justify-content: center;
     align-items: center;
@@ -44,7 +45,7 @@ const {
     display: flex;
   }
   .announcement-bar a {
-    color: inherit;
+    color: #fde68a;
     text-underline-offset: 0.2rem;
     text-decoration: underline;
   }

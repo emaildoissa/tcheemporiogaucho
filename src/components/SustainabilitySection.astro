@@ -1,18 +1,18 @@
 <section id="sustentabilidade" class="sustainability" aria-labelledby="sustainability-title">
   <header data-mos="fade-up">
     <div>
-      <h2 id="sustainability-title">Projetado pensando no amanhã.</h2>
-      <p>Uma abordagem mais consciente para criar peças essenciais melhores.</p>
+      <h2 id="sustainability-title">Nossa Origem & Tradição</h2>
+      <p>Receitas coloniais familiares preservadas por gerações no Rio Grande do Sul.</p>
     </div>
-    <span>Nossa responsabilidade</span>
+    <span>O Legado Gaúcho</span>
   </header>
 
   <div class="sustainability-body">
     <div class="statement" data-mos="fade-right">
-      <span aria-hidden="true">∞</span>
-      <h3>Compre menos. Use por mais tempo.</h3>
+      <span aria-hidden="true">🧉</span>
+      <h3>Da colônia direto para a sua mesa.</h3>
       <p>
-        Focamos em produtos úteis, construção durável e escolhas conscientes em todas as etapas de produção.
+        Priorizamos pequenos produtores, cooperativas históricas da Serra Gaúcha e receitas centenárias que valorizam o verdadeiro sabor caseiro e colonial.
       </p>
     </div>
 
@@ -20,22 +20,22 @@
       <li>
         <b>01</b>
         <div>
-          <h3>Materiais selecionados</h3>
-          <p>Materiais escolhidos por sua performance, conforto e maior vida útil.</p>
+          <h3>Produtores Familiares</h3>
+          <p>Trabalhamos lado a lado com famílias de Bento Gonçalves, Garibaldi, Flores da Cunha e do Vale do Taquari.</p>
         </div>
       </li>
       <li>
         <b>02</b>
         <div>
-          <h3>Embalagem reduzida</h3>
-          <p>Embalagens sob medida com menos camadas e componentes desnecessários.</p>
+          <h3>Cura & Maturação Tradicional</h3>
+          <p>Queijos artesanais, salames coloniais e vinhos que respeitam o tempo certo de fermentação e maturação.</p>
         </div>
       </li>
       <li>
         <b>03</b>
         <div>
-          <h3>Feito para durar</h3>
-          <p>Formas atemporais e construção confiável projetadas para ir além de uma estação.</p>
+          <h3>Atendimento Humanizado</h3>
+          <p>Sem robôs complicados ou carrinhos engessados: tire suas dúvidas e faça seu pedido direto pelo WhatsApp.</p>
         </div>
       </li>
     </ol>
@@ -44,9 +44,11 @@
 
 <style>
   .sustainability {
+    color: var(--commerce-foreground);
     margin-bottom: 36px;
+    font-family: Inter, Arial, sans-serif;
   }
-  .sustainability > header {
+  header {
     border-bottom: 1px solid var(--commerce-border);
     justify-content: space-between;
     align-items: flex-end;
@@ -54,27 +56,24 @@
     padding: 4px 0 18px;
     display: flex;
   }
-  .sustainability > header > div {
+  header > div {
     gap: 9px;
     display: grid;
   }
-  .sustainability h2 {
+  h2 {
     letter-spacing: -0.035em;
-    text-transform: none;
     margin: 0;
-    font-family: Inter, Arial, sans-serif;
     font-size: clamp(1.65rem, 2.5vw, 2.35rem);
-    font-weight: 500;
+    font-weight: 700;
     line-height: 1.15;
   }
-  .sustainability header p {
-    color: #85888d;
+  header p {
+    color: var(--commerce-muted);
     letter-spacing: -0.01em;
     margin: 0;
     font-size: 13px;
-    line-height: 1.5;
   }
-  .sustainability header > span {
+  header > span {
     color: var(--commerce-accent);
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -83,104 +82,76 @@
     font-weight: 600;
   }
   .sustainability-body {
+    grid-template-columns: 1fr 1fr;
     border: 1px solid var(--commerce-border);
+    border-radius: 12px;
     background: var(--commerce-surface);
-    grid-template-columns: minmax(280px, 0.82fr) minmax(0, 1.18fr);
+    overflow: hidden;
     display: grid;
   }
   .statement {
     border-right: 1px solid var(--commerce-border);
-    flex-direction: column;
-    min-height: 390px;
-    padding: clamp(2rem, 4vw, 3.75rem);
+    padding: clamp(2rem, 4vw, 3.5rem);
     display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
-  .statement > span {
-    color: var(--commerce-accent);
-    font-size: 34px;
-    font-weight: 300;
+  .statement span {
+    font-size: 38px;
+    margin-bottom: 16px;
   }
   .statement h3 {
-    letter-spacing: -0.06em;
-    max-width: 430px;
-    margin: auto 0 22px;
-    font-family: Inter, Arial, sans-serif;
-    font-size: clamp(2.8rem, 5vw, 5rem);
-    font-weight: 400;
-    line-height: 0.95;
+    font-size: 24px;
+    margin: 0 0 12px;
+    font-weight: 700;
   }
   .statement p {
-    max-width: 390px;
     color: var(--commerce-muted);
+    line-height: 1.6;
     margin: 0;
-    line-height: 1.7;
+    font-size: 14px;
   }
-  .sustainability ol {
+  ol {
+    list-style: none;
     margin: 0;
     padding: 0;
-    list-style: none;
+    display: flex;
+    flex-direction: column;
   }
-  .sustainability li {
+  li {
+    padding: 24px clamp(1.5rem, 3vw, 2.5rem);
     border-bottom: 1px solid var(--commerce-border);
-    grid-template-columns: 42px 1fr;
-    align-items: center;
+    display: flex;
     gap: 20px;
-    min-height: 130px;
-    padding: 25px clamp(1.5rem, 3vw, 2.75rem);
-    transition: background 0.2s;
-    display: grid;
+    align-items: flex-start;
   }
-  .sustainability li:last-child {
+  li:last-child {
     border-bottom: 0;
   }
-  .sustainability li:hover {
-    background: color-mix(in srgb, var(--commerce-accent) 5%, transparent);
-  }
-  .sustainability li > b {
+  li b {
     color: var(--commerce-accent);
-    letter-spacing: 0.08em;
-    align-self: start;
-    padding-top: 4px;
-    font-size: 10px;
+    font-size: 18px;
+    font-weight: 800;
   }
-  .sustainability li h3 {
+  li h3 {
+    margin: 0 0 6px;
+    font-size: 16px;
+    font-weight: 700;
+  }
+  li p {
     margin: 0;
-    font-family: Inter, Arial, sans-serif;
-    font-size: clamp(1.05rem, 1.5vw, 1.3rem);
-    font-weight: 500;
-  }
-  .sustainability li p {
-    max-width: 500px;
     color: var(--commerce-muted);
-    margin: 9px 0 0;
     font-size: 13px;
-    line-height: 1.6;
+    line-height: 1.5;
   }
-  @media (width <= 760px) {
-    .sustainability h2 {
-      font-size: 1.65rem;
-    }
-    .sustainability header p {
-      font-size: 12px;
-    }
-    .sustainability header > span {
-      text-align: right;
-      max-width: 88px;
-    }
+
+  @media (max-width: 768px) {
     .sustainability-body {
       grid-template-columns: 1fr;
     }
     .statement {
       border-right: 0;
       border-bottom: 1px solid var(--commerce-border);
-      min-height: 320px;
-    }
-    .statement h3 {
-      font-size: clamp(2.8rem, 14vw, 4rem);
-    }
-    .sustainability li {
-      min-height: 125px;
-      padding-inline: 20px;
     }
   }
 </style>

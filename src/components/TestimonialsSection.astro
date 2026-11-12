@@ -1,8 +1,8 @@
 <section id="depoimentos" class="minimal-testimonials" aria-labelledby="minimal-testimonials-title">
   <header data-mos="fade-up">
     <div>
-      <h2 id="minimal-testimonials-title">Nossos clientes aprovam</h2>
-      <p>Pensado para o seu cotidiano.</p>
+      <h2 id="minimal-testimonials-title">O que dizem os apreciadores</h2>
+      <p>Clientes que confiam no sabor autêntico do Tchê Empório.</p>
     </div>
     <span>Clientes verificados</span>
   </header>
@@ -10,26 +10,26 @@
   <div class="quote-columns">
     <blockquote data-mos="fade-up">
       <span aria-hidden="true" class="quote-mark">“</span>
-      <p>Materiais premium, acabamento impecável. Vale cada passo.</p>
+      <p>O vinho fino Cabernet e as chimias coloniais têm exatamente o mesmo sabor da época que eu visitava a serra em Garibaldi.</p>
       <div class="rating" aria-label="5 de 5 estrelas">★★★★★</div>
-      <cite>Olivia H.</cite>
-      <small>Comprou: Cosmic Runner</small>
+      <cite>Mariana R. — Porto Alegre</cite>
+      <small>Comprou: Vinho Fino & Chimia Colonial</small>
     </blockquote>
 
     <blockquote data-mos="fade-up">
       <span aria-hidden="true" class="quote-mark">“</span>
-      <p>Finalmente encontrei peças que atendem ao meu padrão de qualidade. Impecável.</p>
+      <p>Fiz o pedido direto no WhatsApp, fui super bem atendido e no dia seguinte a cesta de queijos e embutidos já estava em casa.</p>
       <div class="rating" aria-label="5 de 5 estrelas">★★★★★</div>
-      <cite>Daniel K.</cite>
-      <small>Comprou: Moletom Stealth</small>
+      <cite>Carlos Eduardo — Canoas</cite>
+      <small>Comprou: Kit Salames & Doces de Leite</small>
     </blockquote>
 
     <blockquote data-mos="fade-up">
       <span aria-hidden="true" class="quote-mark">“</span>
-      <p>Resistente, minimalista e sempre confiável. Isso é raro hoje em dia.</p>
+      <p>A linha de amendoins Amebom e os palmitos especiais têm um padrão de qualidade muito acima do supermercado comum.</p>
       <div class="rating" aria-label="5 de 5 estrelas">★★★★★</div>
-      <cite>Sophia L.</cite>
-      <small>Comprou: Mochila Core</small>
+      <cite>Fernanda Silveira — Caxias do Sul</cite>
+      <small>Comprou: Farinha de Amendoim & Palmito</small>
     </blockquote>
   </div>
 </section>
@@ -37,8 +37,9 @@
 <style>
   .minimal-testimonials {
     margin-bottom: 36px;
+    font-family: Inter, Arial, sans-serif;
   }
-  .minimal-testimonials > header {
+  header {
     border-bottom: 1px solid var(--commerce-border);
     justify-content: space-between;
     align-items: flex-end;
@@ -46,109 +47,91 @@
     padding: 4px 0 18px;
     display: flex;
   }
-  .minimal-testimonials > header > div {
+  header > div {
     gap: 9px;
     display: grid;
   }
-  .minimal-testimonials h2 {
+  h2 {
     letter-spacing: -0.035em;
-    text-transform: none;
     margin: 0;
-    font-family: Inter, Arial, sans-serif;
     font-size: clamp(1.65rem, 2.5vw, 2.35rem);
-    font-weight: 500;
+    font-weight: 700;
     line-height: 1.15;
   }
-  .minimal-testimonials header p {
-    color: #85888d;
+  header p {
+    color: var(--commerce-muted);
     letter-spacing: -0.01em;
     margin: 0;
-    font-family: Inter, Arial, sans-serif;
     font-size: 13px;
-    font-weight: 400;
-    line-height: 1.5;
   }
-  .minimal-testimonials header > span {
+  header > span {
     color: var(--commerce-accent);
     letter-spacing: 0.08em;
     text-transform: uppercase;
     padding-bottom: 3px;
-    font-family: Inter, Arial, sans-serif;
     font-size: 10px;
     font-weight: 600;
   }
   .quote-columns {
+    grid-template-columns: repeat(3, 1fr);
     border: 1px solid var(--commerce-border);
-    background: linear-gradient(
-      115deg,
-      var(--commerce-surface),
-      color-mix(in srgb, var(--commerce-surface) 88%, transparent)
-    );
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--commerce-surface);
     display: grid;
   }
-  .quote-columns blockquote {
+  blockquote {
+    padding: clamp(1.5rem, 3vw, 2.5rem);
     border-right: 1px solid var(--commerce-border);
-    flex-direction: column;
-    min-width: 0;
-    min-height: 300px;
     margin: 0;
-    padding: 34px 26px 30px;
     display: flex;
+    flex-direction: column;
+    position: relative;
   }
-  .quote-columns blockquote:last-child {
+  blockquote:last-child {
     border-right: 0;
   }
   .quote-mark {
-    height: 54px;
-    color: var(--commerce-muted);
-    opacity: 0.42;
-    font: 76px / 0.9 Georgia, serif;
+    font-family: Georgia, serif;
+    font-size: 40px;
+    color: var(--commerce-accent);
+    line-height: 1;
+    margin-bottom: 8px;
   }
-  .quote-columns p {
-    max-width: 270px;
+  blockquote p {
+    font-size: 14px;
+    line-height: 1.6;
     color: var(--commerce-foreground);
-    margin: 24px 0 28px;
-    font: 400 clamp(1.25rem, 1.65vw, 1.65rem) / 1.35 Georgia, serif;
+    margin: 0 0 16px;
+    flex-grow: 1;
   }
   .rating {
-    color: var(--commerce-accent);
-    letter-spacing: 3px;
-    margin-top: auto;
+    color: #f59e0b;
+    font-size: 14px;
+    margin-bottom: 8px;
   }
-  .quote-columns cite {
-    color: var(--commerce-foreground);
-    margin-top: 13px;
+  cite {
     font-style: normal;
-    font-weight: 600;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--commerce-foreground);
   }
-  .quote-columns small {
+  small {
     color: var(--commerce-muted);
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
-    margin-top: 7px;
-    font-size: 9px;
+    font-size: 11px;
+    margin-top: 2px;
   }
-  @media (width <= 760px) {
-    .minimal-testimonials h2 {
-      font-size: 1.65rem;
-    }
-    .minimal-testimonials header p {
-      font-size: 12px;
-    }
-    .minimal-testimonials header > span {
-      text-align: right;
-      max-width: 90px;
-    }
+
+  @media (max-width: 768px) {
     .quote-columns {
-      scroll-snap-type: x mandatory;
-      display: flex;
-      overflow-x: auto;
+      grid-template-columns: 1fr;
     }
-    .quote-columns blockquote {
-      scroll-snap-align: start;
-      min-width: 82%;
-      min-height: 285px;
+    blockquote {
+      border-right: 0;
+      border-bottom: 1px solid var(--commerce-border);
+    }
+    blockquote:last-child {
+      border-bottom: 0;
     }
   }
 </style>

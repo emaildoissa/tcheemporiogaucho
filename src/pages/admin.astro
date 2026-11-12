@@ -1,0 +1,625 @@
+---
+import "../styles/global.css";
+import { products as defaultProducts } from "../data/products";
+---
+
+<!doctype html>
+<html lang="pt-BR" class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+    <title>Painel Administrativo — Tchê Empório Gaúcho</title>
+    <link rel="icon" type="image/svg+xml" href="/favicons/favicon.svg" />
+  </head>
+  <body class="bg-[#0b0c0e] text-[#f2ede6] font-sans min-h-screen">
+    <!-- Header Admin -->
+    <header class="border-b border-[#2d2422] bg-[#141212] sticky top-0 z-30 px-6 py-4">
+      <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-[#8b1b22] flex items-center justify-center font-bold text-lg text-white shadow-md">
+            🍷
+          </div>
+          <div>
+            <h1 class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
+              Tchê Empório Gaúcho
+              <span class="text-xs font-semibold px-2.5 py-0.5 rounded bg-[#8b1b22]/30 text-[#e67e84] border border-[#8b1b22]/50">
+                Admin
+              </span>
+            </h1>
+            <p class="text-xs text-[#a39a97]">Gerenciador de Catálogo de Produtos Coloniais</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <a
+            href="/"
+            class="px-4 py-2 text-xs font-semibold rounded-lg border border-[#3e3432] bg-[#1a1717] hover:bg-[#25201f] text-[#f2ede6] transition flex items-center gap-2"
+          >
+            ← Ver Loja Pública
+          </a>
+          <button
+            type="button"
+            id="btn-export-json"
+            class="px-3.5 py-2 text-xs font-semibold rounded-lg border border-[#3e3432] bg-[#1a1717] hover:bg-[#25201f] text-[#d5cbca] transition"
+            title="Baixar cópia do JSON atualizado"
+          >
+            📥 Exportar JSON
+          </button>
+          <button
+            type="button"
+            id="btn-reset-catalog"
+            class="px-3.5 py-2 text-xs font-semibold rounded-lg border border-red-900/40 bg-red-950/20 hover:bg-red-900/40 text-red-300 transition"
+            title="Restaura a base original dos 228 produtos do dump"
+          >
+            Restaurar Original
+          </button>
+          <button
+            type="button"
+            id="btn-open-add-modal"
+            class="px-4 py-2 text-xs font-bold rounded-lg bg-[#8b1b22] hover:bg-[#a52129] text-white shadow-lg transition flex items-center gap-1.5"
+          >
+            + Novo Produto
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-7xl mx-auto px-6 py-8">
+      <!-- KPI Stats -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div class="bg-[#161313] border border-[#2d2422] rounded-xl p-5 shadow-sm">
+          <span class="text-xs font-semibold uppercase tracking-wider text-[#9f918e]">Total de Produtos</span>
+          <div class="text-3xl font-extrabold text-white mt-2" id="stat-total-products">0</div>
+          <span class="text-xs text-[#7d7270] mt-1 block">Itens cadastrados no catálogo</span>
+        </div>
+        <div class="bg-[#161313] border border-[#2d2422] rounded-xl p-5 shadow-sm">
+          <span class="text-xs font-semibold uppercase tracking-wider text-[#9f918e]">Categorias Ativas</span>
+          <div class="text-3xl font-extrabold text-[#e67e84] mt-2" id="stat-total-categories">0</div>
+          <span class="text-xs text-[#7d7270] mt-1 block">Vinhos, embutidos, doces e mais</span>
+        </div>
+        <div class="bg-[#161313] border border-[#2d2422] rounded-xl p-5 shadow-sm">
+          <span class="text-xs font-semibold uppercase tracking-wider text-[#9f918e]">Produtos em Destaque</span>
+          <div class="text-3xl font-extrabold text-amber-400 mt-2" id="stat-featured-products">0</div>
+          <span class="text-xs text-[#7d7270] mt-1 block">Exibidos na vitrine principal</span>
+        </div>
+        <div class="bg-[#161313] border border-[#2d2422] rounded-xl p-5 shadow-sm">
+          <span class="text-xs font-semibold uppercase tracking-wider text-[#9f918e]">Preço Médio</span>
+          <div class="text-3xl font-extrabold text-emerald-400 mt-2" id="stat-avg-price">R$ 0,00</div>
+          <span class="text-xs text-[#7d7270] mt-1 block">Média de valor do catálogo</span>
+        </div>
+      </div>
+
+      <!-- Filter and Search Bar -->
+      <div class="bg-[#161313] border border-[#2d2422] rounded-xl p-4 mb-6 flex flex-wrap items-center justify-between gap-4">
+        <div class="flex flex-wrap items-center gap-3 flex-1 min-w-[280px]">
+          <div class="relative flex-1 min-w-[220px]">
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Buscar produto por nome, ID ou descrição..."
+              class="w-full bg-[#0d0c0c] border border-[#3e3432] rounded-lg px-3.5 py-2.5 text-sm text-white placeholder-[#7d7270] focus:outline-none focus:border-[#8b1b22]"
+            />
+          </div>
+          <select
+            id="category-select"
+            class="bg-[#0d0c0c] border border-[#3e3432] rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-[#8b1b22]"
+          >
+            <option value="all">Todas as Categorias</option>
+          </select>
+        </div>
+
+        <div class="text-xs text-[#9f918e]">
+          Mostrando <span id="filtered-count" class="font-bold text-white">0</span> produtos
+        </div>
+      </div>
+
+      <!-- Products Table -->
+      <div class="bg-[#161313] border border-[#2d2422] rounded-xl overflow-hidden shadow-sm">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse text-sm">
+            <thead>
+              <tr class="border-b border-[#2d2422] bg-[#120f0f] text-xs uppercase font-semibold text-[#a39a97]">
+                <th class="py-3 px-4">Foto</th>
+                <th class="py-3 px-4">Produto</th>
+                <th class="py-3 px-4">Categoria</th>
+                <th class="py-3 px-4">Preço (R$)</th>
+                <th class="py-3 px-4">Destaque</th>
+                <th class="py-3 px-4 text-right">Ações</th>
+              </tr>
+            </thead>
+            <tbody id="products-table-body" class="divide-y divide-[#241d1c]">
+              <!-- Injected by script -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+
+    <!-- Modal Adicionar / Editar Produto -->
+    <div
+      id="product-modal"
+      class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4"
+    >
+      <div class="bg-[#161313] border border-[#3e3432] rounded-2xl w-full max-w-xl max-h-[90vh] overflow-y-auto shadow-2xl p-6">
+        <div class="flex items-center justify-between pb-4 border-b border-[#2d2422] mb-5">
+          <h2 id="modal-title" class="text-lg font-bold text-white">Adicionar Produto</h2>
+          <button type="button" id="btn-close-modal" class="text-[#a39a97] hover:text-white text-xl">✕</button>
+        </div>
+
+        <form id="product-form" class="space-y-4">
+          <input type="hidden" id="form-product-id" />
+
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-[#a39a97] mb-1.5">
+              Nome do Produto *
+            </label>
+            <input
+              type="text"
+              id="form-product-name"
+              required
+              placeholder="Ex: Vinho Fino Tinto Cabernet Sauvignon 750ml"
+              class="w-full bg-[#0d0c0c] border border-[#3e3432] rounded-lg px-3.5 py-2 text-sm text-white focus:outline-none focus:border-[#8b1b22]"
+            />
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold uppercase tracking-wider text-[#a39a97] mb-1.5">
+                Categoria *
+              </label>
+              <input
+                type="text"
+                id="form-product-category"
+                required
+                list="category-suggestions"
+                placeholder="Ex: Vinhos Finos"
+                class="w-full bg-[#0d0c0c] border border-[#3e3432] rounded-lg px-3.5 py-2 text-sm text-white focus:outline-none focus:border-[#8b1b22]"
+              />
+              <datalist id="category-suggestions"></datalist>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold uppercase tracking-wider text-[#a39a97] mb-1.5">
+                Preço de Venda (R$) *
+              </label>
+              <input
+                type="number"
+                step="0.10"
+                min="0"
+                id="form-product-price"
+                required
+                placeholder="0.00"
+                class="w-full bg-[#0d0c0c] border border-[#3e3432] rounded-lg px-3.5 py-2 text-sm text-white focus:outline-none focus:border-[#8b1b22]"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-[#a39a97] mb-1.5">
+              Caminho ou URL da Imagem
+            </label>
+            <div class="flex gap-3 items-center">
+              <input
+                type="text"
+                id="form-product-image"
+                placeholder="/uploads/2025/07/amendoim-cru-500g.png"
+                class="flex-1 bg-[#0d0c0c] border border-[#3e3432] rounded-lg px-3.5 py-2 text-sm text-white focus:outline-none focus:border-[#8b1b22]"
+              />
+              <div class="w-11 h-11 bg-[#0d0c0c] border border-[#3e3432] rounded-lg overflow-hidden flex items-center justify-center">
+                <img id="form-image-preview" src="" alt="Prévia" class="w-full h-full object-contain hidden" />
+                <span id="form-image-placeholder" class="text-xs text-[#7d7270]">Foto</span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-[#a39a97] mb-1.5">
+              Descrição
+            </label>
+            <textarea
+              id="form-product-desc"
+              rows="3"
+              placeholder="Descrição com detalhes de sabor, receita colonial e harmonização..."
+              class="w-full bg-[#0d0c0c] border border-[#3e3432] rounded-lg px-3.5 py-2 text-sm text-white focus:outline-none focus:border-[#8b1b22]"
+            ></textarea>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+            <div>
+              <label class="block text-xs font-semibold uppercase tracking-wider text-[#a39a97] mb-1.5">
+                Selo / Badge
+              </label>
+              <input
+                type="text"
+                id="form-product-badge"
+                placeholder="Ex: Mais Vendido, Colonial, Artesanal"
+                class="w-full bg-[#0d0c0c] border border-[#3e3432] rounded-lg px-3.5 py-2 text-sm text-white focus:outline-none focus:border-[#8b1b22]"
+              />
+            </div>
+
+            <div class="flex items-center gap-3 pt-6">
+              <input
+                type="checkbox"
+                id="form-product-featured"
+                class="w-4 h-4 rounded text-[#8b1b22] focus:ring-[#8b1b22] bg-[#0d0c0c] border-[#3e3432]"
+              />
+              <label for="form-product-featured" class="text-sm font-medium text-white cursor-pointer">
+                Exibir em Destaque na Vitrine
+              </label>
+            </div>
+          </div>
+
+          <div class="flex justify-end gap-3 pt-4 border-t border-[#2d2422]">
+            <button
+              type="button"
+              id="btn-cancel-modal"
+              class="px-4 py-2 text-sm font-semibold rounded-lg border border-[#3e3432] text-[#d5cbca] hover:bg-[#25201f]"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              class="px-5 py-2 text-sm font-bold rounded-lg bg-[#8b1b22] hover:bg-[#a52129] text-white shadow-lg transition"
+            >
+              Salvar Alterações
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div
+      id="admin-toast"
+      class="fixed bottom-6 right-6 z-50 bg-[#1f1b1b] border border-[#8b1b22] text-white px-5 py-3 rounded-xl shadow-2xl text-sm font-medium transition-all duration-300 opacity-0 pointer-events-none translate-y-2"
+    >
+      Notificação
+    </div>
+
+    <!-- Initial Data Script -->
+    <script type="application/json" id="initial-products-data" set:html={JSON.stringify(defaultProducts)} />
+
+    <script>
+      import { loadCatalogFromStorage, saveCatalogToStorage, resetCatalogStorage, CATALOG_KEY } from "../lib/storefrontStorage";
+
+      interface ProductItem {
+        id: string;
+        name: string;
+        category: string;
+        price: number;
+        regular_price?: number;
+        rating: number;
+        reviews: number;
+        image: string;
+        description: string;
+        badge?: string;
+        featured?: boolean;
+      }
+
+      const initialDataEl = document.getElementById("initial-products-data");
+      const initialProducts: ProductItem[] = JSON.parse(initialDataEl?.textContent || "[]");
+
+      let catalog: ProductItem[] = loadCatalogFromStorage<ProductItem>() || initialProducts;
+      if (!loadCatalogFromStorage()) {
+        saveCatalogToStorage(catalog);
+      }
+
+      // UI elements
+      const tableBody = document.getElementById("products-table-body");
+      const searchInput = document.getElementById("search-input") as HTMLInputElement;
+      const categorySelect = document.getElementById("category-select") as HTMLSelectElement;
+      const categoryDatalist = document.getElementById("category-suggestions");
+      const filteredCountEl = document.getElementById("filtered-count");
+
+      // Stats
+      const statTotalEl = document.getElementById("stat-total-products");
+      const statCatEl = document.getElementById("stat-total-categories");
+      const statFeaturedEl = document.getElementById("stat-featured-products");
+      const statAvgEl = document.getElementById("stat-avg-price");
+
+      // Modal
+      const modal = document.getElementById("product-modal");
+      const modalTitle = document.getElementById("modal-title");
+      const productForm = document.getElementById("product-form") as HTMLFormElement;
+      const formId = document.getElementById("form-product-id") as HTMLInputElement;
+      const formName = document.getElementById("form-product-name") as HTMLInputElement;
+      const formCat = document.getElementById("form-product-category") as HTMLInputElement;
+      const formPrice = document.getElementById("form-product-price") as HTMLInputElement;
+      const formImg = document.getElementById("form-product-image") as HTMLInputElement;
+      const formDesc = document.getElementById("form-product-desc") as HTMLTextAreaElement;
+      const formBadge = document.getElementById("form-product-badge") as HTMLInputElement;
+      const formFeatured = document.getElementById("form-product-featured") as HTMLInputElement;
+      const imgPreview = document.getElementById("form-image-preview") as HTMLImageElement;
+      const imgPlaceholder = document.getElementById("form-image-placeholder") as HTMLSpanElement;
+
+      // Toast
+      const toast = document.getElementById("admin-toast");
+      let toastTimer: number;
+
+      function showToast(msg: string) {
+        if (!toast) return;
+        toast.textContent = msg;
+        toast.classList.remove("opacity-0", "pointer-events-none", "translate-y-2");
+        toast.classList.add("opacity-100", "translate-y-0");
+        clearTimeout(toastTimer);
+        toastTimer = window.setTimeout(() => {
+          toast.classList.remove("opacity-100", "translate-y-0");
+          toast.classList.add("opacity-0", "pointer-events-none", "translate-y-2");
+        }, 2500);
+      }
+
+      function updateStats() {
+        if (!statTotalEl || !statCatEl || !statFeaturedEl || !statAvgEl) return;
+        const total = catalog.length;
+        const uniqueCats = new Set(catalog.map((p) => p.category));
+        const featured = catalog.filter((p) => p.featured).length;
+        const avg = total > 0 ? catalog.reduce((acc, p) => acc + p.price, 0) / total : 0;
+
+        statTotalEl.textContent = String(total);
+        statCatEl.textContent = String(uniqueCats.size);
+        statFeaturedEl.textContent = String(featured);
+        statAvgEl.textContent = `R$ ${avg.toFixed(2).replace(".", ",")}`;
+      }
+
+      function populateCategories() {
+        if (!categorySelect || !categoryDatalist) return;
+        const cats = Array.from(new Set(catalog.map((p) => p.category))).sort();
+        
+        const currentSelected = categorySelect.value;
+        categorySelect.innerHTML = '<option value="all">Todas as Categorias</option>';
+        categoryDatalist.innerHTML = "";
+
+        cats.forEach((cat) => {
+          const opt = document.createElement("option");
+          opt.value = cat;
+          opt.textContent = `${cat} (${catalog.filter((p) => p.category === cat).length})`;
+          categorySelect.appendChild(opt);
+
+          const dataOpt = document.createElement("option");
+          dataOpt.value = cat;
+          categoryDatalist.appendChild(dataOpt);
+        });
+
+        if (cats.includes(currentSelected)) {
+          categorySelect.value = currentSelected;
+        }
+      }
+
+      function renderTable() {
+        if (!tableBody) return;
+        const term = (searchInput?.value || "").toLowerCase().trim();
+        const selectedCat = categorySelect?.value || "all";
+
+        const filtered = catalog.filter((p) => {
+          const matchesTerm =
+            !term ||
+            p.name.toLowerCase().includes(term) ||
+            p.id.toLowerCase().includes(term) ||
+            p.description.toLowerCase().includes(term);
+          const matchesCat = selectedCat === "all" || p.category === selectedCat;
+          return matchesTerm && matchesCat;
+        });
+
+        if (filteredCountEl) filteredCountEl.textContent = String(filtered.length);
+
+        if (filtered.length === 0) {
+          tableBody.innerHTML = `
+            <tr>
+              <td colspan="6" class="py-8 text-center text-[#7d7270]">
+                Nenhum produto colonial encontrado com esses filtros.
+              </td>
+            </tr>
+          `;
+          return;
+        }
+
+        tableBody.innerHTML = filtered
+          .map((prod) => {
+            const imgSrc = prod.image || "/images/shop/cosmic-products.png";
+            return `
+              <tr class="hover:bg-[#1a1717] transition-colors" data-id="${prod.id}">
+                <td class="py-3 px-4">
+                  <div class="w-12 h-12 rounded-lg bg-[#0d0c0c] border border-[#2d2422] p-1 flex items-center justify-center overflow-hidden">
+                    <img src="${imgSrc}" alt="${prod.name}" class="w-full h-full object-contain" loading="lazy" onerror="this.src='/images/shop/cosmic-products.png'" />
+                  </div>
+                </td>
+                <td class="py-3 px-4">
+                  <div class="font-semibold text-white">${prod.name}</div>
+                  <div class="text-xs text-[#7d7270] font-mono">ID: ${prod.id}</div>
+                </td>
+                <td class="py-3 px-4">
+                  <span class="inline-block px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#241d1c] text-[#d5cbca] border border-[#3e3432]">
+                    ${prod.category}
+                  </span>
+                </td>
+                <td class="py-3 px-4 font-bold text-white">
+                  R$ ${prod.price.toFixed(2).replace(".", ",")}
+                </td>
+                <td class="py-3 px-4">
+                  ${
+                    prod.featured
+                      ? '<span class="inline-flex items-center gap-1 text-xs font-semibold text-amber-400">★ Sim</span>'
+                      : '<span class="text-xs text-[#5e5452]">Não</span>'
+                  }
+                </td>
+                <td class="py-3 px-4 text-right">
+                  <div class="inline-flex items-center gap-2">
+                    <button
+                      type="button"
+                      class="btn-edit px-2.5 py-1 text-xs font-medium rounded bg-[#241d1c] hover:bg-[#342a29] text-[#d5cbca] transition"
+                      data-id="${prod.id}"
+                    >
+                      Editar
+                    </button>
+                    <button
+                      type="button"
+                      class="btn-delete px-2.5 py-1 text-xs font-medium rounded bg-red-950/30 hover:bg-red-900/50 text-red-400 transition"
+                      data-id="${prod.id}"
+                    >
+                      Excluir
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            `;
+          })
+          .join("");
+      }
+
+      function openModal(prod?: ProductItem) {
+        if (!modal || !productForm) return;
+        if (prod) {
+          if (modalTitle) modalTitle.textContent = "Editar Produto Colonial";
+          formId.value = prod.id;
+          formName.value = prod.name;
+          formCat.value = prod.category;
+          formPrice.value = String(prod.price);
+          formImg.value = prod.image || "";
+          formDesc.value = prod.description || "";
+          formBadge.value = prod.badge || "";
+          formFeatured.checked = Boolean(prod.featured);
+        } else {
+          if (modalTitle) modalTitle.textContent = "Adicionar Novo Produto Colonial";
+          productForm.reset();
+          formId.value = "tche-" + Date.now();
+          formPrice.value = "15.00";
+        }
+        updateImagePreview();
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+      }
+
+      function closeModal() {
+        if (!modal) return;
+        modal.classList.add("hidden");
+        modal.classList.remove("flex");
+      }
+
+      function updateImagePreview() {
+        const url = formImg?.value?.trim();
+        if (url && imgPreview && imgPlaceholder) {
+          imgPreview.src = url;
+          imgPreview.classList.remove("hidden");
+          imgPlaceholder.classList.add("hidden");
+        } else if (imgPreview && imgPlaceholder) {
+          imgPreview.classList.add("hidden");
+          imgPlaceholder.classList.remove("hidden");
+        }
+      }
+
+      // Event listeners
+      formImg?.addEventListener("input", updateImagePreview);
+
+      document.getElementById("btn-open-add-modal")?.addEventListener("click", () => openModal());
+      document.getElementById("btn-close-modal")?.addEventListener("click", closeModal);
+      document.getElementById("btn-cancel-modal")?.addEventListener("click", closeModal);
+
+      searchInput?.addEventListener("input", renderTable);
+      categorySelect?.addEventListener("change", renderTable);
+
+      // Table actions (edit / delete)
+      tableBody?.addEventListener("click", (ev) => {
+        const target = (ev.target as HTMLElement).closest<HTMLButtonElement>(".btn-edit, .btn-delete");
+        if (!target) return;
+        const id = target.dataset.id;
+        if (!id) return;
+
+        if (target.classList.contains("btn-edit")) {
+          const prod = catalog.find((p) => p.id === id);
+          if (prod) openModal(prod);
+        } else if (target.classList.contains("btn-delete")) {
+          const prod = catalog.find((p) => p.id === id);
+          if (prod && confirm(`Tem certeza que deseja excluir o produto "${prod.name}"?`)) {
+            catalog = catalog.filter((p) => p.id !== id);
+            saveCatalogToStorage(catalog);
+            updateStats();
+            populateCategories();
+            renderTable();
+            showToast("Produto excluído com sucesso.");
+          }
+        }
+      });
+
+      // Form submit (Add or Edit)
+      productForm?.addEventListener("submit", (ev) => {
+        ev.preventDefault();
+        const id = formId.value.trim();
+        const name = formName.value.trim();
+        const category = formCat.value.trim();
+        const price = parseFloat(formPrice.value) || 0;
+        const image = formImg.value.trim() || "/images/shop/cosmic-products.png";
+        const description = formDesc.value.trim();
+        const badge = formBadge.value.trim() || undefined;
+        const featured = formFeatured.checked;
+
+        const existingIdx = catalog.findIndex((p) => p.id === id);
+        if (existingIdx >= 0) {
+          // Update
+          catalog[existingIdx] = {
+            ...catalog[existingIdx],
+            name,
+            category,
+            price,
+            image,
+            description,
+            badge,
+            featured
+          };
+          showToast(`Produto "${name}" atualizado.`);
+        } else {
+          // Create
+          catalog.unshift({
+            id,
+            name,
+            category,
+            price,
+            rating: 5.0,
+            reviews: 1,
+            image,
+            description,
+            badge: badge || "Novo",
+            featured
+          });
+          showToast(`Produto "${name}" adicionado com sucesso!`);
+        }
+
+        saveCatalogToStorage(catalog);
+        updateStats();
+        populateCategories();
+        renderTable();
+        closeModal();
+      });
+
+      // Reset Catalog
+      document.getElementById("btn-reset-catalog")?.addEventListener("click", () => {
+        if (confirm("Deseja restaurar o catálogo para a base original dos 228 produtos do dump? Suas alterações manuais locais serão substituídas.")) {
+          resetCatalogStorage();
+          catalog = [...initialProducts];
+          saveCatalogToStorage(catalog);
+          updateStats();
+          populateCategories();
+          renderTable();
+          showToast("Catálogo restaurado para a versão padrão original.");
+        }
+      });
+
+      // Export JSON
+      document.getElementById("btn-export-json")?.addEventListener("click", () => {
+        const blob = new Blob([JSON.stringify(catalog, null, 2)], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `tcheemporiogaucho_catalogo_${new Date().toISOString().slice(0, 10)}.json`;
+        a.click();
+        URL.revokeObjectURL(url);
+        showToast("Arquivo JSON gerado e baixado.");
+      });
+
+      // Initial run
+      updateStats();
+      populateCategories();
+      renderTable();
+    </script>
+  </body>
+</html>

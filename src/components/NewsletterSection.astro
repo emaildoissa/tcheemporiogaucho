@@ -1,7 +1,7 @@
-<section id="newsletter" style="--image:url('/images/shop/cosmic-minimal.png')">
+<section id="newsletter" style="--image:url('/uploads/2025/11/serra-gaucha-600x394.png')">
   <div data-mos="fade-right">
-    <h2>Seja o primeiro a saber</h2>
-    <p>Novos lançamentos, ofertas exclusivas e inspiração de estilo direto no seu e-mail.</p>
+    <h2>Receba Novidades Coloniais</h2>
+    <p>Novos lotes de vinhos da serra, queijos premiados e condições especiais direto no seu e-mail.</p>
   </div>
 
   <form data-demo-form="newsletter" data-mos="fade-left" method="post">
@@ -10,39 +10,41 @@
       autocomplete="email"
       id="landing-page-3-email"
       name="email"
-      placeholder="Digite seu e-mail"
+      placeholder="Digite seu melhor e-mail"
       required
       type="email"
     />
-    <button type="submit">Inscrever-se</button>
+    <button type="submit">Cadastrar</button>
   </form>
 </section>
 
 <style>
   section {
-    background-image: linear-gradient(90deg, #120708, #52070b80), var(--image);
+    background-image: linear-gradient(90deg, rgba(15, 12, 12, 0.95), rgba(80, 15, 20, 0.65)), var(--image);
     color: #fff;
-    background-position: 78% 48%;
+    background-position: center center;
     background-size: cover;
-    border: 1px solid #352023;
+    border: 1px solid var(--commerce-border);
+    border-radius: 12px;
     grid-template-columns: 1fr 1fr;
     align-items: center;
-    min-height: 190px;
+    min-height: 180px;
     margin-bottom: 36px;
-    padding: 38px 55px;
+    padding: 38px 45px;
     font-family: Inter, Arial, sans-serif;
     display: grid;
   }
   h2 {
-    text-transform: uppercase;
-    margin: 0 0 12px;
-    font-size: 21px;
+    margin: 0 0 10px;
+    font-size: 22px;
+    font-weight: 700;
   }
   p {
-    color: #bbb;
+    color: #d1d5db;
     max-width: 460px;
     margin: 0;
-    line-height: 1.7;
+    line-height: 1.6;
+    font-size: 13px;
   }
   form {
     display: flex;
@@ -57,38 +59,53 @@
   }
   input {
     color: #fff;
-    background: #000000b3;
-    border: 1px solid #652127;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid var(--commerce-border);
+    border-radius: 8px 0 0 8px;
     flex: 1;
     min-width: 0;
-    height: 49px;
+    height: 48px;
     padding: 0 16px;
+    font-size: 13px;
+  }
+  input:focus {
+    outline: none;
+    border-color: var(--commerce-accent);
   }
   button {
     color: #fff;
-    text-transform: uppercase;
     cursor: pointer;
-    background: #c51117;
+    background: var(--commerce-accent);
     border: 0;
-    padding: 0 28px;
-    font-size: 11px;
+    border-radius: 0 8px 8px 0;
+    padding: 0 24px;
+    font-size: 12px;
     font-weight: 700;
+    transition: background 0.2s;
+  }
+  button:hover {
+    background: var(--commerce-accent-hover);
   }
   @media (width <= 900px) {
     section {
       grid-template-columns: 1fr;
-      gap: 25px;
+      gap: 20px;
     }
   }
   @media (width <= 600px) {
     section {
-      padding: 25px 18px;
+      padding: 24px 18px;
     }
     form {
       display: grid;
     }
+    input {
+      border-radius: 8px;
+      margin-bottom: 8px;
+    }
     button {
-      height: 46px;
+      border-radius: 8px;
+      height: 44px;
     }
   }
 </style>
@@ -99,7 +116,7 @@
       ev.preventDefault();
       const btn = form.querySelector("button");
       if (btn) {
-        btn.textContent = "Inscrito com sucesso!";
+        btn.textContent = "Cadastrado!";
       }
     });
   });

@@ -1,5 +1,6 @@
-const CART_KEY = "cosmic-cart";
-const WISHLIST_KEY = "cosmic-wishlist";
+const CART_KEY = "tche-cart";
+const WISHLIST_KEY = "tche-wishlist";
+export const CATALOG_KEY = "tche-custom-catalog";
 
 export function loadCart(validIds: string[]): Record<string, number> {
   try {
@@ -42,5 +43,30 @@ export function saveWishlist(wishlist: string[]): void {
     localStorage.setItem(WISHLIST_KEY, JSON.stringify(wishlist));
   } catch {
     // ignore storage errors
+  }
+}
+
+export function loadCatalogFromStorage<T>(): T[] | null {
+  try {
+    const raw = localStorage.getItem(CATALOG_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
+
+export function saveCatalogToStorage<T>(catalog: T[]): void {
+  try {
+    localStorage.setItem(CATALOG_KEY, JSON.stringify(catalog));
+  } catch (e) {
+    console.error("Failed to save catalog to localStorage", e);
+  }
+}
+
+export function resetCatalogStorage(): void {
+  try {
+    localStorage.removeItem(CATALOG_KEY);
+  } catch (e) {
+    // ignore
   }
 }

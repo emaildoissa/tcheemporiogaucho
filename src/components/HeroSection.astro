@@ -9,18 +9,18 @@ interface Props {
 }
 
 const {
-  eyebrow = "Design atemporal",
-  title = "Eleve o Seu Dia a Dia",
-  description = "Peças cuidadosamente desenhadas para se integrarem perfeitamente à sua rotina.",
-  primaryCta = { label: "Ver coleção", href: "#produtos" },
-  secondaryCta = { label: "Explorar", href: "#colecoes" },
-  image = "/images/shop/cosmic-minimal.png",
+  eyebrow = "Tradição Colonial & Artesanal",
+  title = "O Autêntico Sabor do Rio Grande",
+  description = "Vinhos finos, espumantes, embutidos coloniais, queijos, doces e chimias produzidos com o carinho e as receitas da Serra Gaúcha.",
+  primaryCta = { label: "Ver Produtos", href: "#produtos" },
+  secondaryCta = { label: "Falar no WhatsApp", href: "https://wa.me/5551993257923?text=Ol%C3%A1%20Tch%C3%AA%20Emp%C3%B3rio!%20Gostaria%20de%20tirar%20d%C3%BAvidas%20sobre%20o%20cat%C3%A1logo." },
+  image = "/uploads/2025/11/mesa-com-comidas-2.png",
 } = Astro.props;
 ---
 
 <section
   class="hero"
-  style={`--hero-image:url('${image}');--hero-image-position:72% center;--hero-split:1fr 1.35fr;--hero-height:570px;--hero-content-width:500px;--hero-heading-size:clamp(3rem, 5vw, 4.2rem);--hero-accent:var(--commerce-accent);--hero-align:left`}
+  style={`--hero-image:url('${image}');--hero-image-position:center center;--hero-split:1fr 1.35fr;--hero-height:580px;--hero-content-width:520px;--hero-heading-size:clamp(2.6rem, 4.5vw, 3.8rem);--hero-accent:var(--commerce-accent);--hero-align:left`}
 >
   <div class="inner">
     <div class="copy" data-mos="fade-right">
@@ -29,12 +29,12 @@ const {
       <p class="description">{description}</p>
       <div class="actions">
         <a href={primaryCta.href}>{primaryCta.label}</a>
-        <a href={secondaryCta.href} class="secondary">{secondaryCta.label}</a>
+        <a href={secondaryCta.href} target="_blank" class="secondary">{secondaryCta.label}</a>
       </div>
     </div>
     <div
       class="visual"
-      aria-label="Tênis minimalista em ambiente iluminado naturalmente"
+      aria-label="Mesa farta de produtos coloniais gaúchos"
       data-mos="fade-left"
       role="img"
     >
@@ -44,104 +44,98 @@ const {
 
 <style>
   .hero {
-    min-height: var(--hero-height);
+    height: var(--hero-height);
     background: var(--commerce-background);
     color: var(--commerce-foreground);
-    font-family: Inter, Arial, sans-serif;
+    margin-bottom: 36px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    border: 1px solid var(--commerce-border);
   }
   .inner {
-    min-height: var(--hero-height);
     grid-template-columns: var(--hero-split);
+    height: 100%;
+    margin: 0 auto;
     display: grid;
   }
   .copy {
-    width: min(var(--hero-content-width), calc(100% - (var(--page-gutter) * 2)));
-    margin-left: max(var(--page-gutter), calc((100vw - var(--page-max-width)) / 2));
-    text-align: var(--hero-align);
-    flex-direction: column;
     justify-content: center;
-    padding-right: clamp(2rem, 5vw, 5rem);
+    align-items: var(--hero-align);
+    padding: clamp(2rem, 5vw, 4rem);
+    z-index: 1;
     display: flex;
-  }
-  .visual {
-    background-image: var(--hero-image);
-    background-position: var(--hero-image-position);
-    background-size: cover;
-    min-width: 0;
-    position: relative;
+    flex-direction: column;
+    background: linear-gradient(90deg, var(--commerce-surface) 75%, transparent);
   }
   .eyebrow {
-    color: var(--hero-accent);
+    color: var(--commerce-accent);
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    margin: 0;
-    font-size: 12px;
-    font-weight: 700;
-  }
-  h1 {
-    max-width: 520px;
-    font: 600 var(--hero-heading-size) / 1.02 Georgia, serif;
-    margin: 24px 0;
-  }
-  .description {
-    max-width: 390px;
-    color: color-mix(in srgb, currentColor 68%, transparent);
-    margin: 0;
-    font-size: 17px;
-    line-height: 1.7;
-  }
-  .actions {
-    gap: 26px;
-    margin-top: 32px;
-    display: flex;
-  }
-  .actions a {
-    color: #fff;
-    text-transform: uppercase;
-    background: #c51117;
-    border: 1px solid #c51117;
-    place-items: center;
-    min-height: 50px;
-    padding: 0 28px;
     font-size: 11px;
     font-weight: 700;
+    margin: 0 0 10px;
+  }
+  h1 {
+    font-size: var(--hero-heading-size);
+    line-height: 1.1;
+    margin: 0 0 16px;
+    letter-spacing: -0.03em;
+    font-weight: 800;
+    max-width: var(--hero-content-width);
+  }
+  .description {
+    color: var(--commerce-muted);
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0 0 24px;
+    max-width: var(--hero-content-width);
+  }
+  .actions {
+    display: flex;
+    gap: 12px;
+  }
+  .actions a {
+    background: var(--commerce-accent);
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
     text-decoration: none;
-    display: inline-grid;
+    transition: background 0.2s, transform 0.2s;
   }
-  .actions .secondary {
-    border-color: color-mix(in srgb, currentColor 45%, transparent);
-    color: inherit;
+  .actions a:hover {
+    background: var(--commerce-accent-hover);
+    transform: translateY(-2px);
+  }
+  .actions a.secondary {
     background: transparent;
+    border: 1px solid var(--commerce-border);
+    color: var(--commerce-foreground);
   }
-  @media (width <= 750px) {
-    .hero,
-    .inner {
-      min-height: 0;
+  .actions a.secondary:hover {
+    border-color: var(--commerce-accent);
+    color: var(--commerce-accent);
+  }
+  .visual {
+    background: var(--hero-image) var(--hero-image-position) / cover no-repeat;
+    height: 100%;
+  }
+
+  @media (max-width: 860px) {
+    .hero {
+      height: auto;
     }
     .inner {
       grid-template-columns: 1fr;
     }
     .copy {
-      width: calc(100% - 28px);
-      min-height: 420px;
-      margin-inline: auto;
-      padding-right: 0;
+      background: var(--commerce-surface);
+      padding: 32px 24px;
     }
     .visual {
-      background-position: 62%;
-      min-height: 340px;
-    }
-    h1 {
-      font-size: 48px;
-    }
-    .description {
-      max-width: 290px;
-      font-size: 14px;
-    }
-    .actions {
-      gap: 12px;
-    }
-    .actions a {
-      padding: 0 19px;
+      height: 280px;
     }
   }
 </style>
