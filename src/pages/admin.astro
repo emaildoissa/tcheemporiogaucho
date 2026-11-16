@@ -34,7 +34,7 @@ import availableUploads from "../data/availableUploads.json";
           </div>
         </div>
 
-        <div class="flex items-center gap-3">
+        <div class="flex flex-wrap items-center gap-2.5">
           <a
             href="/"
             class="px-4 py-2 text-xs font-semibold rounded-lg border border-[#3e3432] bg-[#1a1717] hover:bg-[#25201f] text-[#f2ede6] transition flex items-center gap-2"
@@ -57,11 +57,14 @@ import availableUploads from "../data/availableUploads.json";
           </button>
           <button
             type="button"
-            id="btn-reset-catalog"
-            class="px-3.5 py-2 text-xs font-semibold rounded-lg border border-red-900/40 bg-red-950/20 hover:bg-red-900/40 text-red-300 transition"
-            title="Restaura a base original dos 228 produtos do dump"
+            id="btn-refresh-catalog"
+            class="px-3.5 py-2 text-xs font-semibold rounded-lg border border-[#3e3432] bg-[#1a1717] hover:bg-[#25201f] text-[#d5cbca] transition flex items-center gap-1.5 disabled:opacity-50 disabled:cursor-wait"
+            title="Recarrega o catálogo direto do banco Supabase"
           >
-            Restaurar Original
+            <svg class="size-3.5 text-[#d4af37]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m15.356 2H20v5m-.582-2A8.001 8.001 0 014.582 15" />
+            </svg>
+            Atualizar do Banco
           </button>
           <button
             type="button"
@@ -73,6 +76,29 @@ import availableUploads from "../data/availableUploads.json";
             </svg>
             Novo Produto
           </button>
+
+          <!-- Sessão do administrador -->
+          <div
+            id="session-chip"
+            class="hidden items-center gap-2.5 pl-3 pr-1 py-1 rounded-lg border border-[#2d2422] bg-[#1a1717]"
+          >
+            <span class="size-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.7)]" aria-hidden="true"></span>
+            <div class="leading-tight text-left">
+              <span class="block text-[9px] font-semibold uppercase tracking-[0.14em] text-[#7d7270]">Administrador</span>
+              <span id="session-email" class="block text-xs font-semibold text-[#f2ede6] max-w-[170px] truncate">—</span>
+            </div>
+            <button
+              type="button"
+              id="btn-logout"
+              class="ml-1 px-2.5 py-1.5 text-[11px] font-semibold rounded-md border border-[#3e3432] text-[#d5cbca] hover:border-[#8b1b22] hover:text-white hover:bg-[#8b1b22]/20 transition flex items-center gap-1.5"
+              title="Encerrar a sessão de administrador"
+            >
+              <svg class="size-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+              </svg>
+              Sair
+            </button>
+          </div>
         </div>
       </div>
     </header>
@@ -109,21 +135,32 @@ import availableUploads from "../data/availableUploads.json";
           <div class="relative flex-1 min-w-[220px]">
             <input
               type="text"
-              id="search-input"
+              id="search-input" aria-label="Buscar produto por nome, ID ou descrição"
               placeholder="Buscar produto por nome, ID ou descrição..."
               class="w-full bg-[#0d0c0c] border border-[#3e3432] rounded-lg px-3.5 py-2.5 text-sm text-white placeholder-[#7d7270] focus:outline-none focus:border-[#8b1b22]"
             />
           </div>
           <select
-            id="category-select"
+            id="category-select" aria-label="Filtrar por categoria"
             class="bg-[#0d0c0c] border border-[#3e3432] rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-[#8b1b22]"
           >
             <option value="all">Todas as Categorias</option>
           </select>
         </div>
 
-        <div class="text-xs text-[#9f918e]">
-          Mostrando <span id="filtered-count" class="font-bold text-white">0</span> produtos
+        <div class="flex items-center gap-3 text-xs text-[#9f918e]">
+          <span
+            id="sync-status"
+            class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-[#3e3432] bg-[#0d0c0c] text-[#a39a97]"
+            role="status"
+            aria-live="polite"
+          >
+            <span id="sync-dot" class="size-1.5 rounded-full bg-[#7d7270]" aria-hidden="true"></span>
+            <span id="sync-label">Verificando conexão</span>
+          </span>
+          <span>
+            Mostrando <span id="filtered-count" class="font-bold text-white">0</span> produtos
+          </span>
         </div>
       </div>
 
@@ -169,7 +206,7 @@ import availableUploads from "../data/availableUploads.json";
             </label>
             <input
               type="text"
-              id="form-product-name"
+              id="form-product-name" aria-label="Nome do produto"
               required
               placeholder="Ex: Vinho Fino Tinto Cabernet Sauvignon 750ml"
               class="w-full bg-[#0d0c0c] border border-[#3e3432] rounded-lg px-3.5 py-2 text-sm text-white focus:outline-none focus:border-[#8b1b22]"
@@ -183,7 +220,7 @@ import availableUploads from "../data/availableUploads.json";
                 Categoria *
               </label>
               <select
-                id="form-product-category"
+                id="form-product-category" aria-label="Categoria do produto"
                 required
                 class="w-full bg-[#0d0c0c] border border-[#3e3432] rounded-lg px-3.5 py-2 text-sm text-white focus:outline-none focus:border-[#8b1b22]"
               >
@@ -191,7 +228,7 @@ import availableUploads from "../data/availableUploads.json";
               </select>
               <input
                 type="text"
-                id="form-product-category-custom"
+                id="form-product-category-custom" aria-label="Nova categoria personalizada"
                 placeholder="Digite a nova categoria..."
                 class="hidden mt-2 w-full bg-[#0d0c0c] border border-[#3e3432] rounded-lg px-3.5 py-2 text-sm text-white focus:outline-none focus:border-[#8b1b22]"
               />
@@ -205,7 +242,7 @@ import availableUploads from "../data/availableUploads.json";
                 type="number"
                 step="0.10"
                 min="0"
-                id="form-product-price"
+                id="form-product-price" aria-label="Preço de venda em reais"
                 required
                 placeholder="0.00"
                 class="w-full bg-[#0d0c0c] border border-[#3e3432] rounded-lg px-3.5 py-2 text-sm text-white focus:outline-none focus:border-[#8b1b22]"
@@ -279,7 +316,7 @@ import availableUploads from "../data/availableUploads.json";
             <div id="manual-url-container" class="hidden pt-1">
               <input
                 type="text"
-                id="form-product-image"
+                id="form-product-image" aria-label="URL da foto do produto"
                 placeholder="/uploads/2025/07/amendoim-cru-500g.png"
                 class="w-full bg-[#0d0c0c] border border-[#3e3432] rounded-lg px-3.5 py-2 text-xs text-white focus:outline-none focus:border-[#8b1b22]"
               />
@@ -291,7 +328,7 @@ import availableUploads from "../data/availableUploads.json";
               Descrição
             </label>
             <textarea
-              id="form-product-desc"
+              id="form-product-desc" aria-label="Descrição do produto"
               rows="3"
               placeholder="Descrição com detalhes de sabor, receita colonial e harmonização..."
               class="w-full bg-[#0d0c0c] border border-[#3e3432] rounded-lg px-3.5 py-2 text-sm text-white focus:outline-none focus:border-[#8b1b22]"
@@ -305,7 +342,7 @@ import availableUploads from "../data/availableUploads.json";
                 Selo / Badge
               </label>
               <select
-                id="form-product-badge"
+                id="form-product-badge" aria-label="Selo do produto"
                 class="w-full bg-[#0d0c0c] border border-[#3e3432] rounded-lg px-3.5 py-2 text-sm text-white focus:outline-none focus:border-[#8b1b22]"
               >
                 <option value="">Nenhum (Sem selo)</option>
@@ -320,7 +357,7 @@ import availableUploads from "../data/availableUploads.json";
               </select>
               <input
                 type="text"
-                id="form-product-badge-custom"
+                id="form-product-badge-custom" aria-label="Selo personalizado"
                 placeholder="Digite o selo personalizado..."
                 class="hidden mt-2 w-full bg-[#0d0c0c] border border-[#3e3432] rounded-lg px-3.5 py-2 text-sm text-white focus:outline-none focus:border-[#8b1b22]"
               />
@@ -380,7 +417,7 @@ import availableUploads from "../data/availableUploads.json";
         <div class="mb-4">
           <input
             type="text"
-            id="gallery-search-input"
+            id="gallery-search-input" aria-label="Filtrar fotos da galeria"
             placeholder="Filtrar por nome (ex: vinho, amendoim, espumante, geleia, mel, queijo, salame)..."
             class="w-full bg-[#0d0c0c] border border-[#3e3432] rounded-xl px-4 py-2.5 text-sm text-white placeholder-[#7d7270] focus:outline-none focus:border-[#8b1b22]"
           />
@@ -398,10 +435,139 @@ import availableUploads from "../data/availableUploads.json";
       </div>
     </div>
 
+    <!-- Gate de Autenticação (Supabase Auth) -->
+    <div
+      id="auth-gate"
+      class="fixed inset-0 z-[70] flex items-center justify-center p-4 overflow-y-auto"
+      style="background:
+        radial-gradient(1100px 520px at 50% -12%, rgba(139, 27, 34, 0.32), transparent 62%),
+        radial-gradient(760px 420px at 88% 108%, rgba(212, 175, 55, 0.10), transparent 60%),
+        #0b0c0e;"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="auth-title"
+    >
+      <div class="w-full max-w-md my-8">
+        <div class="relative bg-[#141212] border border-[#3e3432] rounded-2xl shadow-2xl overflow-hidden">
+          <!-- Filete dourado superior -->
+          <div class="h-1 w-full bg-gradient-to-r from-[#8b1b22] via-[#d4af37] to-[#8b1b22]" aria-hidden="true"></div>
+
+          <div class="p-7 sm:p-8">
+            <div class="flex items-center gap-3">
+              <img
+                src="/images/logo.png"
+                alt="Logo Tchê Empório Gaúcho"
+                class="w-11 h-11 object-contain rounded-full shadow-md border border-[#3e3432] bg-[#0d0c0c]"
+              />
+              <div>
+                <p class="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#d4af37]">Tchê Empório Gaúcho</p>
+                <p class="text-sm font-semibold text-white">Painel Administrativo</p>
+              </div>
+            </div>
+
+            <!-- 1. Verificando sessão -->
+            <div id="auth-checking" class="py-12 text-center">
+              <span class="inline-block size-7 rounded-full border-2 border-[#3e3432] border-t-[#d4af37] animate-spin" aria-hidden="true"></span>
+              <p class="mt-4 text-sm text-[#a39a97]">Verificando sessão de administrador…</p>
+            </div>
+
+            <!-- 2. Formulário de login -->
+            <div id="auth-login" class="hidden">
+              <h2 id="auth-title" class="mt-6 text-2xl font-bold tracking-tight text-white">Acesso restrito</h2>
+              <p class="mt-1.5 text-sm text-[#a39a97] leading-relaxed">
+                Entre com a conta de administrador para gerenciar o catálogo da loja.
+              </p>
+
+              <form id="login-form" class="mt-6 space-y-4" novalidate>
+                <div>
+                  <label for="login-email" class="block text-[11px] font-semibold uppercase tracking-wider text-[#a39a97] mb-1.5">
+                    E-mail
+                  </label>
+                  <input
+                    type="email"
+                    id="login-email"
+                    name="email"
+                    required
+                    autocomplete="username"
+                    inputmode="email"
+                    placeholder="admin@tcheemporiogaucho.com.br"
+                    class="w-full bg-[#0d0c0c] border border-[#3e3432] rounded-lg px-3.5 py-2.5 text-sm text-white placeholder-[#6b6260] focus:outline-none focus:border-[#d4af37] focus:ring-1 focus:ring-[#d4af37]/40 transition"
+                  />
+                </div>
+
+                <div>
+                  <label for="login-password" class="block text-[11px] font-semibold uppercase tracking-wider text-[#a39a97] mb-1.5">
+                    Senha
+                  </label>
+                  <div class="relative">
+                    <input
+                      type="password"
+                      id="login-password"
+                      name="password"
+                      required
+                      autocomplete="current-password"
+                      placeholder="••••••••"
+                      class="w-full bg-[#0d0c0c] border border-[#3e3432] rounded-lg pl-3.5 pr-11 py-2.5 text-sm text-white placeholder-[#6b6260] focus:outline-none focus:border-[#d4af37] focus:ring-1 focus:ring-[#d4af37]/40 transition"
+                    />
+                    <button
+                      type="button"
+                      id="btn-toggle-password"
+                      class="absolute inset-y-0 right-0 px-3 text-[#7d7270] hover:text-[#d4af37] transition"
+                      aria-label="Mostrar senha"
+                      aria-pressed="false"
+                    >
+                      <svg class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5s8.268 2.943 9.542 7c-1.274 4.057-5.065 7-9.542 7S3.732 16.057 2.458 12z" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+
+                <div
+                  id="login-error"
+                  class="hidden items-start gap-2 rounded-lg border border-red-900/60 bg-red-950/40 px-3 py-2.5 text-xs text-red-200"
+                  role="alert"
+                  aria-live="assertive"
+                >
+                  <svg class="size-4 shrink-0 text-red-400 mt-px" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+                  </svg>
+                  <span id="login-error-text">Credenciais inválidas.</span>
+                </div>
+
+                <button
+                  type="submit"
+                  id="btn-login"
+                  class="w-full py-2.5 px-4 text-sm font-bold rounded-lg bg-[#8b1b22] hover:bg-[#a52129] text-white shadow-lg transition disabled:opacity-60 disabled:cursor-wait flex items-center justify-center gap-2"
+                >
+                  <span id="login-spinner" class="hidden size-4 rounded-full border-2 border-white/30 border-t-white animate-spin" aria-hidden="true"></span>
+                  <span id="login-btn-label">Entrar no Painel</span>
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <div class="px-7 sm:px-8 py-3.5 border-t border-[#2d2422] bg-[#100e0e] flex items-center gap-2 text-[11px] text-[#7d7270]">
+            <svg class="size-3.5 text-[#d4af37]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622C17.176 19.29 21 14.591 21 9c0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+            Sessão protegida por Supabase Auth
+          </div>
+        </div>
+
+        <p class="mt-4 text-center text-[11px] text-[#5e5452]">
+          Acesso exclusivo da equipe Tchê Empório Gaúcho.
+        </p>
+      </div>
+    </div>
+
     <!-- Toast Notification -->
     <div
       id="admin-toast"
       class="fixed bottom-6 right-6 z-50 bg-[#1f1b1b] border border-[#8b1b22] text-white px-5 py-3 rounded-xl shadow-2xl text-sm font-medium transition-all duration-300 opacity-0 pointer-events-none translate-y-2"
+      role="status"
+      aria-live="polite"
     >
       Notificação
     </div>
@@ -411,14 +577,26 @@ import availableUploads from "../data/availableUploads.json";
     <script type="application/json" id="available-uploads-data" set:html={JSON.stringify(availableUploads)} />
 
     <script>
-      import { loadCatalogFromStorage, saveCatalogToStorage, resetCatalogStorage } from "../lib/storefrontStorage";
+      import {
+        getProducts,
+        createProduct,
+        updateProduct,
+        deleteProduct,
+        signIn,
+        signOut,
+        getCurrentUser,
+        isSupabaseConfigured,
+        onAuthStateChange,
+        supabase,
+      } from "../lib/supabase";
+      import { loadCatalogFromStorage, saveCatalogToStorage } from "../lib/storefrontStorage";
 
       interface ProductItem {
         id: string;
         name: string;
         category: string;
         price: number;
-        regular_price?: number;
+        regular_price?: number | null;
         rating: number;
         reviews: number;
         image: string;
@@ -427,30 +605,110 @@ import availableUploads from "../data/availableUploads.json";
         featured?: boolean;
       }
 
+      /* ------------------------------------------------------------------ */
+      /* Dados iniciais (fallback offline)                                   */
+      /* ------------------------------------------------------------------ */
       const initialDataEl = document.getElementById("initial-products-data");
       const initialProducts: ProductItem[] = JSON.parse(initialDataEl?.textContent || "[]");
 
       const availableUploadsEl = document.getElementById("available-uploads-data");
       const availableUploads: string[] = JSON.parse(availableUploadsEl?.textContent || "[]");
 
-      let catalog: ProductItem[] = loadCatalogFromStorage<ProductItem>() || initialProducts;
-      if (!loadCatalogFromStorage()) {
-        saveCatalogToStorage(catalog);
+      /* ------------------------------------------------------------------ */
+      /* Utilidades                                                          */
+      /* ------------------------------------------------------------------ */
+      function escapeHtml(value: string): string {
+        return String(value ?? "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
       }
 
-      // UI elements
+      /** Aceita tanto `T[]` quanto o retorno { data, error } do supabase-js. */
+      function unwrap<T = any>(result: any): T {
+        if (result && typeof result === "object" && !Array.isArray(result)) {
+          if ("error" in result && result.error) {
+            throw new Error(result.error.message || String(result.error));
+          }
+          if ("data" in result) return result.data as T;
+        }
+        return result as T;
+      }
+
+      /** Normaliza linhas do Supabase (snake_case) e objetos já em camelCase. */
+      function normalizeProduct(raw: any): ProductItem {
+        const item = raw ?? {};
+        return {
+          id: String(item.id ?? ""),
+          name: String(item.name ?? ""),
+          category: String(item.category ?? "Geral"),
+          price: Number(item.price ?? 0) || 0,
+          regular_price: item.regular_price ?? item.regularPrice ?? null,
+          rating: Number(item.rating ?? 5) || 5,
+          reviews: Number(item.reviews ?? 0) || 0,
+          image: String(item.image ?? ""),
+          description: String(item.description ?? ""),
+          badge: item.badge ? String(item.badge) : undefined,
+          featured: Boolean(item.featured),
+        };
+      }
+
+      /** Payload aceito por `createProduct` / `updateProduct`. */
+      function toDbPayload(item: ProductItem) {
+        return {
+          id: item.id,
+          name: item.name,
+          category: item.category,
+          price: item.price,
+          regular_price: item.regular_price ?? undefined,
+          rating: item.rating,
+          reviews: item.reviews,
+          image: item.image,
+          description: item.description,
+          // string vazia limpa o selo no banco (o serviço converte para null)
+          badge: item.badge ?? "",
+          featured: Boolean(item.featured),
+        };
+      }
+
+      /** Sonda leve: confirma que o PostgREST responde (o serviço cai no local sem avisar). */
+      async function isRemoteReachable(): Promise<boolean> {
+        if (!isSupabaseConfigured || !supabase) return false;
+        try {
+          const { error } = await supabase
+            .from("products")
+            .select("id", { head: true, count: "exact" })
+            .limit(1);
+          return !error;
+        } catch {
+          return false;
+        }
+      }
+
+      const cachedCatalog = loadCatalogFromStorage<ProductItem>();
+      let catalog: ProductItem[] = cachedCatalog && cachedCatalog.length ? cachedCatalog : initialProducts;
+      let isBusy = false;
+
+      /* ------------------------------------------------------------------ */
+      /* Elementos de UI                                                     */
+      /* ------------------------------------------------------------------ */
       const tableBody = document.getElementById("products-table-body");
       const searchInput = document.getElementById("search-input") as HTMLInputElement;
       const categorySelect = document.getElementById("category-select") as HTMLSelectElement;
       const filteredCountEl = document.getElementById("filtered-count");
+      const syncDot = document.getElementById("sync-dot");
+      const syncLabel = document.getElementById("sync-label");
+      const syncStatus = document.getElementById("sync-status");
 
-      // Stats
       const statTotalEl = document.getElementById("stat-total-products");
       const statCatEl = document.getElementById("stat-total-categories");
       const statFeaturedEl = document.getElementById("stat-featured-products");
       const statAvgEl = document.getElementById("stat-avg-price");
 
-      // Modal Form elements
+      const btnRefresh = document.getElementById("btn-refresh-catalog") as HTMLButtonElement | null;
+
       const modal = document.getElementById("product-modal");
       const modalTitle = document.getElementById("modal-title");
       const productForm = document.getElementById("product-form") as HTMLFormElement;
@@ -466,7 +724,6 @@ import availableUploads from "../data/availableUploads.json";
       const formBadgeCustom = document.getElementById("form-product-badge-custom") as HTMLInputElement;
       const formFeatured = document.getElementById("form-product-featured") as HTMLInputElement;
 
-      // Image Preview elements
       const imgPreview = document.getElementById("form-image-preview") as HTMLImageElement;
       const imgPlaceholder = document.getElementById("form-image-placeholder") as HTMLSpanElement;
       const imgStatusBadge = document.getElementById("image-status-badge") as HTMLDivElement;
@@ -474,26 +731,260 @@ import availableUploads from "../data/availableUploads.json";
       const btnClearImg = document.getElementById("btn-clear-image") as HTMLButtonElement;
       const manualUrlContainer = document.getElementById("manual-url-container") as HTMLDivElement;
 
-      // Gallery Modal elements
       const galleryModal = document.getElementById("gallery-picker-modal");
       const galleryGrid = document.getElementById("gallery-grid");
       const gallerySearchInput = document.getElementById("gallery-search-input") as HTMLInputElement;
       const galleryStatusCount = document.getElementById("gallery-status-count");
 
+      // Autenticação
+      const authGate = document.getElementById("auth-gate");
+      const authChecking = document.getElementById("auth-checking");
+      const authLogin = document.getElementById("auth-login");
+      const loginForm = document.getElementById("login-form") as HTMLFormElement;
+      const loginEmail = document.getElementById("login-email") as HTMLInputElement;
+      const loginPassword = document.getElementById("login-password") as HTMLInputElement;
+      const loginError = document.getElementById("login-error");
+      const loginErrorText = document.getElementById("login-error-text");
+      const btnLogin = document.getElementById("btn-login") as HTMLButtonElement;
+      const btnLoginLabel = document.getElementById("login-btn-label");
+      const loginSpinner = document.getElementById("login-spinner");
+      const btnTogglePassword = document.getElementById("btn-toggle-password");
+      const sessionChip = document.getElementById("session-chip");
+      const sessionEmailEl = document.getElementById("session-email");
+      const btnLogout = document.getElementById("btn-logout") as HTMLButtonElement | null;
+
       // Toast
       const toast = document.getElementById("admin-toast");
       let toastTimer: number;
 
-      function showToast(msg: string) {
+      type ToastKind = "success" | "error" | "warning" | "info";
+
+      const TOAST_TONE: Record<ToastKind, string> = {
+        success: "border-emerald-700/70 bg-[#132019] text-emerald-50",
+        error: "border-red-800 bg-[#1f1314] text-red-50",
+        warning: "border-amber-700/70 bg-[#1f1a10] text-amber-50",
+        info: "border-[#8b1b22] bg-[#1f1b1b] text-white",
+      };
+
+      function showToast(msg: string, kind: ToastKind = "info") {
         if (!toast) return;
+        toast.className = `fixed bottom-6 right-6 z-50 max-w-sm px-5 py-3 rounded-xl shadow-2xl text-sm font-medium border transition-all duration-300 opacity-100 translate-y-0 ${TOAST_TONE[kind]}`;
         toast.textContent = msg;
-        toast.classList.remove("opacity-0", "pointer-events-none", "translate-y-2");
-        toast.classList.add("opacity-100", "translate-y-0");
         clearTimeout(toastTimer);
         toastTimer = window.setTimeout(() => {
           toast.classList.remove("opacity-100", "translate-y-0");
           toast.classList.add("opacity-0", "pointer-events-none", "translate-y-2");
-        }, 2500);
+        }, 3200);
+      }
+
+      function setSyncStatus(mode: "loading" | "online" | "offline" | "idle", label: string) {
+        if (syncLabel) syncLabel.textContent = label;
+        if (!syncDot || !syncStatus) return;
+        syncDot.className = "size-1.5 rounded-full";
+        if (mode === "online") {
+          syncDot.classList.add("bg-emerald-400");
+          syncStatus.className = "inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-emerald-900/60 bg-emerald-950/30 text-emerald-300";
+        } else if (mode === "offline") {
+          syncDot.classList.add("bg-amber-400");
+          syncStatus.className = "inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-amber-900/60 bg-amber-950/20 text-amber-300";
+        } else if (mode === "idle") {
+          syncDot.classList.add("bg-[#7d7270]");
+          syncStatus.className = "inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-[#3e3432] bg-[#0d0c0c] text-[#a39a97]";
+        } else {
+          syncDot.classList.add("bg-[#7d7270]", "animate-pulse");
+          syncStatus.className = "inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-[#3e3432] bg-[#0d0c0c] text-[#a39a97]";
+        }
+      }
+
+      /* ------------------------------------------------------------------ */
+      /* Sessão                                                              */
+      /* ------------------------------------------------------------------ */
+      function showAuthGate(mode: "checking" | "login") {
+        if (!authGate) return;
+        authGate.classList.remove("hidden");
+        authGate.removeAttribute("aria-hidden");
+        document.body.classList.add("overflow-hidden");
+        authChecking?.classList.toggle("hidden", mode !== "checking");
+        authLogin?.classList.toggle("hidden", mode !== "login");
+        if (mode === "login") {
+          setSyncStatus("idle", "Sessão não iniciada");
+          window.setTimeout(() => {
+            if (!loginEmail.value) loginEmail.focus();
+            else loginPassword.focus();
+          }, 60);
+        }
+      }
+
+      function hideAuthGate() {
+        if (!authGate) return;
+        authGate.classList.add("hidden");
+        authGate.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("overflow-hidden");
+      }
+
+      function showSession(email: string) {
+        if (sessionEmailEl) sessionEmailEl.textContent = email;
+        if (sessionChip) {
+          sessionChip.classList.remove("hidden");
+          sessionChip.classList.add("flex");
+        }
+      }
+
+      function clearSession() {
+        if (sessionEmailEl) sessionEmailEl.textContent = "—";
+        if (sessionChip) {
+          sessionChip.classList.add("hidden");
+          sessionChip.classList.remove("flex");
+        }
+      }
+
+      function showLoginError(message: string) {
+        if (!loginError || !loginErrorText) return;
+        loginErrorText.textContent = message;
+        loginError.classList.remove("hidden");
+        loginError.classList.add("flex");
+      }
+
+      function hideLoginError() {
+        if (!loginError) return;
+        loginError.classList.add("hidden");
+        loginError.classList.remove("flex");
+      }
+
+      function friendlyAuthError(err: unknown): string {
+        const raw = err instanceof Error ? err.message : String(err ?? "");
+        const msg = raw.toLowerCase();
+        if (msg.includes("invalid login credentials") || msg.includes("invalid_grant")) {
+          return "E-mail ou senha incorretos. Confira os dados e tente novamente.";
+        }
+        if (msg.includes("email not confirmed")) {
+          return "Este e-mail ainda não foi confirmado. Verifique a caixa de entrada do administrador.";
+        }
+        if (msg.includes("too many requests") || msg.includes("rate limit")) {
+          return "Muitas tentativas seguidas. Aguarde alguns instantes e tente de novo.";
+        }
+        if (msg.includes("failed to fetch") || msg.includes("networkerror") || msg.includes("load failed")) {
+          return "Não foi possível conectar ao servidor de autenticação. Verifique sua conexão.";
+        }
+        if (msg.includes("invalid email")) {
+          return "Informe um e-mail válido.";
+        }
+        return raw || "Não foi possível entrar. Tente novamente.";
+      }
+
+      /** Erros de escrita: RLS, sessão expirada e validação do banco. */
+      function friendlyWriteError(err: unknown): string {
+        const raw = err instanceof Error ? err.message : String(err ?? "");
+        const msg = raw.toLowerCase();
+        if (msg.includes("row-level security") || msg.includes("permission denied") || msg.includes("42501")) {
+          return "Sua conta não tem permissão para alterar o catálogo (RLS exige administrador). Fale com a administração.";
+        }
+        if (msg.includes("jwt") || msg.includes("invalid claim") || msg.includes("401")) {
+          return "Sessão inválida ou expirada. Saia e entre novamente.";
+        }
+        if (msg.includes("duplicate key") || msg.includes("23505")) {
+          return "Já existe um produto com este identificador. Recarregue a página e tente de novo.";
+        }
+        if (msg.includes("failed to fetch") || msg.includes("networkerror") || msg.includes("load failed")) {
+          return "Sem conexão com o banco de dados. Verifique sua internet e tente novamente.";
+        }
+        return raw || "Não foi possível gravar no banco.";
+      }
+
+      /** Confirma no banco se a conta logada é administradora. `null` = não foi possível checar. */
+      async function isAdminUser(): Promise<boolean | null> {
+        if (!supabase) return null;
+        try {
+          const { data, error } = await (supabase as any).rpc("is_admin");
+          if (error) return null;
+          return data === true;
+        } catch {
+          return null;
+        }
+      }
+
+      function setLoginBusy(busy: boolean) {
+        if (!btnLogin) return;
+        btnLogin.disabled = busy;
+        loginSpinner?.classList.toggle("hidden", !busy);
+        if (btnLoginLabel) btnLoginLabel.textContent = busy ? "Autenticando…" : "Entrar no Painel";
+      }
+
+      async function handleAuthenticated(email: string) {
+        const admin = await isAdminUser();
+
+        if (admin === false) {
+          try {
+            await signOut();
+          } catch {
+            // segue para o gate mesmo assim
+          }
+          clearSession();
+          showAuthGate("login");
+          showLoginError(
+            "Esta conta está autenticada, mas não tem permissão de administrador. Use uma conta cadastrada em admin_users."
+          );
+          return;
+        }
+
+        hideAuthGate();
+        showSession(email);
+        await loadCatalog(false);
+      }
+
+      /* ------------------------------------------------------------------ */
+      /* Catálogo                                                            */
+      /* ------------------------------------------------------------------ */
+      function renderTableLoading() {
+        if (!tableBody) return;
+        tableBody.innerHTML = `
+          <tr>
+            <td colspan="6" class="py-10 text-center text-[#7d7270] text-sm">
+              <span class="inline-block size-4 rounded-full border-2 border-[#3e3432] border-t-[#d4af37] animate-spin align-middle mr-2"></span>
+              Sincronizando catálogo com o banco…
+            </td>
+          </tr>
+        `;
+      }
+
+      async function loadCatalog(announce: boolean) {
+        setSyncStatus("loading", "Sincronizando");
+        renderTableLoading();
+
+        const reachable = await isRemoteReachable();
+
+        try {
+          const rows = unwrap<any[]>(await getProducts());
+          const list = (Array.isArray(rows) ? rows : []).map(normalizeProduct).filter((p) => p.id && p.name);
+          catalog = list;
+          saveCatalogToStorage(catalog);
+
+          if (reachable) {
+            setSyncStatus("online", `Supabase · ${catalog.length} itens`);
+            if (announce) {
+              showToast(`Catálogo sincronizado com o banco (${catalog.length} produtos).`, "success");
+            }
+          } else {
+            setSyncStatus("offline", "Modo offline · cópia local");
+            if (announce) {
+              showToast("Banco inacessível no momento. Exibindo a cópia local do catálogo.", "warning");
+            }
+          }
+        } catch (err) {
+          const cached = loadCatalogFromStorage<ProductItem>();
+          catalog = cached && cached.length ? cached : initialProducts;
+          setSyncStatus("offline", "Modo offline · cópia local");
+          const detail = err instanceof Error && err.message ? ` (${err.message})` : "";
+          showToast(`Sem conexão com o banco${detail}. Exibindo a cópia local do catálogo.`, "warning");
+        }
+
+        refreshUI();
+      }
+
+      function refreshUI() {
+        updateStats();
+        populateCategories();
+        renderTable();
       }
 
       function updateStats() {
@@ -513,7 +1004,6 @@ import availableUploads from "../data/availableUploads.json";
         if (!categorySelect || !formCat) return;
         const cats = Array.from(new Set(catalog.map((p) => p.category))).sort();
 
-        // 1. Filtro na barra superior
         const currentFilterSelected = categorySelect.value;
         categorySelect.innerHTML = '<option value="all">Todas as Categorias</option>';
         cats.forEach((cat) => {
@@ -526,7 +1016,6 @@ import availableUploads from "../data/availableUploads.json";
           categorySelect.value = currentFilterSelected;
         }
 
-        // 2. Dropdown do formulário do Modal
         const currentFormVal = formCat.value;
         formCat.innerHTML = "";
         cats.forEach((cat) => {
@@ -555,7 +1044,7 @@ import availableUploads from "../data/availableUploads.json";
             !term ||
             p.name.toLowerCase().includes(term) ||
             p.id.toLowerCase().includes(term) ||
-            p.description.toLowerCase().includes(term);
+            (p.description || "").toLowerCase().includes(term);
           const matchesCat = selectedCat === "all" || p.category === selectedCat;
           return matchesTerm && matchesCat;
         });
@@ -565,8 +1054,8 @@ import availableUploads from "../data/availableUploads.json";
         if (filtered.length === 0) {
           tableBody.innerHTML = `
             <tr>
-              <td colspan="6" class="py-8 text-center text-[#7d7270]">
-                Nenhum produto colonial encontrado com esses filtros.
+              <td colspan="6" class="py-10 text-center text-[#7d7270]">
+                ${catalog.length === 0 ? "Nenhum produto cadastrado no banco ainda." : "Nenhum produto colonial encontrado com esses filtros."}
               </td>
             </tr>
           `;
@@ -575,21 +1064,21 @@ import availableUploads from "../data/availableUploads.json";
 
         tableBody.innerHTML = filtered
           .map((prod) => {
-            const imgSrc = prod.image || "/images/shop/cosmic-products.png";
+            const imgSrc = escapeHtml(prod.image || "/images/shop/cosmic-products.png");
             return `
-              <tr class="hover:bg-[#1a1717] transition-colors" data-id="${prod.id}">
+              <tr class="hover:bg-[#1a1717] transition-colors" data-id="${escapeHtml(prod.id)}">
                 <td class="py-3 px-4">
                   <div class="w-12 h-12 rounded-lg bg-[#0d0c0c] border border-[#2d2422] p-1 flex items-center justify-center overflow-hidden">
-                    <img src="${imgSrc}" alt="${prod.name}" class="w-full h-full object-contain" loading="lazy" onerror="this.src='/images/shop/cosmic-products.png'" />
+                    <img src="${imgSrc}" alt="${escapeHtml(prod.name)}" class="w-full h-full object-contain" loading="lazy" onerror="this.src='/images/shop/cosmic-products.png'" />
                   </div>
                 </td>
                 <td class="py-3 px-4">
-                  <div class="font-semibold text-white">${prod.name}</div>
-                  <div class="text-xs text-[#7d7270] font-mono">ID: ${prod.id}</div>
+                  <div class="font-semibold text-white">${escapeHtml(prod.name)}</div>
+                  <div class="text-xs text-[#7d7270] font-mono">ID: ${escapeHtml(prod.id)}</div>
                 </td>
                 <td class="py-3 px-4">
                   <span class="inline-block px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#241d1c] text-[#d5cbca] border border-[#3e3432]">
-                    ${prod.category}
+                    ${escapeHtml(prod.category)}
                   </span>
                 </td>
                 <td class="py-3 px-4 font-bold text-white">
@@ -607,14 +1096,14 @@ import availableUploads from "../data/availableUploads.json";
                     <button
                       type="button"
                       class="btn-edit px-2.5 py-1 text-xs font-medium rounded bg-[#241d1c] hover:bg-[#342a29] text-[#d5cbca] transition"
-                      data-id="${prod.id}"
+                      data-id="${escapeHtml(prod.id)}"
                     >
                       Editar
                     </button>
                     <button
                       type="button"
                       class="btn-delete px-2.5 py-1 text-xs font-medium rounded bg-red-950/30 hover:bg-red-900/50 text-red-400 transition"
-                      data-id="${prod.id}"
+                      data-id="${escapeHtml(prod.id)}"
                     >
                       Excluir
                     </button>
@@ -626,6 +1115,9 @@ import availableUploads from "../data/availableUploads.json";
           .join("");
       }
 
+      /* ------------------------------------------------------------------ */
+      /* Modal de produto                                                    */
+      /* ------------------------------------------------------------------ */
       function updateImagePreview(label?: string) {
         const url = formImg?.value?.trim();
         if (url && imgPreview && imgPlaceholder) {
@@ -657,7 +1149,6 @@ import availableUploads from "../data/availableUploads.json";
           formDesc.value = prod.description || "";
           formFeatured.checked = Boolean(prod.featured);
 
-          // Categoria
           const hasCat = Array.from(formCat.options).some((o) => o.value === prod.category);
           if (hasCat) {
             formCat.value = prod.category;
@@ -669,7 +1160,6 @@ import availableUploads from "../data/availableUploads.json";
             formCatCustom.value = prod.category;
           }
 
-          // Selo / Badge
           const badgeVal = prod.badge || "";
           const hasBadge = Array.from(formBadge.options).some((o) => o.value === badgeVal);
           if (hasBadge) {
@@ -699,6 +1189,7 @@ import availableUploads from "../data/availableUploads.json";
         updateImagePreview();
         modal.classList.remove("hidden");
         modal.classList.add("flex");
+        window.setTimeout(() => formName?.focus(), 60);
       }
 
       function closeModal() {
@@ -707,7 +1198,6 @@ import availableUploads from "../data/availableUploads.json";
         modal.classList.remove("flex");
       }
 
-      // Eventos dos selects de Categoria e Selo
       formCat?.addEventListener("change", () => {
         if (formCat.value === "__custom__") {
           formCatCustom.classList.remove("hidden");
@@ -728,7 +1218,6 @@ import availableUploads from "../data/availableUploads.json";
         }
       });
 
-      // Upload local via File Picker
       formFileInput?.addEventListener("change", () => {
         const file = formFileInput.files?.[0];
         if (file) {
@@ -737,20 +1226,18 @@ import availableUploads from "../data/availableUploads.json";
             const dataUrl = e.target?.result as string;
             formImg.value = dataUrl;
             updateImagePreview(`Arquivo: ${file.name} (${Math.round(file.size / 1024)} KB)`);
-            showToast(`Foto "${file.name}" carregada com sucesso.`);
+            showToast(`Foto "${file.name}" carregada com sucesso.`, "success");
           };
           reader.readAsDataURL(file);
         }
       });
 
-      // Limpar foto
       btnClearImg?.addEventListener("click", () => {
         formImg.value = "";
         if (formFileInput) formFileInput.value = "";
         updateImagePreview();
       });
 
-      // Alternar campo manual de URL
       document.getElementById("btn-toggle-manual-url")?.addEventListener("click", () => {
         manualUrlContainer.classList.toggle("hidden");
         if (!manualUrlContainer.classList.contains("hidden")) {
@@ -759,7 +1246,9 @@ import availableUploads from "../data/availableUploads.json";
       });
       formImg?.addEventListener("input", () => updateImagePreview("URL digitada manualmente"));
 
-      // Galeria de Fotos
+      /* ------------------------------------------------------------------ */
+      /* Galeria de fotos                                                    */
+      /* ------------------------------------------------------------------ */
       function openGallery() {
         if (!galleryModal) return;
         galleryModal.classList.remove("hidden");
@@ -792,17 +1281,17 @@ import availableUploads from "../data/availableUploads.json";
             return `
               <button
                 type="button"
-                data-img-src="${imgPath}"
+                data-img-src="${escapeHtml(imgPath)}"
                 class="gallery-item group relative aspect-square rounded-xl bg-[#0d0c0c] border border-[#2d2422] hover:border-[#8b1b22] p-2 flex flex-col items-center justify-center overflow-hidden transition hover:scale-[1.03] text-left"
               >
                 <img
-                  src="${imgPath}"
-                  alt="${fileName}"
+                  src="${escapeHtml(imgPath)}"
+                  alt="${escapeHtml(fileName)}"
                   class="w-full h-full object-contain mb-1"
                   loading="lazy"
                 />
                 <span class="absolute inset-x-0 bottom-0 bg-black/80 text-[10px] text-white px-1.5 py-0.5 truncate opacity-0 group-hover:opacity-100 transition">
-                  ${fileName}
+                  ${escapeHtml(fileName)}
                 </span>
               </button>
             `;
@@ -819,7 +1308,7 @@ import availableUploads from "../data/availableUploads.json";
           const fileName = src.split("/").pop() || "Foto da Galeria";
           updateImagePreview(`Acervo da Loja: ${fileName}`);
           closeGallery();
-          showToast(`Foto colonial selecionada: ${fileName}`);
+          showToast(`Foto colonial selecionada: ${fileName}`, "success");
         }
       });
 
@@ -833,43 +1322,68 @@ import availableUploads from "../data/availableUploads.json";
       document.getElementById("btn-close-gallery")?.addEventListener("click", closeGallery);
       document.getElementById("btn-cancel-gallery")?.addEventListener("click", closeGallery);
 
-      // Event listeners gerais do Modal
       document.getElementById("btn-open-add-modal")?.addEventListener("click", () => openModal());
       document.getElementById("btn-close-modal")?.addEventListener("click", closeModal);
       document.getElementById("btn-cancel-modal")?.addEventListener("click", closeModal);
 
+      document.addEventListener("keydown", (ev) => {
+        if (ev.key !== "Escape") return;
+        if (galleryModal && !galleryModal.classList.contains("hidden")) closeGallery();
+        else if (modal && !modal.classList.contains("hidden")) closeModal();
+      });
+
       searchInput?.addEventListener("input", renderTable);
       categorySelect?.addEventListener("change", renderTable);
 
-      // Ações da Tabela (Editar e Excluir)
-      tableBody?.addEventListener("click", (ev) => {
+      /* ------------------------------------------------------------------ */
+      /* Excluir produto                                                     */
+      /* ------------------------------------------------------------------ */
+      tableBody?.addEventListener("click", async (ev) => {
         const target = (ev.target as HTMLElement).closest<HTMLButtonElement>(".btn-edit, .btn-delete");
-        if (!target) return;
+        if (!target || isBusy) return;
         const id = target.dataset.id;
         if (!id) return;
 
         if (target.classList.contains("btn-edit")) {
           const prod = catalog.find((p) => p.id === id);
           if (prod) openModal(prod);
-        } else if (target.classList.contains("btn-delete")) {
-          const prod = catalog.find((p) => p.id === id);
-          if (prod && confirm(`Tem certeza que deseja excluir o produto "${prod.name}"?`)) {
-            catalog = catalog.filter((p) => p.id !== id);
-            saveCatalogToStorage(catalog);
-            updateStats();
-            populateCategories();
-            renderTable();
-            showToast("Produto excluído com sucesso.");
-          }
+          return;
+        }
+
+        const prod = catalog.find((p) => p.id === id);
+        if (!prod) return;
+        if (!confirm(`Tem certeza que deseja excluir o produto "${prod.name}"?\n\nA exclusão também remove o item do banco de dados.`)) return;
+
+        isBusy = true;
+        target.disabled = true;
+        const previous = [...catalog];
+
+        try {
+          await deleteProduct(id);
+          catalog = catalog.filter((p) => p.id !== id);
+          saveCatalogToStorage(catalog);
+          refreshUI();
+          showToast(`Produto "${prod.name}" excluído do catálogo e do banco.`, "success");
+        } catch (err) {
+          catalog = previous;
+          refreshUI();
+          showToast(`Não foi possível excluir no banco. ${friendlyWriteError(err)}`, "error");
+        } finally {
+          isBusy = false;
+          target.disabled = false;
         }
       });
 
-      // Submit do Formulário (Criar ou Editar)
-      productForm?.addEventListener("submit", (ev) => {
+      /* ------------------------------------------------------------------ */
+      /* Criar / editar produto                                              */
+      /* ------------------------------------------------------------------ */
+      productForm?.addEventListener("submit", async (ev) => {
         ev.preventDefault();
-        const id = formId.value.trim();
+        if (isBusy) return;
+
+        const id = formId.value.trim() || "tche-" + Date.now();
         const name = formName.value.trim();
-        
+
         let category = formCat.value.trim();
         if (category === "__custom__") {
           category = formCatCustom.value.trim() || "Geral";
@@ -887,57 +1401,77 @@ import availableUploads from "../data/availableUploads.json";
         }
 
         const featured = formFeatured.checked;
-
         const existingIdx = catalog.findIndex((p) => p.id === id);
-        if (existingIdx >= 0) {
-          catalog[existingIdx] = {
-            ...catalog[existingIdx],
-            name,
-            category,
-            price,
-            image,
-            description,
-            badge,
-            featured
-          };
-          showToast(`Produto "${name}" atualizado com sucesso!`);
-        } else {
-          catalog.unshift({
-            id,
-            name,
-            category,
-            price,
-            rating: 5.0,
-            reviews: 1,
-            image,
-            description,
-            badge: badge || "Novo",
-            featured
-          });
-          showToast(`Produto "${name}" adicionado com sucesso!`);
+        const isEdit = existingIdx >= 0;
+
+        const item: ProductItem = isEdit
+          ? { ...catalog[existingIdx], name, category, price, image, description, badge, featured }
+          : {
+              id,
+              name,
+              category,
+              price,
+              regular_price: null,
+              rating: 5.0,
+              reviews: 1,
+              image,
+              description,
+              badge: badge || "Novo",
+              featured,
+            };
+
+        const submitBtn = productForm.querySelector<HTMLButtonElement>('button[type="submit"]');
+        const originalLabel = submitBtn?.textContent ?? "Salvar Alterações";
+        isBusy = true;
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = "Sincronizando…";
         }
 
+        // Atualização otimista da UI (revertida se o banco recusar)
+        const snapshot = [...catalog];
+        if (isEdit) catalog[existingIdx] = item;
+        else catalog.unshift(item);
         saveCatalogToStorage(catalog);
-        updateStats();
-        populateCategories();
-        renderTable();
-        closeModal();
-      });
+        refreshUI();
 
-      // Restaurar Catálogo Original
-      document.getElementById("btn-reset-catalog")?.addEventListener("click", () => {
-        if (confirm("Deseja restaurar o catálogo para a base original dos 228 produtos do dump? Suas alterações manuais locais serão substituídas.")) {
-          resetCatalogStorage();
-          catalog = [...initialProducts];
+        try {
+          if (isEdit) await updateProduct(id, toDbPayload(item));
+          else await createProduct(toDbPayload(item));
+
+          showToast(
+            isEdit ? `"${name}" atualizado e sincronizado com o banco.` : `"${name}" adicionado e sincronizado com o banco.`,
+            "success"
+          );
+          closeModal();
+        } catch (err) {
+          // Mantém o formulário aberto com os dados digitados para nova tentativa,
+          // mas não deixa um produto "fantasma" só na tela.
+          catalog = snapshot;
           saveCatalogToStorage(catalog);
-          updateStats();
-          populateCategories();
-          renderTable();
-          showToast("Catálogo restaurado para a versão padrão original.");
+          refreshUI();
+          showToast(`Não foi possível gravar no banco. ${friendlyWriteError(err)}`, "error");
+        } finally {
+          isBusy = false;
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalLabel;
+          }
         }
       });
 
-      // Exportar JSON
+      /* ------------------------------------------------------------------ */
+      /* Ações do cabeçalho                                                  */
+      /* ------------------------------------------------------------------ */
+      btnRefresh?.addEventListener("click", async () => {
+        if (isBusy) return;
+        isBusy = true;
+        btnRefresh.disabled = true;
+        await loadCatalog(true);
+        btnRefresh.disabled = false;
+        isBusy = false;
+      });
+
       document.getElementById("btn-export-json")?.addEventListener("click", () => {
         const blob = new Blob([JSON.stringify(catalog, null, 2)], { type: "application/json" });
         const url = URL.createObjectURL(blob);
@@ -946,13 +1480,106 @@ import availableUploads from "../data/availableUploads.json";
         a.download = `tcheemporiogaucho_catalogo_${new Date().toISOString().slice(0, 10)}.json`;
         a.click();
         URL.revokeObjectURL(url);
-        showToast("Arquivo JSON gerado e baixado.");
+        showToast("Arquivo JSON gerado e baixado.", "success");
       });
 
-      // Execução inicial
-      updateStats();
-      populateCategories();
-      renderTable();
+      /* ------------------------------------------------------------------ */
+      /* Login / logout                                                      */
+      /* ------------------------------------------------------------------ */
+      loginForm?.addEventListener("submit", async (ev) => {
+        ev.preventDefault();
+        hideLoginError();
+
+        const email = loginEmail.value.trim();
+        const password = loginPassword.value;
+
+        if (!email || !email.includes("@")) {
+          showLoginError("Informe um e-mail válido.");
+          loginEmail.focus();
+          return;
+        }
+        if (!password) {
+          showLoginError("Informe a senha do administrador.");
+          loginPassword.focus();
+          return;
+        }
+
+        setLoginBusy(true);
+        try {
+          const result: any = unwrap<any>(await signIn(email, password));
+          const user = result?.user ?? result;
+          const authedEmail = user?.email || email;
+
+          if (result && result.session === null && !user) {
+            throw new Error("Sessão não iniciada.");
+          }
+
+          await handleAuthenticated(authedEmail);
+          loginPassword.value = "";
+          showToast(`Bem-vindo, ${authedEmail}.`, "success");
+        } catch (err) {
+          showLoginError(friendlyAuthError(err));
+          loginPassword.select?.();
+        } finally {
+          setLoginBusy(false);
+        }
+      });
+
+      btnTogglePassword?.addEventListener("click", () => {
+        const showing = loginPassword.type === "text";
+        loginPassword.type = showing ? "password" : "text";
+        btnTogglePassword.setAttribute("aria-pressed", String(!showing));
+        btnTogglePassword.setAttribute("aria-label", showing ? "Mostrar senha" : "Ocultar senha");
+      });
+
+      loginEmail?.addEventListener("input", hideLoginError);
+      loginPassword?.addEventListener("input", hideLoginError);
+
+      btnLogout?.addEventListener("click", async () => {
+        if (isBusy) return;
+        isBusy = true;
+        btnLogout.disabled = true;
+        try {
+          await signOut();
+        } catch {
+          // mesmo se falhar no servidor, a UI volta para o gate
+        } finally {
+          clearSession();
+          showAuthGate("login");
+          showToast("Sessão encerrada. Até logo!", "info");
+          isBusy = false;
+          btnLogout.disabled = false;
+        }
+      });
+
+      /* ------------------------------------------------------------------ */
+      /* Inicialização                                                       */
+      /* ------------------------------------------------------------------ */
+      // Se o token expirar ou for revogado em outra aba, volta ao gate.
+      onAuthStateChange((event) => {
+        if (event === "SIGNED_OUT") {
+          clearSession();
+          setSyncStatus("idle", "Sessão encerrada");
+          showAuthGate("login");
+        }
+      });
+
+      (async function init() {
+        document.body.classList.add("overflow-hidden");
+        refreshUI();
+
+        try {
+          const user: any = unwrap<any>(await getCurrentUser());
+          if (user && user.email) {
+            await handleAuthenticated(user.email);
+          } else {
+            showAuthGate("login");
+          }
+        } catch (err) {
+          showAuthGate("login");
+          showLoginError("Não foi possível verificar a sessão. Faça login para continuar.");
+        }
+      })();
     </script>
   </body>
 </html>
